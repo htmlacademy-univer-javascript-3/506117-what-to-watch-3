@@ -8,6 +8,7 @@ export const Info = {
   },
   films: [
     {
+      id: 0,
       name: 'The Grand Budapest Hotel',
       imagePath: 'img/the-grand-budapest-hotel-poster.jpg'
     }

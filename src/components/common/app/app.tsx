@@ -9,6 +9,7 @@ type AppProps = {
   };
 
   filmsInfo: {
+    id: number;
     name: string;
     imagePath: string;
   }[];

@@ -10,6 +10,7 @@ type MainScreenProps = {
     backgroundPath: string;
   };
   filmsInfo: {
+    id: number;
     name: string;
     imagePath: string;
   }[];
