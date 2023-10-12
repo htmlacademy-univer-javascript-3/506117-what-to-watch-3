@@ -1,24 +1,35 @@
-import { Reviews } from "../../../constants/reviews";
+type MoviePageReviewsProps = {
+  reviewsInfo: {
+    id: number;
+    text: string;
+    author: string;
+    rating: number;
+    date: Date;
+  }[];
+}
 
-function MoviePageReviews(): JSX.Element {
+
+function MoviePageReviews({ reviewsInfo }: MoviePageReviewsProps): JSX.Element {
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
         {
-          Reviews.map(
-            review =>
-              <div className="review">
-                <blockquote className="review__quote">
-                  <p className="review__text">{review.text}</p>
+          reviewsInfo.map(
+            (review) =>
+              (
+                <div key={review.id} className="review">
+                  <blockquote className="review__quote">
+                    <p className="review__text">{review.text}</p>
 
-                  <footer className="review__details">
-                    <cite className="review__author">{review.author}</cite>
-                    <time className="review__date" dateTime={review.date.toISOString()}>{review.date.toISOString()}</time>
-                  </footer>
-                </blockquote>
+                    <footer className="review__details">
+                      <cite className="review__author">{review.author}</cite>
+                      <time className="review__date" dateTime={review.date.toISOString()}>{review.date.toISOString()}</time>
+                    </footer>
+                  </blockquote>
 
-                <div className="review__rating">{review.rating.toLocaleString()}</div>
-              </div>
+                  <div className="review__rating">{review.rating.toLocaleString()}</div>
+                </div>
+              )
           )
         }
       </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/common/app/app';
-import {Info} from './constants/const';
+import {Info} from './const';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -9,6 +9,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App promoInfo={Info.promo} />
+    <App promoInfo={Info.promo} filmsInfo={Info.films} userInfo={Info.userInfo}/>
   </React.StrictMode>
 );

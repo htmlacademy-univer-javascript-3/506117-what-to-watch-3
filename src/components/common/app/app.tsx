@@ -7,11 +7,20 @@ type AppProps = {
     posterPath: string;
     backgroundPath: string;
   };
+
+  filmsInfo: {
+    name: string;
+    imagePath: string;
+  }[];
+
+  userInfo: {
+    listCount: number;
+  };
 }
 
-function App({ promoInfo }: AppProps): JSX.Element {
+function App({ promoInfo, filmsInfo, userInfo}: AppProps): JSX.Element {
   return (
-    <MainScreen promoInfo={promoInfo}/>
+    <MainScreen promoInfo={promoInfo} filmsInfo={filmsInfo} userInfo={userInfo}/>
   );
 }
 

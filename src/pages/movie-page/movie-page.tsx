@@ -1,6 +1,31 @@
-import HeadUser from "../../components/common/head-user/head-user";
+import HeadUser from '../../components/common/head-user/head-user';
 
-function MoviePage() {
+type MoviePageProps = {
+  movieInfo: {
+    name: string;
+    genre: string;
+    releaseDate: Date;
+    posterPath: string;
+    backgroundPath: string;
+    description: string;
+    director: string;
+    starring: string[];
+  };
+
+  moreLikeThis: { name: string; id: number; imagePath: string }[];
+
+  rating: {
+    mark: number;
+    level: string;
+    rateCount: number;
+  };
+
+  userInfo: {
+    listCount: number;
+  };
+};
+
+function MoviePage({ movieInfo, moreLikeThis, rating, userInfo }: MoviePageProps) {
   return (
     <>
       <section className="film-card film-card--full">
@@ -15,10 +40,10 @@ function MoviePage() {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{movieInfo.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{movieInfo.genre}</span>
+                <span className="film-card__year">{movieInfo.releaseDate.toISOString()}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -33,7 +58,7 @@ function MoviePage() {
                     <use xlinkHref="#add" href="#add"></use>
                   </svg>
                   <span>My list</span>
-                  <span className="film-card__count">9</span>
+                  <span className="film-card__count">{userInfo.listCount}</span>
                 </button>
                 <a href="add-review.html" className="btn film-card__button">Add review</a>
               </div>
@@ -63,21 +88,19 @@ function MoviePage() {
               </nav>
 
               <div className="film-rating">
-                <div className="film-rating__score">8,9</div>
+                <div className="film-rating__score">{rating.mark.toLocaleString()}</div>
                 <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">240 ratings</span>
+                  <span className="film-rating__level">{rating.level}</span>
+                  <span className="film-rating__count">{rating.rateCount} ratings</span>
                 </p>
               </div>
 
               <div className="film-card__text">
-                <p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&apos;s friend and protege.</p>
+                {movieInfo.description}
 
-                <p>Gustave prides himself on providing first-className service to the hotel&apos;s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave&apos;s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p>
+                <p className="film-card__director"><strong>Director: {movieInfo.director}</strong></p>
 
-                <p className="film-card__director"><strong>Director: Wes Anderson</strong></p>
-
-                <p className="film-card__starring"><strong>Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other</strong></p>
+                <p className="film-card__starring"><strong>Starring: {movieInfo.starring.join(' ')} and other</strong></p>
               </div>
             </div>
           </div>
@@ -87,19 +110,20 @@ function MoviePage() {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-        
           <div className="catalog__films-list">
             {
-              [{ name: "Bohemian Rhapsody", imagePath: "img/bohemian-rhapsody.jpg" }].map(
-                film =>
-                  <article className="small-film-card catalog__films-card">
-                    <div className="small-film-card__image">
-                      <img src={film.imagePath} alt={film.name} width="280" height="175" />
-                    </div>
-                    <h3 className="small-film-card__title">
-                      <a className="small-film-card__link" href="film-page.html">{film.name}</a>
-                    </h3>
-                  </article>
+              moreLikeThis.map(
+                (film) =>
+                  (
+                    <article key={film.id} className="small-film-card catalog__films-card">
+                      <div className="small-film-card__image">
+                        <img src={film.imagePath} alt={film.name} width="280" height="175" />
+                      </div>
+                      <h3 className="small-film-card__title">
+                        <a className="small-film-card__link" href="film-page.html">{film.name}</a>
+                      </h3>
+                    </article>
+                  )
               )
             }
           </div>

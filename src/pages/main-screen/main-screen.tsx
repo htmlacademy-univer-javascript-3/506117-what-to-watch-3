@@ -9,17 +9,25 @@ type MainScreenProps = {
     posterPath: string;
     backgroundPath: string;
   };
+  filmsInfo: {
+    name: string;
+    imagePath: string;
+  }[];
+  userInfo: {
+    listCount: number;
+  };
 }
 
-function MainScreen({promoInfo}: MainScreenProps): JSX.Element {
+function MainScreen({ promoInfo, filmsInfo, userInfo }: MainScreenProps): JSX.Element {
   return (
     <>
       <PromoCard
         promoInfo={promoInfo}
+        userInfo={userInfo}
       />
 
       <div className="page-content">
-        <Catalog />
+        <Catalog filmsInfo={filmsInfo} />
 
         <footer className="page-footer">
           <div className="logo">

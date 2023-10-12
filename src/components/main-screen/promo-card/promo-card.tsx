@@ -9,10 +9,14 @@ type PromoCardProps = {
     posterPath: string;
     backgroundPath: string;
   };
+
+  userInfo: {
+    listCount: number;
+  };
 };
 
 
-function PromoCard({ promoInfo }: PromoCardProps): JSX.Element {
+function PromoCard({ promoInfo, userInfo }: PromoCardProps): JSX.Element {
   return (
     <section className="film-card">
       <div className="film-card__bg">
@@ -44,7 +48,7 @@ function PromoCard({ promoInfo }: PromoCardProps): JSX.Element {
                 <span>Play</span>
               </button>
 
-              <MoviePageInList />
+              <MoviePageInList userInfo={userInfo}/>
             </div>
           </div>
         </div>

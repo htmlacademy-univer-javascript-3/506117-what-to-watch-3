@@ -1,7 +1,14 @@
-import { Genres } from "../../../constants/const";
-import { Films } from "../../../constants/films";
+import { Genres } from '../../../const';
 
-function Catalog(): JSX.Element {
+type CatalogProps = {
+  filmsInfo: {
+    id: number;
+    name: string;
+    imagePath: string;
+  }[];
+}
+
+function Catalog({ filmsInfo }: CatalogProps): JSX.Element {
   return (
     <section className="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>
@@ -10,20 +17,21 @@ function Catalog(): JSX.Element {
           <a href="#" className="catalog__genres-link">All genres</a>
         </li>
         {
-          Genres.map(
-            genre =>
-              <li className="catalog__genres-item">
+          Genres.map((genre) =>
+            (
+              <li key={0} className="catalog__genres-item">
                 <a href="#" className="catalog__genres-link">{genre}</a>
               </li>
+            )
           )
         }
       </ul>
 
       <div className="catalog__films-list">
         {
-          Films.map(
-            film =>
-              <article className="small-film-card catalog__films-card">
+          filmsInfo.map((film) =>
+            (
+              <article key={film.id} className="small-film-card catalog__films-card">
                 <div className="small-film-card__image">
                   <img src={film.imagePath} alt={film.name} width="280" height="175" />
                 </div>
@@ -31,6 +39,7 @@ function Catalog(): JSX.Element {
                   <a className="small-film-card__link" href="film-page.html">{film.name}</a>
                 </h3>
               </article>
+            )
           )
         }
       </div>
