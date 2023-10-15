@@ -26,10 +26,9 @@ function MainScreen(
   return (
     <>
       <PromoCard {...props}/>
-
       <div className="page-content">
         <Catalog {...props}/>
-        <Footer />        
+        <Footer />
       </div>
     </>
   );

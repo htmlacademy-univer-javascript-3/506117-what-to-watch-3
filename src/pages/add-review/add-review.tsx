@@ -1,5 +1,5 @@
-import RatingStars from "../../components/add-review/rating-stars";
-import Logo from "../../components/common/footer/footer";
+import RatingStars from '../../components/add-review/rating-stars';
+import Logo from '../../components/common/footer/footer';
 
 function AddReview(): JSX.Element {
   return (
@@ -45,7 +45,7 @@ function AddReview(): JSX.Element {
       <div className="add-review">
         <form action="#" className="add-review__form">
           <div className="rating">
-           <RatingStars />
+            <RatingStars />
           </div>
 
           <div className="add-review__text">

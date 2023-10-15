@@ -15,15 +15,15 @@ function Catalog({ filmsInfo }: CatalogProps): JSX.Element {
       <ul className="catalog__genres-list">
         {
           Genres.map((genre) =>
-          (
-            genre.id == 0 ?
-              <li key={genre.id} className="catalog__genres-item catalog__genres-item--active">
-                <a href="#" className="catalog__genres-link">{genre.name}</a>
-              </li> :
-              <li key={genre.id} className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">{genre.name}</a>
-              </li>
-          )
+            (
+              genre.id === 0 ?
+                <li key={genre.id} className="catalog__genres-item catalog__genres-item--active">
+                  <a href="#" className="catalog__genres-link">{genre.name}</a>
+                </li> :
+                <li key={genre.id} className="catalog__genres-item">
+                  <a href="#" className="catalog__genres-link">{genre.name}</a>
+                </li>
+            )
           )
         }
       </ul>
@@ -31,16 +31,16 @@ function Catalog({ filmsInfo }: CatalogProps): JSX.Element {
       <div className="catalog__films-list">
         {
           filmsInfo.map((film) =>
-          (
-            <article key={film.id} className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src={film.imagePath} alt={film.name} width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">{film.name}</a>
-              </h3>
-            </article>
-          )
+            (
+              <article key={film.id} className="small-film-card catalog__films-card">
+                <div className="small-film-card__image">
+                  <img src={film.imagePath} alt={film.name} width="280" height="175" />
+                </div>
+                <h3 className="small-film-card__title">
+                  <a className="small-film-card__link" href="film-page.html">{film.name}</a>
+                </h3>
+              </article>
+            )
           )
         }
       </div>

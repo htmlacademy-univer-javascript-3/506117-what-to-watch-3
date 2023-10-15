@@ -16,20 +16,20 @@ function MoviePageReviews({ reviewsInfo }: MoviePageReviewsProps): JSX.Element {
         {
           reviewsInfo.map(
             (review) =>
-            (
-              <div key={review.id} className="review">
-                <blockquote className="review__quote">
-                  <p className="review__text">{review.text}</p>
+              (
+                <div key={review.id} className="review">
+                  <blockquote className="review__quote">
+                    <p className="review__text">{review.text}</p>
 
-                  <footer className="review__details">
-                    <cite className="review__author">{review.author}</cite>
-                    <time className="review__date" dateTime={review.date.toISOString()}>{review.date.toISOString()}</time>
-                  </footer>
-                </blockquote>
+                    <footer className="review__details">
+                      <cite className="review__author">{review.author}</cite>
+                      <time className="review__date" dateTime={review.date.toISOString()}>{review.date.toISOString()}</time>
+                    </footer>
+                  </blockquote>
 
-                <div className="review__rating">{review.rating.toLocaleString()}</div>
-              </div>
-            )
+                  <div className="review__rating">{review.rating.toLocaleString()}</div>
+                </div>
+              )
           )
         }
       </div>
