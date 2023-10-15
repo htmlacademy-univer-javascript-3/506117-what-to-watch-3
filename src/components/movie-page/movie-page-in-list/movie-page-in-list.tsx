@@ -4,7 +4,7 @@ type MoviePageInListProps = {
   };
 }
 
-function MoviePageInList({userInfo} : MoviePageInListProps): JSX.Element {
+function MoviePageInList({ userInfo }: MoviePageInListProps): JSX.Element {
   return (
     <button className="btn btn--list film-card__button" type="button">
       <svg viewBox="0 0 18 14" width="18" height="14">

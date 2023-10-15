@@ -1,4 +1,5 @@
-import HeadUser from '../../components/common/head-user/head-user';
+import HeadUser from '../../components/common/head/head-user/head-user';
+import Footer from '../../components/common/footer/footer';
 
 type MyListProps = {
   listFilms: { name: string; id: number; imagePath: string }[];
@@ -31,19 +32,7 @@ function MyList(props: MyListProps): JSX.Element {
         </div>
       </section>
 
-      <footer className="page-footer">
-        <div className="logo">
-          <a href="main.html" className="logo__link logo__link--light">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

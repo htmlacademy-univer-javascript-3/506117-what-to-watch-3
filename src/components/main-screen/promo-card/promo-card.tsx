@@ -1,4 +1,4 @@
-import HeadUser from '../../common/head-user/head-user';
+import HeadUser from '../../common/head/head-user/head-user';
 import MoviePageInList from '../../movie-page/movie-page-in-list/movie-page-in-list';
 
 type PromoCardProps = {

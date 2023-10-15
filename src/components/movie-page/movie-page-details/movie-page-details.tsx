@@ -21,9 +21,8 @@ function MoviePageDetails({ filmInfo }: MoviePageDetailsProps): JSX.Element {
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
             {
-              `
-                ${filmInfo.stars.slice(0, -1).join(', <br />')} 
-                ${filmInfo.stars[filmInfo.stars.length - 1]}`
+              `${filmInfo.stars.slice(0, -1).join(', <br />')} 
+              ${filmInfo.stars[filmInfo.stars.length - 1]}`
             }
           </span>
         </p>

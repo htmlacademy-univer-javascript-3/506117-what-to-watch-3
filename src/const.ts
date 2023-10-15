@@ -1,12 +1,12 @@
 export const Info = {
-  promo: {
+  promoInfo: {
     name: 'The Grand Budapest Hotel',
     genre: 'Drama',
     releaseDate: new Date('2014'),
     posterPath: 'img/the-grand-budapest-hotel-poster.jpg',
     backgroundPath: 'img/bg-the-grand-budapest-hotel.jpg',
   },
-  films: [
+  filmsInfo: [
     {
       id: 0,
       name: 'The Grand Budapest Hotel',
@@ -19,5 +19,11 @@ export const Info = {
   }
 };
 
-export const Genres = ['Comedies', 'Crime', 'Documentary', 'Dramas', 'Horor', 'Kids & Family', 'Romance', 'Sci-Fi', 'Thrillers'];
+export const Genres = [
+  { name: 'All genres', id: 0 }, { name: 'Comedies', id: 1 },
+  { name: 'Crime', id: 2 }, { name: 'Documentary', id: 3 },
+  { name: 'Dramas', id: 4 }, { name: 'Horor', id: 5 },
+  { name: 'Kids & Family', id: 6 }, { name: 'Romance', id: 7 },
+  { name: 'Sci-Fi', id: 8 }, { name: 'Thrillers', id: 9 }
+];
 
