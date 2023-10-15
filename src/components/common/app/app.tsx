@@ -1,4 +1,5 @@
 import MainScreen from '../../../pages/main-screen/main-screen';
+
 type AppProps = {
   promoInfo: {
     name: string;
@@ -19,9 +20,9 @@ type AppProps = {
   };
 }
 
-function App({ promoInfo, filmsInfo, userInfo}: AppProps): JSX.Element {
+function App(props: AppProps): JSX.Element {
   return (
-    <MainScreen promoInfo={promoInfo} filmsInfo={filmsInfo} userInfo={userInfo}/>
+    <MainScreen {...props}/>
   );
 }
 
