@@ -15,8 +15,10 @@ type MainScreenProps = {
     name: string;
     imagePath: string;
   }[];
+
   userInfo: {
     listCount: number;
+    isInList: boolean;
   };
 }
 
