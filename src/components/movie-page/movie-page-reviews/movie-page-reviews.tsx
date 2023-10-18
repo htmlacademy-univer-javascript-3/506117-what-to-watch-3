@@ -23,7 +23,9 @@ function MoviePageReviews({ reviewsInfo }: MoviePageReviewsProps): JSX.Element {
 
                     <footer className="review__details">
                       <cite className="review__author">{review.author}</cite>
-                      <time className="review__date" dateTime={review.date.toISOString()}>{review.date.toISOString()}</time>
+                      <time className="review__date" dateTime={review.date.toISOString()}>
+                        {review.date.toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', })}
+                      </time>
                     </footer>
                   </blockquote>
 

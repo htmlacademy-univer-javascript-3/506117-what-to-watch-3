@@ -9,7 +9,7 @@ type MyListProps = {
 function MyList(props: MyListProps): JSX.Element {
   return (
     <div className="user-page">
-      <HeadUser />
+      <HeadUser userPageHeader />
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
