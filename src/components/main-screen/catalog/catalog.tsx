@@ -13,15 +13,16 @@ function Catalog({ filmsInfo }: CatalogProps): JSX.Element {
     <section className="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>
       <ul className="catalog__genres-list">
-        <li className="catalog__genres-item catalog__genres-item--active">
-          <a href="#" className="catalog__genres-link">All genres</a>
-        </li>
         {
           Genres.map((genre) =>
             (
-              <li key={0} className="catalog__genres-item">
-                <a href="#" className="catalog__genres-link">{genre}</a>
-              </li>
+              genre.id === 0 ?
+                <li key={genre.id} className="catalog__genres-item catalog__genres-item--active">
+                  <a href="#" className="catalog__genres-link">{genre.name}</a>
+                </li> :
+                <li key={genre.id} className="catalog__genres-item">
+                  <a href="#" className="catalog__genres-link">{genre.name}</a>
+                </li>
             )
           )
         }

@@ -1,4 +1,6 @@
-import HeadUser from '../../components/common/head-user/head-user';
+import HeadUser from '../../components/common/head/head-user/head-user';
+import Footer from '../../components/common/footer/footer';
+import { NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
 
 type MoviePageProps = {
   movieInfo: {
@@ -7,25 +9,32 @@ type MoviePageProps = {
     releaseDate: Date;
     posterPath: string;
     backgroundPath: string;
-    description: string;
-    director: string;
-    starring: string[];
+
+    movieOverview: {
+      description: string;
+      director: string;
+      starring: string[];
+    };
+
   };
 
-  moreLikeThis: { name: string; id: number; imagePath: string }[];
-
-  rating: {
-    mark: number;
-    level: string;
-    rateCount: number;
-  };
+  moreLikeThis: {
+    name: string;
+    id: number;
+    imagePath: string;
+  }[];
 
   userInfo: {
     listCount: number;
+    isInList: boolean;
   };
 };
 
-function MoviePage({ movieInfo, moreLikeThis, rating, userInfo }: MoviePageProps) {
+function MoviePage({ movieInfo, moreLikeThis, userInfo }: MoviePageProps) {
+  const { id } = useParams();
+  const { pathname } = useLocation();
+  const setLiState = (path: string) => `film-nav__item ${pathname === path ? 'film-nav__item--active' : ''}`;
+
   return (
     <>
       <section className="film-card film-card--full">
@@ -36,14 +45,14 @@ function MoviePage({ movieInfo, moreLikeThis, rating, userInfo }: MoviePageProps
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <HeadUser />
+          <HeadUser userPageHeader={false} />
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
               <h2 className="film-card__title">{movieInfo.name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{movieInfo.genre}</span>
-                <span className="film-card__year">{movieInfo.releaseDate.toISOString()}</span>
+                <span className="film-card__year">{movieInfo.releaseDate.getFullYear()}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -75,33 +84,26 @@ function MoviePage({ movieInfo, moreLikeThis, rating, userInfo }: MoviePageProps
             <div className="film-card__desc">
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="#" className="film-nav__link">Overview</a>
+                  <li className={setLiState(`/films/${id || ''}/`)}>
+                    <NavLink to={`/films/${id || ''}/`} className="film-nav__link">
+                      Overview
+                    </NavLink>
                   </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Details</a>
+                  <li className={setLiState(`/films/${id || ''}/details`)}>
+                    <NavLink to={`/films/${id || ''}/details`} className="film-nav__link">
+                      Details
+                    </NavLink>
                   </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Reviews</a>
+                  <li className={setLiState(`/films/${id || ''}/reviews`)}>
+                    <NavLink to={`/films/${id || ''}/reviews`} className="film-nav__link">
+                      Reviews
+                    </NavLink>
                   </li>
                 </ul>
               </nav>
 
-              <div className="film-rating">
-                <div className="film-rating__score">{rating.mark.toLocaleString()}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">{rating.level}</span>
-                  <span className="film-rating__count">{rating.rateCount} ratings</span>
-                </p>
-              </div>
+              <Outlet />
 
-              <div className="film-card__text">
-                {movieInfo.description}
-
-                <p className="film-card__director"><strong>Director: {movieInfo.director}</strong></p>
-
-                <p className="film-card__starring"><strong>Starring: {movieInfo.starring.join(' ')} and other</strong></p>
-              </div>
             </div>
           </div>
         </div>
@@ -129,19 +131,7 @@ function MoviePage({ movieInfo, moreLikeThis, rating, userInfo }: MoviePageProps
           </div>
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );

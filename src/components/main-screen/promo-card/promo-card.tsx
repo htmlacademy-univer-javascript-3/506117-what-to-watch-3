@@ -1,4 +1,4 @@
-import HeadUser from '../../common/head-user/head-user';
+import HeadUser from '../../common/head/head-user/head-user';
 import MoviePageInList from '../../movie-page/movie-page-in-list/movie-page-in-list';
 
 type PromoCardProps = {
@@ -12,6 +12,7 @@ type PromoCardProps = {
 
   userInfo: {
     listCount: number;
+    isInList: boolean;
   };
 };
 
@@ -25,7 +26,7 @@ function PromoCard({ promoInfo, userInfo }: PromoCardProps): JSX.Element {
 
       <h1 className="visually-hidden">WTW</h1>
 
-      <HeadUser />
+      <HeadUser userPageHeader={false} />
 
       <div className="film-card__wrap">
         <div className="film-card__info">
@@ -48,7 +49,7 @@ function PromoCard({ promoInfo, userInfo }: PromoCardProps): JSX.Element {
                 <span>Play</span>
               </button>
 
-              <MoviePageInList userInfo={userInfo}/>
+              <MoviePageInList userInfo={userInfo} />
             </div>
           </div>
         </div>
