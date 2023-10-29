@@ -11,6 +11,7 @@ import MoviePageDetails from '../../movie-page/movie-page-details/movie-page-det
 import MoviePageReviews from '../../movie-page/movie-page-reviews/movie-page-reviews';
 import PrivateRoute from '../private-route/private-route';
 import { AuthorizationStatus } from '../../../const';
+import { AppProps } from './appProps';
 
 
 function App({ props }: AppProps): JSX.Element {
