@@ -9,14 +9,15 @@ type FilmCardProps = {
     previewVideoLink: string;
     genre: string;
   };
+  key: string;
 }
 
-export default function FilmCard({ film }: FilmCardProps): JSX.Element {
+export default function FilmCard({ film, key }: FilmCardProps): JSX.Element {
   const [, changeActive] = useState(false);
 
   return (
     <article
-      key={film.id}
+      key={key}
       className="small-film-card catalog__films-card"
       onMouseEnter={() => changeActive(true)}
       onMouseLeave={() => changeActive(false)}

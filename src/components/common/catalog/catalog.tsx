@@ -19,7 +19,7 @@ function Catalog({ films, showGenresFilter }: CatalogProps): JSX.Element {
 
       <div className="catalog__films-list">
         {
-          films.map((film) => (<FilmCard film={film} />))
+          films.map((film) => (<FilmCard film={film} key={film.id} />))
         }
       </div>
 

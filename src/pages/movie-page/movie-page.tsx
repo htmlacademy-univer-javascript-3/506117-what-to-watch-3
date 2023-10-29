@@ -115,7 +115,7 @@ function MoviePage({ film, similar }: MoviePageProps) {
           <h2 className="catalog__title">More like this</h2>
           <div className="catalog__films-list">
             {
-              similar.map((filmItem) => (<FilmCard film={ filmItem } />))
+              similar.map((filmItem) => (<FilmCard film={filmItem} key={film.id} />))
             }
           </div>
         </section>
