@@ -1,23 +1,44 @@
-import RatingStars from '../../components/add-review/rating-stars';
-import Logo from '../../components/common/footer/footer';
+import FormField from '../../components/add-review/rormField';
+import Logo from '../../components/common/logo/logo';
 
-function AddReview(): JSX.Element {
+
+type AddReviewProps = {
+  film: {
+    id: string;
+    name: string;
+    posterImage: string;
+    backgroundImage: string;
+    backgroundColor: string;
+    videoLink: string;
+    description: string;
+    rating: number;
+    scoresCount: number;
+    director: string;
+    starring: string[];
+    runTime: number;
+    genre: string;
+    released: number;
+    isFavorite: boolean;
+  };
+}
+
+export default function AddReview({ film }: AddReviewProps): JSX.Element {
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={film.backgroundImage} alt={film.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header">
-          <Logo />
+          <Logo isLight={false}/>
 
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+                <a href="film-page.html" className="breadcrumbs__link">{film.name}</a>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>
@@ -38,28 +59,13 @@ function AddReview(): JSX.Element {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+          <img src={film.posterImage} alt={film.name} width="218" height="327" />
         </div>
       </div>
 
-      <div className="add-review">
-        <form action="#" className="add-review__form">
-          <div className="rating">
-            <RatingStars />
-          </div>
-
-          <div className="add-review__text">
-            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
-            <div className="add-review__submit">
-              <button className="add-review__btn" type="submit">Post</button>
-            </div>
-
-          </div>
-        </form>
-      </div>
+      <FormField />
 
     </section>
   );
 }
 
-export default AddReview;

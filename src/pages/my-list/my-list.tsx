@@ -1,37 +1,23 @@
 import HeadUser from '../../components/common/head/head-user/head-user';
 import Footer from '../../components/common/footer/footer';
+import Catalog from '../../components/common/catalog/catalog';
 
 type MyListProps = {
-  listFilms: { name: string; id: number; imagePath: string }[];
+  films: {
+    id: string;
+    name: string;
+    previewImage: string;
+    previewVideoLink: string;
+    genre: string;
+}[];
 }
 
 
-function MyList(props: MyListProps): JSX.Element {
+function MyList({ films }: MyListProps): JSX.Element {
   return (
     <div className="user-page">
       <HeadUser userPageHeader />
-
-      <section className="catalog">
-        <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <div className="catalog__films-list">
-          {
-            props.listFilms.map(
-              (film) =>
-                (
-                  <article key={film.id} className="small-film-card catalog__films-card">
-                    <div className="small-film-card__image">
-                      <img src={film.imagePath} alt={film.name} width="280" height="175" />
-                    </div>
-                    <h3 className="small-film-card__title">
-                      <a className="small-film-card__link" href="film-page.html">{film.name}</a>
-                    </h3>
-                  </article>
-                )
-            )
-          }
-        </div>
-      </section>
-
+      <Catalog {...{ films, ...{ showGenresFilter: false } }} />
       <Footer />
     </div>
   );

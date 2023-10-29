@@ -1,27 +1,25 @@
+import { Link } from 'react-router-dom';
 import HeadUser from '../../common/head/head-user/head-user';
-import MoviePageInList from '../../movie-page/movie-page-in-list/movie-page-in-list';
 
 type PromoCardProps = {
-  promoInfo: {
+  promo: {
+    id: string;
     name: string;
+    posterImage: string;
+    backgroundImage: string;
+    videoLink: string;
     genre: string;
-    releaseDate: Date;
-    posterPath: string;
-    backgroundPath: string;
-  };
-
-  userInfo: {
-    listCount: number;
-    isInList: boolean;
+    released: number;
+    isFavorite: boolean;
   };
 };
 
 
-function PromoCard({ promoInfo, userInfo }: PromoCardProps): JSX.Element {
+function PromoCard({ promo }: PromoCardProps): JSX.Element {
   return (
     <section className="film-card">
       <div className="film-card__bg">
-        <img src={promoInfo.backgroundPath} alt={promoInfo.name} />
+        <img src={promo.backgroundImage} alt={promo.name} />
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -31,25 +29,25 @@ function PromoCard({ promoInfo, userInfo }: PromoCardProps): JSX.Element {
       <div className="film-card__wrap">
         <div className="film-card__info">
           <div className="film-card__poster">
-            <img src={promoInfo.posterPath} alt={`${promoInfo.name} poster`} width="218" height="327" />
+            <img src={promo.posterImage} alt={`${promo.name} poster`} width="218" height="327" />
           </div>
 
           <div className="film-card__desc">
-            <h2 className="film-card__title">{promoInfo.name}</h2>
+            <h2 className="film-card__title">{promo.name}</h2>
             <p className="film-card__meta">
-              <span className="film-card__genre">{promoInfo.genre}</span>
-              <span className="film-card__year">{promoInfo.releaseDate.getFullYear()}</span>
+              <span className="film-card__genre">{promo.genre}</span>
+              <span className="film-card__year">{promo.released}</span>
             </p>
 
             <div className="film-card__buttons">
-              <button className="btn btn--play film-card__button" type="button">
+              <Link className="btn btn--play film-card__button" to={`/player/${promo.id}/`}>
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s" href="#play-s"></use>
                 </svg>
                 <span>Play</span>
-              </button>
+              </Link>
 
-              <MoviePageInList userInfo={userInfo} />
+              {/* <MoviePageInList userInfo={userInfo} /> */}
             </div>
           </div>
         </div>
