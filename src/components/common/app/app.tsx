@@ -13,7 +13,6 @@ import PrivateRoute from '../private-route/private-route';
 import { AuthorizationStatus } from '../../../const';
 
 
-
 function App({ props }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
@@ -30,7 +29,7 @@ function App({ props }: AppProps): JSX.Element {
           <Route
             path='mylist'
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
                 <MyList {...props} />
               </PrivateRoute>
             }
@@ -48,14 +47,14 @@ function App({ props }: AppProps): JSX.Element {
               path='reviews'
               element={<MoviePageReviews {...props} />}
             />
-            <Route
-              path='review'
-              element={<AddReview />}
-            />
           </Route>
           <Route
+            path='films/:id/add-review'
+            element={<AddReview {...props} />}
+          />
+          <Route
             path='/player/:id'
-            element={<Player />}
+            element={<Player {...props}/>}
           />
           <Route
             path="*"

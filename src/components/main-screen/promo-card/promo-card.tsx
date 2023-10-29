@@ -1,17 +1,17 @@
-import HeadGuest from '../../common/head/head-guest/head-guest';
+import { Link } from 'react-router-dom';
 import HeadUser from '../../common/head/head-user/head-user';
 
 type PromoCardProps = {
   promo: {
-    id: string
-    name: string
-    posterImage: string
-    backgroundImage: string
-    videoLink: string
-    genre: string
-    released: number
-    isFavorite: boolean
-};
+    id: string;
+    name: string;
+    posterImage: string;
+    backgroundImage: string;
+    videoLink: string;
+    genre: string;
+    released: number;
+    isFavorite: boolean;
+  };
 };
 
 
@@ -24,7 +24,7 @@ function PromoCard({ promo }: PromoCardProps): JSX.Element {
 
       <h1 className="visually-hidden">WTW</h1>
 
-      <HeadUser userPageHeader={false}/>
+      <HeadUser userPageHeader={false} />
 
       <div className="film-card__wrap">
         <div className="film-card__info">
@@ -40,12 +40,12 @@ function PromoCard({ promo }: PromoCardProps): JSX.Element {
             </p>
 
             <div className="film-card__buttons">
-              <button className="btn btn--play film-card__button" type="button">
+              <Link className="btn btn--play film-card__button" to={`/player/${promo.id}/`}>
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s" href="#play-s"></use>
                 </svg>
                 <span>Play</span>
-              </button>
+              </Link>
 
               {/* <MoviePageInList userInfo={userInfo} /> */}
             </div>

@@ -1,10 +1,10 @@
 type MoviePageReviewsProps = {
   reviews: {
-    id: string
-    date: string
-    user: string
-    comment: string
-    rating: number
+    id: string;
+    date: string;
+    user: string;
+    comment: string;
+    rating: number;
   }[];
 }
 

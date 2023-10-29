@@ -1,32 +1,33 @@
 import HeadUser from '../../components/common/head/head-user/head-user';
 import Footer from '../../components/common/footer/footer';
-import { NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
+import FilmCard from '../../components/main-screen/film-card/film-card';
 
 type MoviePageProps = {
   film: {
-    id: string
-    name: string
-    posterImage: string
-    backgroundImage: string
-    backgroundColor: string
-    videoLink: string
-    description: string
-    rating: number
-    scoresCount: number
-    director: string
-    starring: string[]
-    runTime: number
-    genre: string
-    released: number
-    isFavorite: boolean
-  },
+    id: string;
+    name: string;
+    posterImage: string;
+    backgroundImage: string;
+    backgroundColor: string;
+    videoLink: string;
+    description: string;
+    rating: number;
+    scoresCount: number;
+    director: string;
+    starring: string[];
+    runTime: number;
+    genre: string;
+    released: number;
+    isFavorite: boolean;
+  };
 
   similar: {
-    id: string
-    name: string
-    previewImage: string
-    previewVideoLink: string
-    genre: string
+    id: string;
+    name: string;
+    previewImage: string;
+    previewVideoLink: string;
+    genre: string;
   }[];
 };
 
@@ -56,12 +57,12 @@ function MoviePage({ film, similar }: MoviePageProps) {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <Link className="btn btn--play film-card__button" to={`/player/${film.id}`}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s" href="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                </button>
+                </Link>
                 <button className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add" href="#add"></use>
@@ -69,7 +70,7 @@ function MoviePage({ film, similar }: MoviePageProps) {
                   <span>My list</span>
                   {/* <span className="film-card__count">{userInfo.listCount}</span> */}
                 </button>
-                <a href="add-review.html" className="btn film-card__button">Add review</a>
+                <Link className="btn film-card__button" to={`/films/${film.id}/add-review`}>Add review</Link>
               </div>
             </div>
           </div>
@@ -114,19 +115,7 @@ function MoviePage({ film, similar }: MoviePageProps) {
           <h2 className="catalog__title">More like this</h2>
           <div className="catalog__films-list">
             {
-              similar.map(
-                (film) =>
-                  (
-                    <article key={film.id} className="small-film-card catalog__films-card">
-                      <div className="small-film-card__image">
-                        <img src={film.previewImage} alt={film.name} width="280" height="175" />
-                      </div>
-                      <h3 className="small-film-card__title">
-                        <a className="small-film-card__link" href="film-page.html">{film.name}</a>
-                      </h3>
-                    </article>
-                  )
-              )
+              similar.map((filmItem) => (<FilmCard film={ filmItem } />))
             }
           </div>
         </section>

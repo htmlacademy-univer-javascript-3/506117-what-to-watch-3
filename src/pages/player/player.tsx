@@ -1,20 +1,20 @@
 type PlayerProps = {
   film: {
-    id: string
-    name: string
-    posterImage: string
-    backgroundImage: string
-    backgroundColor: string
-    videoLink: string
-    description: string
-    rating: number
-    scoresCount: number
-    director: string
-    starring: string[]
-    runTime: number
-    genre: string
-    released: number
-    isFavorite: boolean
+    id: string;
+    name: string;
+    posterImage: string;
+    backgroundImage: string;
+    backgroundColor: string;
+    videoLink: string;
+    description: string;
+    rating: number;
+    scoresCount: number;
+    director: string;
+    starring: string[];
+    runTime: number;
+    genre: string;
+    released: number;
+    isFavorite: boolean;
   };
 }
 
@@ -26,7 +26,7 @@ function minutesToTimeFormat(minutes:number): string {
 export default function Player({ film }: PlayerProps): JSX.Element {
   return (
     <div className="player">
-      <video src={film.videoLink} className="player__video" poster={film.posterImage}></video>
+      <video src={film.videoLink} className="player__video" poster="img/player-poster.jpg"></video>
 
       <button type="button" className="player__exit">Exit</button>
 
