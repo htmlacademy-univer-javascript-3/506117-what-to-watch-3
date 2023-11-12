@@ -1,7 +1,7 @@
 import HeadUser from '../../components/common/head/head-user/head-user';
 import Footer from '../../components/common/footer/footer';
 import { Link, NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
-import FilmCard from '../../components/main-screen/film-card/film-card';
+import FilmCard from '../../components/main/film-card/film-card';
 
 type MoviePageProps = {
   film: {

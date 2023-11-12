@@ -23,7 +23,7 @@ function minutesToTimeFormat(minutes:number): string {
 }
 
 
-export default function Player({ film }: PlayerProps): JSX.Element {
+export default function PlayerPage({ film }: PlayerProps): JSX.Element {
   return (
     <div className="player">
       <video src={film.videoLink} className="player__video" poster="img/player-poster.jpg"></video>

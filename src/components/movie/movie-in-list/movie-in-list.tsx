@@ -1,11 +1,11 @@
-type MoviePageInListProps = {
+type MovieInListProps = {
   userInfo: {
     listCount: number;
     isInList: boolean;
   };
 }
 
-function MoviePageInList({ userInfo }: MoviePageInListProps): JSX.Element {
+export default function MovieInList({ userInfo }: MovieInListProps): JSX.Element {
   return (
     <button className="btn btn--list film-card__button" type="button">
       {
@@ -22,5 +22,3 @@ function MoviePageInList({ userInfo }: MoviePageInListProps): JSX.Element {
     </button>
   );
 }
-
-export default MoviePageInList;
