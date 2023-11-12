@@ -1,4 +1,4 @@
-import FilmCard from '../../main-screen/film-card/film-card';
+import FilmCard from '../../main/film-card/film-card';
 import Genres from '../genres/genres';
 
 type CatalogProps = {

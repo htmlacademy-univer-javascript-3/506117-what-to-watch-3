@@ -1,14 +1,14 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import MainScreen from '../../../pages/main-screen/main-screen';
-import SignIn from '../../../pages/sign-in/sign-in';
-import MyList from '../../../pages/my-list/my-list';
+import MainPage from '../../../pages/main-page/main-page';
+import SignInPage from '../../../pages/sign-in-page/sign-in-page';
+import MyListPage from '../../../pages/my-list-page/my-list-page';
 import MoviePage from '../../../pages/movie-page/movie-page';
-import AddReview from '../../../pages/add-review/add-review';
-import Player from '../../../pages/player/player';
-import NotFound from '../../../pages/not-found/not-found';
-import MoviePageOverview from '../../movie-page/movie-page-overview/movie-page-overview';
-import MoviePageDetails from '../../movie-page/movie-page-details/movie-page-details';
-import MoviePageReviews from '../../movie-page/movie-page-reviews/movie-page-reviews';
+import AddReviewPage from '../../../pages/add-review-page/add-review-page';
+import PlayerPage from '../../../pages/player-page/player-page';
+import NotFoundPage from '../../../pages/not-found-page/not-found-page';
+import MoviePageOverview from '../../movie/movie-overview/movie-overview';
+import MoviePageDetails from '../../movie/movie-details/movie-details';
+import MoviePageReviews from '../../movie/movie-reviews/movie-reviews';
 import PrivateRoute from '../private-route/private-route';
 import { AuthorizationStatus } from '../../../const';
 import { AppProps } from './appProps';
@@ -21,24 +21,24 @@ function App({ props }: AppProps): JSX.Element {
         <Route path='/'>
           <Route
             index
-            element={<MainScreen {...props} />}
+            element={<MainPage {...props} />}
           />
           <Route
             path='login'
-            element={<SignIn />}
+            element={<SignInPage />}
           />
           <Route
             path='mylist'
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <MyList {...props} />
+                <MyListPage {...props} />
               </PrivateRoute>
             }
           />
           <Route path='films/:id/' element={<MoviePage {...props} />}>
             <Route
               path=''
-              element={ <MoviePageOverview {...props} /> }
+              element={<MoviePageOverview {...props} />}
             />
             <Route
               path='details'
@@ -51,15 +51,15 @@ function App({ props }: AppProps): JSX.Element {
           </Route>
           <Route
             path='films/:id/add-review'
-            element={<AddReview {...props} />}
+            element={<AddReviewPage {...props} />}
           />
           <Route
             path='/player/:id'
-            element={<Player {...props}/>}
+            element={<PlayerPage {...props} />}
           />
           <Route
             path="*"
-            element={<NotFound />}
+            element={<NotFoundPage />}
           />
         </Route>
       </Routes>
