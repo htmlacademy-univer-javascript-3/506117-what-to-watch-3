@@ -40,7 +40,13 @@ export default function DefaultPlayer(props: DefaultPlayerProps): JSX.Element {
   }, [isPlaying]);
 
   return (
-    <video {...props} poster={props.previewImage} ref={playerRef}>
+    <video 
+        muted={props.muted}
+        width={props.width}
+        height={props.height}
+        poster={props.previewImage} 
+        ref={playerRef}
+    >
       <source src={props.previewVideoLink} />
     </video>
   );
