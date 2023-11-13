@@ -2,12 +2,12 @@
 import { useEffect, useRef, useState } from 'react';
 
 type DefaultPlayerProps = {
-    previewVideoLink: string;
-    previewImage: string;
-    muted: boolean;
-    width: number | string;
-    height: number | string;
-    isActive: boolean;
+  previewVideoLink: string;
+  previewImage: string;
+  muted: boolean;
+  width: number | string;
+  height: number | string;
+  isActive: boolean;
 }
 
 export default function DefaultPlayer(props: DefaultPlayerProps): JSX.Element {
@@ -40,12 +40,12 @@ export default function DefaultPlayer(props: DefaultPlayerProps): JSX.Element {
   }, [isPlaying]);
 
   return (
-    <video 
-        muted={props.muted}
-        width={props.width}
-        height={props.height}
-        poster={props.previewImage} 
-        ref={playerRef}
+    <video
+      muted={props.muted}
+      width={props.width}
+      height={props.height}
+      poster={props.previewImage}
+      ref={playerRef}
     >
       <source src={props.previewVideoLink} />
     </video>
