@@ -1,4 +1,4 @@
-export type MainScreenProps = {
+export type MainPageProps = {
     films: {
         id: string;
         name: string;

@@ -1,5 +1,4 @@
-
-type MoviePageOverviewProps = {
+type MovieOverviewProps = {
   film: {
     id: string;
     name: string;
@@ -19,7 +18,7 @@ type MoviePageOverviewProps = {
   };
 }
 
-function computeRatingLevel(ratingValue:number): string {
+function computeRatingLevel(ratingValue: number): string {
   if (0.0 <= ratingValue && ratingValue <= 2.0) {
     return 'Bad';
   } else if (2.0 <= ratingValue && ratingValue <= 4.0) {
@@ -34,7 +33,8 @@ function computeRatingLevel(ratingValue:number): string {
   throw new Error(`Unexpected rating value: ${ratingValue}, rating value must be between 0.0 and 10.0`);
 }
 
-export default function MoviePageOverview({ film }: MoviePageOverviewProps): JSX.Element {
+
+export default function MovieOverview({ film }: MovieOverviewProps): JSX.Element {
   return (
     <>
       <div className="film-rating">

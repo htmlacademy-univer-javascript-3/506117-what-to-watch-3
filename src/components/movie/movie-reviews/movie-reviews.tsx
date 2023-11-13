@@ -1,4 +1,4 @@
-type MoviePageReviewsProps = {
+type MovieReviewsProps = {
   reviews: {
     id: string;
     date: string;
@@ -9,7 +9,7 @@ type MoviePageReviewsProps = {
 }
 
 
-function MoviePageReviews({ reviews }: MoviePageReviewsProps): JSX.Element {
+export default function MovieReviews({ reviews }: MovieReviewsProps): JSX.Element {
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
@@ -23,11 +23,13 @@ function MoviePageReviews({ reviews }: MoviePageReviewsProps): JSX.Element {
 
                     <footer className="review__details">
                       <cite className="review__author">{review.user}</cite>
-                      <time className="review__date" dateTime={review.date}>{review.date}</time>
+                      <time className="review__date" dateTime={review.date}>
+                        {(new Date(review.date)).toDateString()}
+                      </time>
                     </footer>
                   </blockquote>
 
-                  <div className="review__rating">{review.rating.toLocaleString()}</div>
+                  <div className="review__rating">{review.rating}</div>
                 </div>
               )
           )
@@ -36,5 +38,3 @@ function MoviePageReviews({ reviews }: MoviePageReviewsProps): JSX.Element {
     </div>
   );
 }
-
-export default MoviePageReviews;

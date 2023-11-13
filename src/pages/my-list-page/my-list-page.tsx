@@ -13,7 +13,7 @@ type MyListProps = {
 }
 
 
-function MyList({ films }: MyListProps): JSX.Element {
+export default function MyListPage({ films }: MyListProps): JSX.Element {
   return (
     <div className="user-page">
       <HeadUser userPageHeader />
@@ -22,5 +22,3 @@ function MyList({ films }: MyListProps): JSX.Element {
     </div>
   );
 }
-
-export default MyList;

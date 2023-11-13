@@ -18,12 +18,12 @@ type PlayerProps = {
   };
 }
 
-function minutesToTimeFormat(minutes:number): string {
+function minutesToTimeFormat(minutes: number): string {
   return `${Math.floor(minutes / 60)}:${minutes % 60}:00`;
 }
 
 
-export default function Player({ film }: PlayerProps): JSX.Element {
+export default function PlayerPage({ film }: PlayerProps): JSX.Element {
   return (
     <div className="player">
       <video src={film.videoLink} className="player__video" poster="img/player-poster.jpg"></video>

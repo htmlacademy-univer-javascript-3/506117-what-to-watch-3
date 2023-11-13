@@ -1,4 +1,4 @@
-import FilmCard from '../../main-screen/film-card/film-card';
+import FilmCard from '../../main/film-card/film-card';
 import Genres from '../genres/genres';
 
 type CatalogProps = {
@@ -15,7 +15,7 @@ type CatalogProps = {
 function Catalog({ films, showGenresFilter }: CatalogProps): JSX.Element {
   return (
     <section className="catalog">
-      {showGenresFilter ? <Genres /> : ''}
+      {showGenresFilter && <Genres />}
 
       <div className="catalog__films-list">
         {

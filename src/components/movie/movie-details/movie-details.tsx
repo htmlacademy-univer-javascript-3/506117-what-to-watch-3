@@ -1,4 +1,5 @@
-type MoviePageDetailsProps = {
+
+type MovieDetailsProps = {
   film: {
     id: string;
     name: string;
@@ -18,8 +19,16 @@ type MoviePageDetailsProps = {
   };
 }
 
+function minutesToStringTime(minutes: number) {
+  const hours = Math.floor(minutes / 60);
+  const addMinutes = minutes % 60;
 
-function MoviePageDetails({ film }: MoviePageDetailsProps): JSX.Element {
+  return (
+    `${hours > 0 ? `${hours}h` : ''}${addMinutes > 0 ? ` ${addMinutes}m` : ''}`
+  );
+}
+
+export default function MovieDetails({ film }: MovieDetailsProps): JSX.Element {
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
@@ -31,8 +40,18 @@ function MoviePageDetails({ film }: MoviePageDetailsProps): JSX.Element {
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
             {
-              `${film.starring.slice(0, -1).join(', <br />')} 
-              ${film.starring[film.starring.length - 1]}`
+              film.starring
+                .slice(0, film.starring.length - 1)
+                .map(
+                  (star) => (
+                    <>
+                      {star}, <br />
+                    </>
+                  )
+                )
+            }
+            {
+              film.starring[film.starring.length - 1]
             }
           </span>
         </p>
@@ -41,7 +60,9 @@ function MoviePageDetails({ film }: MoviePageDetailsProps): JSX.Element {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{film.runTime}</span>
+          <span className="film-card__details-value">
+            {minutesToStringTime(film.runTime)}
+          </span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>
@@ -55,5 +76,3 @@ function MoviePageDetails({ film }: MoviePageDetailsProps): JSX.Element {
     </div>
   );
 }
-
-export default MoviePageDetails;

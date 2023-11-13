@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import RatingStars from './rating-stars';
+import RatingStars from '../rating-stars/rating-stars';
 
-export default function FormField(): JSX.Element {
+export default function FieldForm(): JSX.Element {
   const [, setFormData] = useState('');
 
   return (

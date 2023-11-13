@@ -1,4 +1,4 @@
-import FormField from '../../components/add-review/rormField';
+import FieldForm from '../../components/add-review/field-form/field-form';
 import Logo from '../../components/common/logo/logo';
 
 
@@ -22,7 +22,7 @@ type AddReviewProps = {
   };
 }
 
-export default function AddReview({ film }: AddReviewProps): JSX.Element {
+export default function AddReviewPage({ film }: AddReviewProps): JSX.Element {
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
@@ -63,7 +63,7 @@ export default function AddReview({ film }: AddReviewProps): JSX.Element {
         </div>
       </div>
 
-      <FormField />
+      <FieldForm />
 
     </section>
   );

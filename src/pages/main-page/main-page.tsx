@@ -1,11 +1,11 @@
 import Footer from '../../components/common/footer/footer';
 import Catalog from '../../components/common/catalog/catalog';
-import PromoCard from '../../components/main-screen/promo-card/promo-card';
-import { MainScreenProps } from './mainScreenProps';
+import PromoCard from '../../components/main/promo-card/promo-card';
+import { MainPageProps } from './mainPageProps';
 
 
-function MainScreen(
-  props: MainScreenProps
+export default function MainPage(
+  props: MainPageProps
 ): JSX.Element {
   return (
     <>
@@ -17,5 +17,3 @@ function MainScreen(
     </>
   );
 }
-
-export default MainScreen;
