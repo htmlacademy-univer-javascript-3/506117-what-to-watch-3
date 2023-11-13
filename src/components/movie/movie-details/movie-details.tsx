@@ -19,6 +19,14 @@ type MovieDetailsProps = {
   };
 }
 
+function minutesToStringTime(minutes: number) {
+  const hours = Math.floor(minutes / 60);
+  const addMinutes = minutes % 60;
+
+  return (
+    `${hours > 0 ? `${hours}h` : ''}${addMinutes > 0 ? ` ${addMinutes}m` : ''}`
+  );
+}
 
 export default function MovieDetails({ film }: MovieDetailsProps): JSX.Element {
   return (
@@ -66,14 +74,5 @@ export default function MovieDetails({ film }: MovieDetailsProps): JSX.Element {
         </p>
       </div>
     </div>
-  );
-}
-
-function minutesToStringTime(minutes: number) {
-  let hours = Math.floor(minutes / 60);
-  let addMinutes = minutes % 60;
-
-  return (
-    `${hours > 0 ? `${hours}h` : ''}${addMinutes > 0 ? ` ${addMinutes}m` : ''}`
   );
 }

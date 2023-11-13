@@ -18,7 +18,7 @@ type PlayerProps = {
   };
 }
 
-function minutesToTimeFormat(minutes:number): string {
+function minutesToTimeFormat(minutes: number): string {
   return `${Math.floor(minutes / 60)}:${minutes % 60}:00`;
 }
 

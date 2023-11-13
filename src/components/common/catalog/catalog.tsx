@@ -15,7 +15,7 @@ type CatalogProps = {
 function Catalog({ films, showGenresFilter }: CatalogProps): JSX.Element {
   return (
     <section className="catalog">
-      {showGenresFilter ? <Genres /> : ''}
+      {showGenresFilter && <Genres />}
 
       <div className="catalog__films-list">
         {
