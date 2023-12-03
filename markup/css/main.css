@@ -528,6 +528,8 @@ main {
 .catalog__genres-link {
   display: block;
   color: #DFCF77;
+  background: transparent;
+  border: none;
   text-decoration: none;
   position: relative;
   padding-bottom: 15px;

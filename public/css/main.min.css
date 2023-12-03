@@ -434,6 +434,8 @@ main {
 
 .catalog__genres-link {
   display: block;
+  background: transparent;
+  border: none;
   color: #dfcf77;
   text-decoration: none;
   position: relative;
