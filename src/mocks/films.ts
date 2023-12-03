@@ -55,4 +55,18 @@ export const films = [
     previewVideoLink: 'https://13.design.pages.academy/static//film/video/dog.mp4',
     genre: 'Comedy'
   },
+  {
+    id: 'adbd6d10-4262-4002-a8eb-9a460eb37503',
+    name: 'The Revenant',
+    previewImage: 'https://13.design.pages.academy/static/film/preview/revenant.jpg',
+    previewVideoLink: 'https://13.design.pages.academy/static//film/video/traffic.mp4',
+    genre: 'Action'
+  },
+  {
+    id: 'fe7ab681-8f5d-4661-a2b6-335b07bffd2e',
+    name: 'Johnny English',
+    previewImage: 'https://13.design.pages.academy/static/film/preview/johnny-english.jpg',
+    previewVideoLink: 'https://13.design.pages.academy/static//film/video/dog.mp4',
+    genre: 'Comedy'
+  },
 ];

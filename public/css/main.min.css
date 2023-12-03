@@ -502,6 +502,10 @@ main {
   cursor: pointer
 }
 
+.catalog__button--hide {
+  display: none;
+}
+
 .catalog__button:hover {
   border-color: rgba(217, 202, 116, .5)
 }
