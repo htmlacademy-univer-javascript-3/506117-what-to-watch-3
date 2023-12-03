@@ -1,22 +1,16 @@
+import { PropsWithChildren } from 'react';
 import FilmCard from '../../main/film-card/film-card';
-import Genres from '../genres/genres';
+import { useAppSelector } from '../../../hooks';
 
-type CatalogProps = {
-  films: {
-    id: string;
-    name: string;
-    previewImage: string;
-    previewVideoLink: string;
-    genre: string;
-  }[];
-  showGenresFilter: boolean;
-}
+type CatalogProps = PropsWithChildren;
 
-function Catalog({ films, showGenresFilter }: CatalogProps): JSX.Element {
+function Catalog(props: CatalogProps): JSX.Element {
+  const { children } = props;
+  const films = useAppSelector((state) => state.films);
+
   return (
     <section className="catalog">
-      {showGenresFilter && <Genres />}
-
+      {children}
       <div className="catalog__films-list">
         {
           films.map((film) => (<FilmCard film={film} key={film.id} />))

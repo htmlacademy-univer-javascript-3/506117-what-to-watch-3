@@ -31,7 +31,7 @@ function App({ props }: AppProps): JSX.Element {
             path='mylist'
             element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <MyListPage {...props} />
+                <MyListPage />
               </PrivateRoute>
             }
           />
