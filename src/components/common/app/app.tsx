@@ -10,7 +10,7 @@ import MoviePageOverview from '../../movie/movie-overview/movie-overview';
 import MoviePageDetails from '../../movie/movie-details/movie-details';
 import MoviePageReviews from '../../movie/movie-reviews/movie-reviews';
 import PrivateRoute from '../private-route/private-route';
-import { AuthorizationStatus } from '../../../const';
+import { AppRoute } from '../../../const';
 import { AppProps } from './appProps';
 import LoadingScreen from '../loading/loading';
 import { useAppSelector } from '../../../hooks';
@@ -21,27 +21,28 @@ function App({ props }: AppProps): JSX.Element {
   if (isFilmsDataLoading) {
     return <LoadingScreen />;
   }
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/'>
+        <Route path={AppRoute.Main}>
           <Route
             index
             element={<MainPage {...props} />}
           />
           <Route
-            path='login'
+            path={AppRoute.SignIn}
             element={<SignInPage />}
           />
           <Route
-            path='mylist'
+            path={AppRoute.MyList}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <PrivateRoute>
                 <MyListPage />
               </PrivateRoute>
             }
           />
-          <Route path='films/:id/' element={<MoviePage {...props} />}>
+          <Route path={AppRoute.Film} element={<MoviePage {...props} />}>
             <Route
               path='overview'
               element={<MoviePageOverview {...props} />}
@@ -56,11 +57,15 @@ function App({ props }: AppProps): JSX.Element {
             />
           </Route>
           <Route
-            path='films/:id/add-review'
-            element={<AddReviewPage {...props} />}
+            path={AppRoute.AddReview}
+            element={
+              <PrivateRoute>
+                <AddReviewPage {...props} />
+              </PrivateRoute>
+            }
           />
           <Route
-            path='/player/:id'
+            path={AppRoute.Player}
             element={<PlayerPage {...props} />}
           />
           <Route

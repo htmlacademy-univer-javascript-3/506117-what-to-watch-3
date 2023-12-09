@@ -68,7 +68,7 @@ function MoviePage({ film, similar }: MoviePageProps) {
                   <span>My list</span>
                   {/* <span className="film-card__count">{userInfo.listCount}</span> */}
                 </button>
-                <Link className="btn film-card__button" to={`/films/${film.id}/add-review`}>Add review</Link>
+                <Link className="btn film-card__button" to={`/films/${film.id}/review`}>Add review</Link>
               </div>
             </div>
           </div>

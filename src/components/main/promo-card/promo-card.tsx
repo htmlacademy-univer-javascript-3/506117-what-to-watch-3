@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
 import HeadUser from '../../common/head/head-user/head-user';
+import HeadGuest from '../../common/head/head-guest/head-guest';
+import { useAppSelector } from '../../../hooks';
+import { AuthorizationStatus } from '../../../const';
 
 type PromoCardProps = {
   promo: {
@@ -16,6 +19,8 @@ type PromoCardProps = {
 
 
 function PromoCard({ promo }: PromoCardProps): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+
   return (
     <section className="film-card">
       <div className="film-card__bg">
@@ -23,8 +28,7 @@ function PromoCard({ promo }: PromoCardProps): JSX.Element {
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
-
-      <HeadUser userPageHeader={false} />
+      {authorizationStatus === AuthorizationStatus.Auth ? <HeadUser userPageHeader={false} /> : <HeadGuest />}
 
       <div className="film-card__wrap">
         <div className="film-card__info">
