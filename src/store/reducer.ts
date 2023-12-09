@@ -3,7 +3,7 @@ import { changeGenre, putGenreFilms } from './action';
 import { films } from '../mocks/films';
 
 const initialState = {
-  genre: 'All genres',
+  genre: {id: 0, title: 'All genres'},
   films: films.map((film) => film)
 };
 
@@ -14,10 +14,10 @@ export const reducer = createReducer(initialState, (builder) => {
       state.genre = newGenre;
     })
     .addCase(putGenreFilms, (state) => {
-      if (state.genre === 'All genres') {
+      if (state.genre.id === 0) {
         state.films = films.map((film) => film);
       } else {
-        state.films = films.filter((film) => film.genre === state.genre);
+        state.films = films.filter((film) => film.genre === state.genre.title);
       }
     });
 });

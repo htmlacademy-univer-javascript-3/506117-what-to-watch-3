@@ -37,7 +37,7 @@ function App({ props }: AppProps): JSX.Element {
           />
           <Route path='films/:id/' element={<MoviePage {...props} />}>
             <Route
-              path=''
+              path='overview'
               element={<MoviePageOverview {...props} />}
             />
             <Route

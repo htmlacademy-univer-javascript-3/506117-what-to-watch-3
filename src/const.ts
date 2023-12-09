@@ -9,3 +9,5 @@ export const filmCardVideoProps = {
   width: 280,
   height: 175
 };
+
+export const showNum = 4;
