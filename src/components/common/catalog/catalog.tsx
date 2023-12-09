@@ -1,5 +1,4 @@
 import { PropsWithChildren, useEffect, useState } from 'react';
-import { PropsWithChildren, useState } from 'react';
 import FilmCard from '../../main/film-card/film-card';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import ShowMore from '../show-more/show-more';
@@ -10,8 +9,15 @@ type CatalogProps = PropsWithChildren;
 
 function Catalog(props: CatalogProps): JSX.Element {
   const { children } = props;
-  const films = useAppSelector((state) => state.films);
-  const [limit, changeLimit] = useState(8);
+  const films = useAppSelector((state) => state.genreFilms);
+  const [limit, setLimit] = useState(showNum);
+  const dispatcher = useAppDispatch();
+
+  useEffect(() => {
+    dispatcher(changeGenre({ newGenre: { title: 'All genres', id: 0 } }));
+    dispatcher(putGenreFilms());
+  }, []);
+
 
   return (
     <section className="catalog">
@@ -21,16 +27,7 @@ function Catalog(props: CatalogProps): JSX.Element {
           films.slice(0, limit).map((film) => (<FilmCard film={film} key={film.id} />))
         }
       </div>
-
-      <div className="catalog__more">
-        <button
-          className={limit < films.length ? 'catalog__button' : 'catalog__button--hide'}
-          type="button"
-          onClick={() => changeLimit((newLimit) => 2 * newLimit)}
-        >
-          Show more
-        </button>
-      </div>
+      {limit < films.length && <ShowMore {...{ limit, setLimit }} /> }
     </section>
   );
 }
