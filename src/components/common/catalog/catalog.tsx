@@ -1,4 +1,5 @@
 import { PropsWithChildren, useEffect, useState } from 'react';
+
 import FilmCard from '../../main/film-card/film-card';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import ShowMore from '../show-more/show-more';
@@ -18,6 +19,7 @@ function Catalog(props: CatalogProps): JSX.Element {
     dispatcher(putGenreFilms());
   }, []);
 
+
   return (
     <section className="catalog">
       {children}
@@ -26,7 +28,6 @@ function Catalog(props: CatalogProps): JSX.Element {
           films.slice(0, limit).map((film) => (<FilmCard film={film} key={film.id} />))
         }
       </div>
-
       {limit < films.length && <ShowMore {...{ limit, setLimit }} /> }
     </section>
   );
