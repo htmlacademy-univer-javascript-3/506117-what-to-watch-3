@@ -1,15 +1,22 @@
-import { PropsWithChildren, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 import FilmCard from '../../main/film-card/film-card';
-import { useAppSelector } from '../../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import ShowMore from '../show-more/show-more';
 import { showNum } from '../../../const';
+import { changeGenre, putGenreFilms } from '../../../store/action';
 
 type CatalogProps = PropsWithChildren;
 
 function Catalog(props: CatalogProps): JSX.Element {
   const { children } = props;
-  const films = useAppSelector((state) => state.films);
+  const films = useAppSelector((state) => state.genreFilms);
   const [limit, setLimit] = useState(showNum);
+  const dispatcher = useAppDispatch();
+
+  useEffect(() => {
+    dispatcher(changeGenre({ newGenre: { title: 'All genres', id: 0 } }));
+    dispatcher(putGenreFilms());
+  }, []);
 
   return (
     <section className="catalog">
@@ -20,7 +27,7 @@ function Catalog(props: CatalogProps): JSX.Element {
         }
       </div>
 
-      {limit < films.length ? <ShowMore {...{ limit, setLimit }} /> : <></>}
+      {limit < films.length && <ShowMore {...{ limit, setLimit }} /> }
     </section>
   );
 }

@@ -10,4 +10,4 @@ export const filmCardVideoProps = {
   height: 175
 };
 
-export const showNum = 4;
+export const showNum = 8;

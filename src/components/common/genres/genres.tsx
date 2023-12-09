@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { changeGenre, putGenreFilms } from '../../../store/action';
-import { films } from '../../../mocks/films';
 
 
 export default function Genres(): JSX.Element {
   const dispatcher = useAppDispatch();
   const curGenre = useAppSelector((state) => state.genre);
   const [activeGenre, setGenre] = useState(0);
+  const films = useAppSelector((state) => state.films);
   const filmGenres = films
     .map((f) => f.genre)
     .filter((value, index, array) => array.indexOf(value) === index)

@@ -12,9 +12,15 @@ import MoviePageReviews from '../../movie/movie-reviews/movie-reviews';
 import PrivateRoute from '../private-route/private-route';
 import { AuthorizationStatus } from '../../../const';
 import { AppProps } from './appProps';
+import LoadingScreen from '../loading/loading';
+import { useAppSelector } from '../../../hooks';
 
 
 function App({ props }: AppProps): JSX.Element {
+  const isFilmsDataLoading = useAppSelector((state) => state.isFilmsDataLoading);
+  if (isFilmsDataLoading) {
+    return <LoadingScreen />;
+  }
   return (
     <BrowserRouter>
       <Routes>

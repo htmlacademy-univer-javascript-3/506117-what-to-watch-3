@@ -1,10 +1,15 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre, putGenreFilms } from './action';
-import { films } from '../mocks/films';
+import { changeGenre, loadFilms, putGenreFilms, setFilmsDataLoadingStatus } from './action';
+import { InitialState } from '../types/initialState';
 
-const initialState = {
-  genre: {id: 0, title: 'All genres'},
-  films: films.map((film) => film)
+const initialState: InitialState = {
+  genre: {
+    id: 0,
+    title: 'All genres'
+  },
+  films: [],
+  genreFilms: [],
+  isFilmsDataLoading: false
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -15,9 +20,15 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(putGenreFilms, (state) => {
       if (state.genre.id === 0) {
-        state.films = films.map((film) => film);
+        state.genreFilms = state.films.map((film) => film);
       } else {
-        state.films = films.filter((film) => film.genre === state.genre.title);
+        state.genreFilms = state.films.filter((film) => film.genre === state.genre.title);
       }
+    })
+    .addCase(loadFilms, (state, action) => {
+      state.films = action.payload;
+    })
+    .addCase(setFilmsDataLoadingStatus, (state, action) => {
+      state.isFilmsDataLoading = action.payload;
     });
 });
