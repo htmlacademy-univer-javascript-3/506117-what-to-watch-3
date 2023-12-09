@@ -24,7 +24,7 @@ export default function FilmCard({ film }: FilmCardProps): JSX.Element {
     >
       <Link
         className="small-film-card__link"
-        to={`/films/${film.id}/`}
+        to={`/films/${film.id}/overview`}
       >
         <div className="small-film-card__image">
           {
