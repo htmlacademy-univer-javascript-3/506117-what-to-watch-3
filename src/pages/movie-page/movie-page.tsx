@@ -3,26 +3,10 @@ import { Link, NavLink, Outlet, useParams } from 'react-router-dom';
 import FilmCard from '../../components/main/film-card/film-card';
 import Head from '../../components/common/head/head';
 import MyList from '../../components/common/my-list/my-list';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFilmDetailsAction } from '../../store/api-actions';
 
 type MoviePageProps = {
-  film: {
-    id: string;
-    name: string;
-    posterImage: string;
-    backgroundImage: string;
-    backgroundColor: string;
-    videoLink: string;
-    description: string;
-    rating: number;
-    scoresCount: number;
-    director: string;
-    starring: string[];
-    runTime: number;
-    genre: string;
-    released: number;
-    isFavorite: boolean;
-  };
-
   similar: {
     id: string;
     name: string;
@@ -32,9 +16,15 @@ type MoviePageProps = {
   }[];
 };
 
-function MoviePage({ film, similar }: MoviePageProps) {
+function MoviePage({ similar }: MoviePageProps) {
   const { id } = useParams();
+  const dispatcher = useAppDispatch();
 
+  if (id === undefined) return <></>;
+  dispatcher(fetchFilmDetailsAction({ id: id }));
+  const film = useAppSelector((state) => state.filmDetails);
+
+  if (film === null) return <></>;
   return (
     <>
       <section className="film-card film-card--full">

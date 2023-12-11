@@ -2,22 +2,20 @@ import { Link } from 'react-router-dom';
 import Head from '../../common/head/head';
 import Logo from '../../common/logo/logo';
 import MyList from '../../common/my-list/my-list';
+import { useAppSelector } from '../../../hooks';
 
-type PromoCardProps = {
-  promo: {
-    id: string;
-    name: string;
-    posterImage: string;
-    backgroundImage: string;
-    videoLink: string;
-    genre: string;
-    released: number;
-    isFavorite: boolean;
-  };
-};
-
-
-function PromoCard({ promo }: PromoCardProps): JSX.Element {
+function PromoCard(): JSX.Element {
+  const promo = useAppSelector((state) => 
+    state.promo || {
+      id: '',
+      name: '',
+      posterImage: '',
+      backgroundImage: '',
+      videoLink: '',
+      genre: '',
+      released: '',
+      isFavorite: false
+  });
   return (
     <section className="film-card">
       <div className="film-card__bg">
@@ -47,7 +45,6 @@ function PromoCard({ promo }: PromoCardProps): JSX.Element {
                 </svg>
                 <span>Play</span>
               </Link>
-
               <MyList />
             </div>
           </div>

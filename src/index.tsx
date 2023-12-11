@@ -8,10 +8,11 @@ import { reviews } from './mocks/reviews';
 import { similar } from './mocks/similar';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { fetchFilmsAction } from './store/api-actions';
+import { fetchFilmsAction, fetchPromoAction } from './store/api-actions';
 
 
 store.dispatch(fetchFilmsAction());
+store.dispatch(fetchPromoAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
