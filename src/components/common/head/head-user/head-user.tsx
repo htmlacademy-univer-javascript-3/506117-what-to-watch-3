@@ -1,19 +1,20 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
-import Logo from '../../logo/logo';
 import { AppRoute } from '../../../../const';
-import { logOut } from '../../../../store/action';
+import { logoutAction } from '../../../../store/api-actions';
+import { PropsWithChildren } from 'react';
 
 type HeadUserProps = {
   userPageHeader: boolean;
 }
 
-function HeadUser({ userPageHeader }: HeadUserProps): JSX.Element {
+function HeadUser({ userPageHeader, children }: PropsWithChildren<HeadUserProps>): JSX.Element {
   const userData = useAppSelector((state) => state.userData);
   const dispatcher = useAppDispatch();
+  const navigate = useNavigate();
   return (
     <header className={`page-header ${userPageHeader ? 'user-page__head' : 'film-card__head'}`}>
-      <Logo isLight={false} />
+      {children}
 
       {userPageHeader && <h1 className="page-title user-page__title">My list <span className="user-page__film-count">9</span></h1>}
 
@@ -24,12 +25,15 @@ function HeadUser({ userPageHeader }: HeadUserProps): JSX.Element {
           </div>
         </li>
         <li className="user-block__item">
-          <Link 
-            onClick={() => dispatcher(logOut())}
+          <button 
+            onClick={() => {
+              dispatcher(logoutAction());
+              navigate(AppRoute.Main);
+            }}
             className="user-block__link" 
-            to={AppRoute.Main}>
-              Sign out
-            </Link>
+          >
+            Sign out
+          </button>
         </li>
       </ul>
     </header>

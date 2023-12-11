@@ -1,13 +1,17 @@
-import { Link } from 'react-router-dom';
-import Logo from '../../logo/logo';
+import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../../../const';
+import { PropsWithChildren } from 'react';
 
-function HeadGuest() {
+type HeadGuestProps = PropsWithChildren;
+
+function HeadGuest({ children } : HeadGuestProps) {
+  const navigate = useNavigate();
+
   return (
     <header className="page-header">
-      <Logo isLight={false}/>
+      {children}
       <div className="user-block">
-        <Link to={AppRoute.SignIn} className="user-block__link">Sign in</Link>
+        <button onClick={() => navigate(AppRoute.SignIn)} className="user-block__link">Sign in</button>
       </div>
     </header>
   );

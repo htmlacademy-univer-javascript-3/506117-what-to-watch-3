@@ -1,3 +1,6 @@
+import { useNavigate } from "react-router-dom";
+import { AppRoute } from "../../const";
+
 type PlayerProps = {
   film: {
     id: string;
@@ -24,11 +27,18 @@ function minutesToTimeFormat(minutes: number): string {
 
 
 export default function PlayerPage({ film }: PlayerProps): JSX.Element {
+  const navigate = useNavigate();
   return (
     <div className="player">
       <video src={film.videoLink} className="player__video" poster="img/player-poster.jpg"></video>
 
-      <button type="button" className="player__exit">Exit</button>
+      <button 
+        type="button" 
+        className="player__exit"
+        onClick={() => navigate(AppRoute.Main)}
+        >
+          Exit
+        </button>
 
       <div className="player__controls">
         <div className="player__controls-row">

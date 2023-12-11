@@ -10,6 +10,7 @@ import SignInErr from '../../components/sign-in/sign-in-err/sign-in-err';
 export default function SignInPage(): JSX.Element {
   const navigate = useNavigate();
   const auth = useAppSelector((state) => state.authorizationStatus);
+
   if (auth === AuthorizationStatus.Auth) {
     navigate(AppRoute.Main);
   }

@@ -1,7 +1,8 @@
-import HeadUser from '../../components/common/head/head-user/head-user';
 import Footer from '../../components/common/footer/footer';
 import { Link, NavLink, Outlet, useParams } from 'react-router-dom';
 import FilmCard from '../../components/main/film-card/film-card';
+import Head from '../../components/common/head/head';
+import MyList from '../../components/common/my-list/my-list';
 
 type MoviePageProps = {
   film: {
@@ -44,7 +45,7 @@ function MoviePage({ film, similar }: MoviePageProps) {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <HeadUser userPageHeader={false} />
+          <Head />
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
@@ -61,13 +62,7 @@ function MoviePage({ film, similar }: MoviePageProps) {
                   </svg>
                   <span>Play</span>
                 </Link>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add" href="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  {/* <span className="film-card__count">{userInfo.listCount}</span> */}
-                </button>
+                <MyList />
                 <Link className="btn film-card__button" to={`/films/${film.id}/review`}>Add review</Link>
               </div>
             </div>

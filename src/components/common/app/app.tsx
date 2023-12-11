@@ -14,6 +14,8 @@ import { AppRoute } from '../../../const';
 import { AppProps } from './appProps';
 import LoadingScreen from '../loading/loading';
 import { useAppSelector } from '../../../hooks';
+import HistoryRouter from '../../history-route/history-route';
+import browserHistory from '../../../browser-history';
 
 
 function App({ props }: AppProps): JSX.Element {
@@ -23,7 +25,7 @@ function App({ props }: AppProps): JSX.Element {
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoute.Main}>
           <Route
@@ -74,7 +76,7 @@ function App({ props }: AppProps): JSX.Element {
           />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

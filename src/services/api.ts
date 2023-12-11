@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { getToken } from './token';
 import { StatusCodes } from 'http-status-codes';
-import { processErrorHandle } from './handle-signin-err';
+import { processErrorHandle } from './handle-sign-in-err';
 
 const BACKEND_URL = 'https://13.design.pages.academy/wtw';
 const REQUEST_TIMEOUT = 5000;
@@ -43,7 +43,6 @@ export const createAPI = (): AxiosInstance => {
         const detailMessage = (error.response.data);
         processErrorHandle(detailMessage.message);
       }
-
       throw error;
     }
   );

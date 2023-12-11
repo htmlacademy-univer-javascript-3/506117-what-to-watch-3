@@ -1,12 +1,12 @@
-import HeadUser from '../../components/common/head/head-user/head-user';
 import Footer from '../../components/common/footer/footer';
 import Catalog from '../../components/common/catalog/catalog';
+import Head from '../../components/common/head/head';
 
 
 export default function MyListPage(): JSX.Element {
   return (
     <div className="user-page">
-      <HeadUser userPageHeader />
+      <Head />
       <Catalog />
       <Footer />
     </div>

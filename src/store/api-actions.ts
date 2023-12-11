@@ -6,7 +6,7 @@ import { loadFilms, redirectToRoute, requireAuthorization, saveUserInfo, setFilm
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
-import { saveToken } from '../services/token';
+import { dropToken, saveToken } from '../services/token';
 import { store } from '.';
 
 export const clearErrorAction = createAsyncThunk(
@@ -44,6 +44,19 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     saveToken(userData.data.token);
     dispatch(saveUserInfo(userData.data));
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
-    dispatch(redirectToRoute(AppRoute.MyList));
+    dispatch(redirectToRoute(AppRoute.Main));
+  },
+);
+
+export const logoutAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/logout',
+  async (_arg, {dispatch, extra: api}) => {
+    await api.delete(APIRoute.Logout);
+    dropToken();
+    dispatch(requireAuthorization(AuthorizationStatus.Unknown));
   },
 );

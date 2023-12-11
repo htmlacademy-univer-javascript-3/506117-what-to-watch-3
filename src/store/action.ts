@@ -10,7 +10,6 @@ export const loadFilms = createAction<Film[]>('data/loadFilms');
 export const setFilmsDataLoadingStatus = createAction<boolean>('data/setFilmsDataLoadingStatus');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
-export const redirectToRoute = createAction<AppRoute>('user/redirectToRoute');
+export const redirectToRoute = createAction<AppRoute>('main/redirectToRoute');
 export const saveUserInfo = createAction<UserData>('user/saveInfo');
-export const logOut = createAction('user/logout');
 export const setUserError = createAction<string | null>('user/error');

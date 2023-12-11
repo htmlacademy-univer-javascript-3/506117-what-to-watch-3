@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
-import HeadUser from '../../common/head/head-user/head-user';
-import HeadGuest from '../../common/head/head-guest/head-guest';
-import { useAppSelector } from '../../../hooks';
-import { AuthorizationStatus } from '../../../const';
+import Head from '../../common/head/head';
+import Logo from '../../common/logo/logo';
+import MyList from '../../common/my-list/my-list';
 
 type PromoCardProps = {
   promo: {
@@ -19,8 +18,6 @@ type PromoCardProps = {
 
 
 function PromoCard({ promo }: PromoCardProps): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-
   return (
     <section className="film-card">
       <div className="film-card__bg">
@@ -28,7 +25,7 @@ function PromoCard({ promo }: PromoCardProps): JSX.Element {
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
-      {authorizationStatus === AuthorizationStatus.Auth ? <HeadUser userPageHeader={false} /> : <HeadGuest />}
+      <Head><Logo isLight={false} /></Head>
 
       <div className="film-card__wrap">
         <div className="film-card__info">
@@ -51,7 +48,7 @@ function PromoCard({ promo }: PromoCardProps): JSX.Element {
                 <span>Play</span>
               </Link>
 
-              {/* <MoviePageInList userInfo={userInfo} /> */}
+              <MyList />
             </div>
           </div>
         </div>

@@ -73,6 +73,11 @@ img {
   border-style: none
 }
 
+button {
+  border: none;
+  background-color: transparent;
+}
+
 button,
 input,
 optgroup,
@@ -522,7 +527,7 @@ main {
   margin: 0
 }
 
-.logo__link {
+button  .logo__link, .logo__link {
   border: 1px solid rgba(223, 207, 119, .36);
   border-radius: 8px;
   width: 93px;
@@ -545,7 +550,10 @@ main {
 }
 
 .logo__link[href]:focus,
-.logo__link[href]:hover {
+.logo__link[href]:hover,
+.logo__link[button]:focus,
+.logo__linkp[button]:hover
+{
   border-color: rgba(84, 80, 62, .36);
   color: #54503e
 }
