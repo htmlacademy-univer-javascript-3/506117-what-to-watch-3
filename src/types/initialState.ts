@@ -13,8 +13,10 @@ export type InitialState = {
     films: Film[];
     promo: Promo | null;
     filmDetails: FilmDetails | null;
+    similarFilms: SimilarFilms;
+    reviews: Reviews;
     genreFilms: Film[];
     authorizationStatus: AuthorizationStatus;
-    isFilmsDataLoading: boolean;
+    isDataLoading: boolean;
     userError: string | null;
 };

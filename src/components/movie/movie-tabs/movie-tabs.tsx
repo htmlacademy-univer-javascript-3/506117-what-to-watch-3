@@ -1,67 +1,59 @@
-import { useState } from "react";
-import { Tab } from "../../../const";
+import { useEffect, useState } from "react";
 import MovieOverview from "../movie-overview/movie-overview";
 import MovieDetails from "../movie-details/movie-details";
 import MovieReviews from "../movie-reviews/movie-reviews";
 import { FilmDetails } from "../../../types/film-details";
+import { Location } from "react-router-dom";
 
 type MovieTabsProps = {
   film: FilmDetails
+  location: Location
 }
 
-export default function MovieTabs({ film }: MovieTabsProps): JSX.Element {
+export default function MovieTabs({ film, location }: MovieTabsProps): JSX.Element {
   const tabs = [
     {
       id: 0,
       title: 'Overview',
-      component: <MovieOverview />
+      component: <MovieOverview film={film} />
     },
     {
       id: 1,
       title: 'Details',
-      component: <MovieDetails />
+      component: <MovieDetails film={film} />
     },
     {
       id: 2,
       title: 'Reviews',
-      component: <MovieReviews />
+      component: <MovieReviews film={film}/>
     },
   ]
-  const [currentTab, setTab] = useState(Tab.Overview);
+
+  const [currentTabId, setTabId] = useState(0);
+
+  useEffect(() => {
+    setTabId(() => 0);
+  }, [location]);
 
   return (
     <div className="film-card__desc">
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
           {
-            [Tab.Overview, Tab.Details, Tab.Reviews].map(t => {
+            tabs.map(t => {
               return (
-                <li className="film-nav__item">
-                  <button onClick={() => setTab(() => Tab.Overview)} className="film-nav__link">
-                    Overview
+                <li className={"film-nav__item" + (t.id === currentTabId ? " film-nav__item--active" : "")} key={t.id}>
+                  <button onClick={() => setTabId(() => t.id)} className="film-nav__link">
+                    {t.title}
                   </button>
                 </li>
-              )
+              );
             })
           }
-          <li className="film-nav__item">
-            <button onClick={() => setTab(() => Tab.Overview)} className="film-nav__link">
-              Overview
-            </button>
-          </li>
-          <li className="film-nav__item">
-            <button onClick={() => setTab(() => Tab.Details)} className="film-nav__link">
-              Details
-            </button>
-          </li>
-          <li className={"film-nav__item"}>
-            <button onClick={() => setTab(() => Tab.Reviews)} className="film-nav__link">
-              Reviews
-            </button>
-          </li>
         </ul>
       </nav>
-      <Outlet />
+      {tabs[currentTabId].component}
     </div>
   );
 }
+

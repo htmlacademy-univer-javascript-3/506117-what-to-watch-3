@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre, loadFilmDetails, loadFilms, loadPromo, putGenreFilms, requireAuthorization, saveUserInfo, setFilmsDataLoadingStatus, setUserError } from './action';
+import { changeGenre, loadFilmDetails, loadFilms, loadPromo, loadReviews, loadSimilarFilms, putGenreFilms, requireAuthorization, saveUserInfo, setDataLoadingStatus, setUserError } from './action';
 import { InitialState } from '../types/initialState';
 import { AuthorizationStatus } from '../const';
 
@@ -12,9 +12,11 @@ const initialState: InitialState = {
   films: [],
   promo: null,
   filmDetails: null,
+  similarFilms: [],
+  reviews: [],
   genreFilms: [],
   authorizationStatus: AuthorizationStatus.Unknown,
-  isFilmsDataLoading: false,
+  isDataLoading: false,
   userError: null
 };
 
@@ -40,8 +42,14 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(loadFilmDetails, (state, action) => {
       state.filmDetails = action.payload;
     })
-    .addCase(setFilmsDataLoadingStatus, (state, action) => {
-      state.isFilmsDataLoading = action.payload;
+    .addCase(loadSimilarFilms, (state, action) => {
+      state.similarFilms = action.payload;
+    })
+    .addCase(loadReviews, (state, action) => {
+      state.reviews = action.payload;
+    })
+    .addCase(setDataLoadingStatus, (state, action) => {
+      state.isDataLoading = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;

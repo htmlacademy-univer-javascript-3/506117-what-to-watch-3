@@ -5,17 +5,12 @@ import MyList from '../../common/my-list/my-list';
 import { useAppSelector } from '../../../hooks';
 
 function PromoCard(): JSX.Element {
-  const promo = useAppSelector((state) => 
-    state.promo || {
-      id: '',
-      name: '',
-      posterImage: '',
-      backgroundImage: '',
-      videoLink: '',
-      genre: '',
-      released: '',
-      isFavorite: false
-  });
+  const promo = useAppSelector((state) => state.promo);
+
+  if (promo === null) {
+    return <></>;
+  }
+
   return (
     <section className="film-card">
       <div className="film-card__bg">

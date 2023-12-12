@@ -3,29 +3,14 @@ import FieldForm from '../../components/add-review/field-form/field-form';
 import Head from '../../components/common/head/head';
 import Logo from '../../components/common/logo/logo';
 import { AppRoute } from '../../const';
+import { useAppSelector } from '../../hooks';
 
 
-type AddReviewProps = {
-  film: {
-    id: string;
-    name: string;
-    posterImage: string;
-    backgroundImage: string;
-    backgroundColor: string;
-    videoLink: string;
-    description: string;
-    rating: number;
-    scoresCount: number;
-    director: string;
-    starring: string[];
-    runTime: number;
-    genre: string;
-    released: number;
-    isFavorite: boolean;
-  };
-}
+export default function AddReviewPage(): JSX.Element {
+  const film = useAppSelector((state) => state.filmDetails);
 
-export default function AddReviewPage({ film }: AddReviewProps): JSX.Element {
+  if (film === null) return <></>;
+
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">

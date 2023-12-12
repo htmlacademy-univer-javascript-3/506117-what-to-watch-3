@@ -1,29 +1,26 @@
 import Footer from '../../components/common/footer/footer';
-import { Link, NavLink, Outlet, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import FilmCard from '../../components/main/film-card/film-card';
 import Head from '../../components/common/head/head';
 import MyList from '../../components/common/my-list/my-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFilmDetailsAction } from '../../store/api-actions';
+import { fetchFilmDetailsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
 import MovieTabs from '../../components/movie/movie-tabs/movie-tabs';
+import { useEffect } from 'react';
 
-type MoviePageProps = {
-  similar: {
-    id: string;
-    name: string;
-    previewImage: string;
-    previewVideoLink: string;
-    genre: string;
-  }[];
-};
-
-function MoviePage({ similar }: MoviePageProps) {
+function MoviePage() {
   const { id } = useParams();
   const dispatcher = useAppDispatch();
 
   if (id === undefined) return <></>;
-  dispatcher(fetchFilmDetailsAction({ id: id }));
+  const location = useLocation();
+  useEffect(() => {
+    dispatcher(fetchFilmDetailsAction({ id: location.pathname.split('/')[2] }));
+    dispatcher(fetchSimilarFilmsAction({ id: location.pathname.split('/')[2] }));
+  }, [location]);
+  
   const film = useAppSelector((state) => state.filmDetails);
+  const similarFilms = useAppSelector((state) => state.similarFilms);
 
   if (film === null) return <></>;
   return (
@@ -65,7 +62,7 @@ function MoviePage({ similar }: MoviePageProps) {
             <div className="film-card__poster film-card__poster--big">
               <img src={film.posterImage} alt={film.name} width="218" height="327" />
             </div>
-            <MovieTabs />
+            <MovieTabs film={film} location={location}/>
           </div>
         </div>
       </section>
@@ -75,7 +72,7 @@ function MoviePage({ similar }: MoviePageProps) {
           <h2 className="catalog__title">More like this</h2>
           <div className="catalog__films-list">
             {
-              similar.map((filmItem) => (<FilmCard film={filmItem} key={film.id} />))
+              similarFilms.slice(0, 4).map((film) => (<FilmCard film={film} key={film.id} />))
             }
           </div>
         </section>
