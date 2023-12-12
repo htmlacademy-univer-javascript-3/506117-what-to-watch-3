@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import MainPage from '../../../pages/main-page/main-page';
 import SignInPage from '../../../pages/sign-in-page/sign-in-page';
 import MyListPage from '../../../pages/my-list-page/my-list-page';
@@ -6,61 +6,55 @@ import MoviePage from '../../../pages/movie-page/movie-page';
 import AddReviewPage from '../../../pages/add-review-page/add-review-page';
 import PlayerPage from '../../../pages/player-page/player-page';
 import NotFoundPage from '../../../pages/not-found-page/not-found-page';
-import MoviePageOverview from '../../movie/movie-overview/movie-overview';
-import MoviePageDetails from '../../movie/movie-details/movie-details';
-import MoviePageReviews from '../../movie/movie-reviews/movie-reviews';
 import PrivateRoute from '../private-route/private-route';
-import { AuthorizationStatus } from '../../../const';
+import { AppRoute } from '../../../const';
 import { AppProps } from './appProps';
 import LoadingScreen from '../loading/loading';
 import { useAppSelector } from '../../../hooks';
+import HistoryRouter from '../../history-route/history-route';
+import browserHistory from '../../../browser-history';
 
 
 function App({ props }: AppProps): JSX.Element {
-  const isFilmsDataLoading = useAppSelector((state) => state.isFilmsDataLoading);
-  if (isFilmsDataLoading) {
+  const isDataLoading = useAppSelector((state) => state.isDataLoading);
+  if (isDataLoading) {
     return <LoadingScreen />;
   }
+
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
-        <Route path='/'>
+        <Route path={AppRoute.Main}>
           <Route
             index
-            element={<MainPage {...props} />}
+            element={<MainPage />}
           />
           <Route
-            path='login'
+            path={AppRoute.SignIn}
             element={<SignInPage />}
           />
           <Route
-            path='mylist'
+            path={AppRoute.MyList}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <PrivateRoute>
                 <MyListPage />
               </PrivateRoute>
             }
           />
-          <Route path='films/:id/' element={<MoviePage {...props} />}>
-            <Route
-              path='overview'
-              element={<MoviePageOverview {...props} />}
-            />
-            <Route
-              path='details'
-              element={<MoviePageDetails {...props} />}
-            />
-            <Route
-              path='reviews'
-              element={<MoviePageReviews {...props} />}
-            />
-          </Route>
           <Route
-            path='films/:id/add-review'
-            element={<AddReviewPage {...props} />}
+            path={AppRoute.Film}
+            element={<MoviePage />}
           />
           <Route
-            path='/player/:id'
+            path={AppRoute.AddReview}
+            element={
+              <PrivateRoute>
+                <AddReviewPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path={AppRoute.Player}
             element={<PlayerPage {...props} />}
           />
           <Route
@@ -69,7 +63,7 @@ function App({ props }: AppProps): JSX.Element {
           />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

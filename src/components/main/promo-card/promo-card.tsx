@@ -1,21 +1,18 @@
 import { Link } from 'react-router-dom';
-import HeadUser from '../../common/head/head-user/head-user';
+import Head from '../../common/head/head';
+import Logo from '../../common/logo/logo';
+import MyList from '../../common/my-list/my-list';
+import { useAppSelector } from '../../../hooks';
+import { AuthorizationStatus } from '../../../const';
 
-type PromoCardProps = {
-  promo: {
-    id: string;
-    name: string;
-    posterImage: string;
-    backgroundImage: string;
-    videoLink: string;
-    genre: string;
-    released: number;
-    isFavorite: boolean;
-  };
-};
+function PromoCard(): JSX.Element {
+  const promo = useAppSelector((state) => state.promo);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
+  if (promo === null) {
+    return <section className="film-card"></section>;
+  }
 
-function PromoCard({ promo }: PromoCardProps): JSX.Element {
   return (
     <section className="film-card">
       <div className="film-card__bg">
@@ -23,8 +20,7 @@ function PromoCard({ promo }: PromoCardProps): JSX.Element {
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
-
-      <HeadUser userPageHeader={false} />
+      <Head><Logo isLight={false} /></Head>
 
       <div className="film-card__wrap">
         <div className="film-card__info">
@@ -46,8 +42,7 @@ function PromoCard({ promo }: PromoCardProps): JSX.Element {
                 </svg>
                 <span>Play</span>
               </Link>
-
-              {/* <MoviePageInList userInfo={userInfo} /> */}
+              {authorizationStatus === AuthorizationStatus.Auth && <MyList />}
             </div>
           </div>
         </div>

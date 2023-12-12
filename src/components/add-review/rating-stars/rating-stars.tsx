@@ -14,10 +14,10 @@ export default function RatingStars(): JSX.Element {
       {
         GenerateRange(1, 10).map((el) =>
           (
-            <>
+            <span key={`star-${el}`}>
               <input className="rating__input" id={`star-${el}`} type="radio" name="rating" value={el} />
               <label className="rating__label" htmlFor={`star-${el}`}>Rating {el}</label>
-            </>
+            </span>
           )
         )
       }

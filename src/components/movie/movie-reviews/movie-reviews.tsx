@@ -1,18 +1,27 @@
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { FilmDetails } from '../../../types/film-details';
+import { fetchReviews } from '../../../store/api-actions';
+
 type MovieReviewsProps = {
-  reviews: {
-    id: string;
-    date: string;
-    user: string;
-    comment: string;
-    rating: number;
-  }[];
+  film: FilmDetails;
 }
 
+export default function MovieReviews({ film }: MovieReviewsProps): JSX.Element {
+  const dispatcher = useAppDispatch();
 
-export default function MovieReviews({ reviews }: MovieReviewsProps): JSX.Element {
+  useEffect(() => {
+    dispatcher(fetchReviews({ id: film.id }));
+  }, [dispatcher, film]);
+
+  const reviews = useAppSelector((state) => state.reviews);
+
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
+        {
+          reviews.length === 0 && <p className="review__text">There is no comments yet...</p>
+        }
         {
           reviews.map(
             (review) =>

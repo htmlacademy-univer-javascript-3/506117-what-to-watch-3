@@ -1,4 +1,4 @@
-import { showNum } from '../../../const';
+import { SHOW_NUM } from '../../../const';
 
 type ShowMoreProps = {
     limit: number;
@@ -11,7 +11,7 @@ export default function ShowMore({ limit, setLimit }: ShowMoreProps): JSX.Elemen
       <button
         className="catalog__button"
         type="button"
-        onClick={() => setLimit(() => showNum + limit)}
+        onClick={() => setLimit(() => SHOW_NUM + limit)}
       >
                 Show more
       </button>
