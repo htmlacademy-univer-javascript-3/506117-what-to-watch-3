@@ -1,33 +1,20 @@
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
-
-type PlayerProps = {
-  film: {
-    id: string;
-    name: string;
-    posterImage: string;
-    backgroundImage: string;
-    backgroundColor: string;
-    videoLink: string;
-    description: string;
-    rating: number;
-    scoresCount: number;
-    director: string;
-    starring: string[];
-    runTime: number;
-    genre: string;
-    released: number;
-    isFavorite: boolean;
-  };
-}
+import { useAppSelector } from '../../hooks';
 
 function minutesToTimeFormat(minutes: number): string {
   return `${Math.floor(minutes / 60)}:${minutes % 60}:00`;
 }
 
 
-export default function PlayerPage({ film }: PlayerProps): JSX.Element {
+export default function PlayerPage(): JSX.Element {
+  const film = useAppSelector((state) => state.filmDetails);
   const navigate = useNavigate();
+
+  if (film === null) {
+    return <div className="player"></div>;
+  }
+
   return (
     <div className="player">
       <video src={film.videoLink} className="player__video" poster="img/player-poster.jpg"></video>
