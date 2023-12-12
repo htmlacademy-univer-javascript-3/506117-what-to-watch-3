@@ -5,6 +5,7 @@ import Head from '../../components/common/head/head';
 import MyList from '../../components/common/my-list/my-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmDetailsAction } from '../../store/api-actions';
+import MovieTabs from '../../components/movie/movie-tabs/movie-tabs';
 
 type MoviePageProps = {
   similar: {
@@ -64,29 +65,7 @@ function MoviePage({ similar }: MoviePageProps) {
             <div className="film-card__poster film-card__poster--big">
               <img src={film.posterImage} alt={film.name} width="218" height="327" />
             </div>
-
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item">
-                    <NavLink to={`/films/${id || ''}/overview`} className="film-nav__link">
-                      Overview
-                    </NavLink>
-                  </li>
-                  <li className="film-nav__item">
-                    <NavLink to={`/films/${id || ''}/details`} className="film-nav__link">
-                      Details
-                    </NavLink>
-                  </li>
-                  <li className="film-nav__item">
-                    <NavLink to={`/films/${id || ''}/reviews`} className="film-nav__link">
-                      Reviews
-                    </NavLink>
-                  </li>
-                </ul>
-              </nav>
-              <Outlet />
-            </div>
+            <MovieTabs />
           </div>
         </div>
       </section>
