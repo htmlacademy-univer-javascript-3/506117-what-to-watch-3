@@ -8,14 +8,13 @@ import PlayerPage from '../../../pages/player-page/player-page';
 import NotFoundPage from '../../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 import { AppRoute } from '../../../const';
-import { AppProps } from './appProps';
 import LoadingScreen from '../loading/loading';
 import { useAppSelector } from '../../../hooks';
 import HistoryRouter from '../../history-route/history-route';
 import browserHistory from '../../../browser-history';
 
 
-function App({ props }: AppProps): JSX.Element {
+function App(): JSX.Element {
   const isDataLoading = useAppSelector((state) => state.isDataLoading);
   if (isDataLoading) {
     return <LoadingScreen />;
@@ -55,10 +54,10 @@ function App({ props }: AppProps): JSX.Element {
           />
           <Route
             path={AppRoute.Player}
-            element={<PlayerPage {...props} />}
+            element={<PlayerPage />}
           />
           <Route
-            path="*"
+            path={AppRoute.NotFound}
             element={<NotFoundPage />}
           />
         </Route>

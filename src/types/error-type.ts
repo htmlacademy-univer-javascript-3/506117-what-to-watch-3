@@ -5,7 +5,7 @@ export type ErrorDetails = {
 }
 
 export type DetailMessageType = {
-  type: string;
+  errorType: string;
   message: string;
   details: ErrorDetails[];
 }

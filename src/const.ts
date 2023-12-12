@@ -4,7 +4,8 @@ export enum AppRoute {
   MyList = '/mylist',
   Film = '/films/:id',
   AddReview = '/films/:id/review',
-  Player = '/player/:id'
+  Player = '/player/:id',
+  NotFound = '*'
 }
 
 export enum APIRoute {
@@ -28,4 +29,4 @@ export const filmCardVideoProps = {
 };
 
 export const SHOW_NUM = 8;
-export const TIMEOUT_SHOW_ERROR = 2000;
+export const TIMEOUT_SHOW_ERROR = 5000;

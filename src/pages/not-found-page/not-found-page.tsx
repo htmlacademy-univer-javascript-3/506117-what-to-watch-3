@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
+
 export default function NotFoundPage() {
   return (
     <div className='error-container'>
@@ -7,7 +10,7 @@ export default function NotFoundPage() {
         <span className="four"><span className="screen-reader-text">4</span></span>
       </section>
       <div className="link-container">
-        <a href="\" >Go back to main page.</a>
+        <Link to={AppRoute.Main} >Go back to main page.</Link>
       </div>
     </div>
   );

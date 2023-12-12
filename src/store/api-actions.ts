@@ -12,6 +12,7 @@ import { Promo } from '../types/promo';
 import { FilmDetails } from '../types/film-details';
 import { SimilarFilm } from '../types/similar-film';
 import { Review } from '../types/reviews';
+import { ReviewData } from '../types/review-data';
 
 export const clearErrorAction = createAsyncThunk(
   'user/clearError',
@@ -84,6 +85,18 @@ export const fetchReviews = createAsyncThunk<void, { id: string }, {
   async ({ id }, { dispatch, extra: api }) => {
     const { data } = await api.get<Review[]>(`/comments/${id}`);
     dispatch(loadReviews(data));
+  },
+);
+
+export const postReviewAction = createAsyncThunk<void, ReviewData & { id: string }, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/review',
+  async ({ comment: comment, rating: rating, id: id }, { dispatch, extra: api }) => {
+    await api.post(`/comments/${id}`, { comment, rating });
+    dispatch(redirectToRoute(AppRoute.Main));
   },
 );
 

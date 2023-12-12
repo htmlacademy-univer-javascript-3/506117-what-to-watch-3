@@ -1,5 +1,5 @@
 import Footer from '../../components/common/footer/footer';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import FilmCard from '../../components/main/film-card/film-card';
 import Head from '../../components/common/head/head';
 import MyList from '../../components/common/my-list/my-list';
@@ -7,12 +7,13 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmDetailsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
 import MovieTabs from '../../components/movie/movie-tabs/movie-tabs';
 import { useEffect } from 'react';
-import { AuthorizationStatus } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 
 function MoviePage() {
   const { id } = useParams();
   const dispatcher = useAppDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatcher(fetchFilmDetailsAction({ id: location.pathname.split('/')[2] }));
@@ -22,9 +23,14 @@ function MoviePage() {
   const film = useAppSelector((state) => state.filmDetails);
   const similarFilms = useAppSelector((state) => state.similarFilms);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const error = useAppSelector((state) => state.userError);
+
+  if (error?.errorType === 'COMMON_ERROR') {
+    navigate(AppRoute.NotFound);
+  }
 
   if (id === undefined || film === null) {
-    return <div></div>;
+    return <p></p>;
   }
 
   return (
