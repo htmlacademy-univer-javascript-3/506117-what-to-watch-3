@@ -21,12 +21,6 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export enum Tab {
-  Overview = 'Overview', 
-  Details = 'Details', 
-  Reviews = 'Reviews'
-}
-
 export const filmCardVideoProps = {
   muted: true,
   width: 280,

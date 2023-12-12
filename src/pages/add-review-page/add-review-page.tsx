@@ -9,7 +9,9 @@ import { useAppSelector } from '../../hooks';
 export default function AddReviewPage(): JSX.Element {
   const film = useAppSelector((state) => state.filmDetails);
 
-  if (film === null) return <></>;
+  if (film === null) {
+    return <section></section>;
+  }
 
   return (
     <section className="film-card film-card--full">

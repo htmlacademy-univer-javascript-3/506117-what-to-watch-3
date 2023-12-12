@@ -2,22 +2,12 @@ import { FormEvent, useRef } from 'react';
 import Footer from '../../components/common/footer/footer';
 import Logo from '../../components/common/logo/logo';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { useNavigate } from 'react-router-dom';
 import { loginAction } from '../../store/api-actions';
-import { AppRoute, AuthorizationStatus } from '../../const';
 import SignInErr from '../../components/sign-in/sign-in-err/sign-in-err';
 
 export default function SignInPage(): JSX.Element {
-  const navigate = useNavigate();
-  const auth = useAppSelector((state) => state.authorizationStatus);
-
-  if (auth === AuthorizationStatus.Auth) {
-    navigate(AppRoute.Main);
-  }
-
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-
   const dispatch = useAppDispatch();
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
@@ -32,8 +22,8 @@ export default function SignInPage(): JSX.Element {
   };
 
   const signInError = useAppSelector((state) => state.userError);
-  const hasEmailError = signInError?.details.map(d => d.property).includes("email");
-  const hasPasswordError = signInError?.details.map(d => d.property).includes("password");
+  const hasEmailError = signInError?.details.map((d) => d.property).includes('email');
+  const hasPasswordError = signInError?.details.map((d) => d.property).includes('password');
 
   return (
     <div className="user-page">
@@ -47,7 +37,7 @@ export default function SignInPage(): JSX.Element {
       <div className="sign-in user-page__content">
         <form action="" onSubmit={handleSubmit} className="sign-in__form">
           <div className="sign-in__fields">
-            <div className={(hasEmailError ? "sign-in__field--error " : "") + "sign-in__field"}>
+            <div className={`${hasEmailError ? 'sign-in__field--error ' : '' }sign-in__field`}>
               <input
                 className="sign-in__input"
                 type="email"
@@ -58,7 +48,7 @@ export default function SignInPage(): JSX.Element {
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
-            <div className={(hasPasswordError ? "sign-in__field--error " : "") + "sign-in__field"}>
+            <div className={`${hasPasswordError ? 'sign-in__field--error ' : '' }sign-in__field`}>
               <input
                 className="sign-in__input"
                 type="password"

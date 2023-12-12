@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import { AppRoute } from "../../const";
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 type PlayerProps = {
   film: {
@@ -32,13 +32,13 @@ export default function PlayerPage({ film }: PlayerProps): JSX.Element {
     <div className="player">
       <video src={film.videoLink} className="player__video" poster="img/player-poster.jpg"></video>
 
-      <button 
-        type="button" 
+      <button
+        type="button"
         className="player__exit"
         onClick={() => navigate(AppRoute.Main)}
-        >
+      >
           Exit
-        </button>
+      </button>
 
       <div className="player__controls">
         <div className="player__controls-row">

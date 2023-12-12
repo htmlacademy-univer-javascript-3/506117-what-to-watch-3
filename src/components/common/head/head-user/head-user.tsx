@@ -25,12 +25,12 @@ function HeadUser({ userPageHeader, children }: PropsWithChildren<HeadUserProps>
           </div>
         </li>
         <li className="user-block__item">
-          <button 
+          <button
             onClick={() => {
               dispatcher(logoutAction());
               navigate(AppRoute.Main);
             }}
-            className="user-block__link" 
+            className="user-block__link"
           >
             Sign out
           </button>

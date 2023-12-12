@@ -7,22 +7,26 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmDetailsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
 import MovieTabs from '../../components/movie/movie-tabs/movie-tabs';
 import { useEffect } from 'react';
+import { AuthorizationStatus } from '../../const';
 
 function MoviePage() {
   const { id } = useParams();
   const dispatcher = useAppDispatch();
-
-  if (id === undefined) return <></>;
   const location = useLocation();
+
   useEffect(() => {
     dispatcher(fetchFilmDetailsAction({ id: location.pathname.split('/')[2] }));
     dispatcher(fetchSimilarFilmsAction({ id: location.pathname.split('/')[2] }));
-  }, [location]);
-  
+  }, [dispatcher, location]);
+
   const film = useAppSelector((state) => state.filmDetails);
   const similarFilms = useAppSelector((state) => state.similarFilms);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
-  if (film === null) return <></>;
+  if (id === undefined || film === null) {
+    return <div></div>;
+  }
+
   return (
     <>
       <section className="film-card film-card--full">
@@ -50,8 +54,13 @@ function MoviePage() {
                   </svg>
                   <span>Play</span>
                 </Link>
-                <MyList />
-                <Link className="btn film-card__button" to={`/films/${film.id}/review`}>Add review</Link>
+                {
+                  authorizationStatus === AuthorizationStatus.Auth &&
+                  <>
+                    <MyList />
+                    <Link className="btn film-card__button" to={`/films/${film.id}/review`}>Add review</Link>
+                  </>
+                }
               </div>
             </div>
           </div>
@@ -72,7 +81,7 @@ function MoviePage() {
           <h2 className="catalog__title">More like this</h2>
           <div className="catalog__films-list">
             {
-              similarFilms.slice(0, 4).map((film) => (<FilmCard film={film} key={film.id} />))
+              similarFilms.slice(0, 4).map((f) => (<FilmCard film={f} key={f.id} />))
             }
           </div>
         </section>

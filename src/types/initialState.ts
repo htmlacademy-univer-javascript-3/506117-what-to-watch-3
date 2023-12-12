@@ -1,8 +1,10 @@
 import { AuthorizationStatus } from '../const';
-import { DetailMessageType, ErrorDetails } from './error-type';
+import { DetailMessageType } from './error-type';
 import { Film } from './film';
 import { FilmDetails } from './film-details';
 import { Promo } from './promo';
+import { Review } from './reviews';
+import { SimilarFilm } from './similar-film';
 import { UserData } from './user-data';
 
 export type InitialState = {
@@ -14,8 +16,8 @@ export type InitialState = {
     films: Film[];
     promo: Promo | null;
     filmDetails: FilmDetails | null;
-    similarFilms: SimilarFilms;
-    reviews: Reviews;
+    similarFilms: SimilarFilm[];
+    reviews: Review[];
     genreFilms: Film[];
     authorizationStatus: AuthorizationStatus;
     isDataLoading: boolean;

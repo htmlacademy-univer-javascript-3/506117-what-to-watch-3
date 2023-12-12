@@ -7,6 +7,6 @@ export type ErrorDetails = {
 export type DetailMessageType = {
   type: string;
   message: string;
-  details: ErrorDetails[]
+  details: ErrorDetails[];
 }
 

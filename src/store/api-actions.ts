@@ -6,10 +6,12 @@ import { loadFilmDetails, loadFilms, loadPromo, loadReviews, loadSimilarFilms, r
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
-import { dropToken, saveToken } from '../services/token';
+import { dropToken, saveToken } from '../services/api/token';
 import { store } from '.';
 import { Promo } from '../types/promo';
 import { FilmDetails } from '../types/film-details';
+import { SimilarFilm } from '../types/similar-film';
+import { Review } from '../types/reviews';
 
 export const clearErrorAction = createAsyncThunk(
   'user/clearError',
@@ -68,7 +70,7 @@ export const fetchSimilarFilmsAction = createAsyncThunk<void, { id: string }, {
 }>(
   'data/fetchSimilarFilms',
   async ({ id }, { dispatch, extra: api }) => {
-    const { data } = await api.get<SimilarFilms>(`/films/${id}/similar`);
+    const { data } = await api.get<SimilarFilm[]>(`/films/${id}/similar`);
     dispatch(loadSimilarFilms(data));
   },
 );
@@ -80,7 +82,7 @@ export const fetchReviews = createAsyncThunk<void, { id: string }, {
 }>(
   'data/fetchReviews',
   async ({ id }, { dispatch, extra: api }) => {
-    const { data } = await api.get<Reviews>(`/comments/${id}`);
+    const { data } = await api.get<Review[]>(`/comments/${id}`);
     dispatch(loadReviews(data));
   },
 );

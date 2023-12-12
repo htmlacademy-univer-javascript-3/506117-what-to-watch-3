@@ -16,7 +16,7 @@ export default function Genres(): JSX.Element {
 
   useEffect(() => {
     setGenre(() => curGenre.id);
-  }, []);
+  }, [curGenre]);
 
   return (
     <>

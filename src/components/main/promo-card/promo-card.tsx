@@ -3,12 +3,14 @@ import Head from '../../common/head/head';
 import Logo from '../../common/logo/logo';
 import MyList from '../../common/my-list/my-list';
 import { useAppSelector } from '../../../hooks';
+import { AuthorizationStatus } from '../../../const';
 
 function PromoCard(): JSX.Element {
   const promo = useAppSelector((state) => state.promo);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   if (promo === null) {
-    return <></>;
+    return <section className="film-card"></section>;
   }
 
   return (
@@ -40,7 +42,7 @@ function PromoCard(): JSX.Element {
                 </svg>
                 <span>Play</span>
               </Link>
-              <MyList />
+              {authorizationStatus === AuthorizationStatus.Auth && <MyList />}
             </div>
           </div>
         </div>

@@ -5,6 +5,8 @@ import { UserData } from '../types/user-data';
 import { Promo } from '../types/promo';
 import { FilmDetails } from '../types/film-details';
 import { DetailMessageType } from '../types/error-type';
+import { SimilarFilm } from '../types/similar-film';
+import { Review } from '../types/reviews';
 
 export const changeGenre = createAction<{ newGenre: { id: number; title: string } }>('genre/change');
 export const putGenreFilms = createAction('genre/films');
@@ -12,8 +14,8 @@ export const putGenreFilms = createAction('genre/films');
 export const loadFilms = createAction<Film[]>('data/loadFilms');
 export const loadPromo = createAction<Promo>('data/loadPromo');
 export const loadFilmDetails = createAction<FilmDetails>('data/loadFilmDetails');
-export const loadSimilarFilms = createAction<SimilarFilms>('data/loadSimilarFilms');
-export const loadReviews = createAction<Reviews>('data/loadReviews');
+export const loadSimilarFilms = createAction<SimilarFilm[]>('data/loadSimilarFilms');
+export const loadReviews = createAction<Review[]>('data/loadReviews');
 export const setDataLoadingStatus = createAction<boolean>('data/setDataLoadingStatus');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');

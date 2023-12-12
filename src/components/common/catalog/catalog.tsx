@@ -15,7 +15,7 @@ function Catalog(props: CatalogProps): JSX.Element {
 
   useEffect(() => {
     dispatcher(putGenreFilms());
-  }, []);
+  }, [dispatcher]);
 
   return (
     <section className="catalog">

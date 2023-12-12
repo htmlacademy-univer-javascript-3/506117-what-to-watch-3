@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import MainPage from '../../../pages/main-page/main-page';
 import SignInPage from '../../../pages/sign-in-page/sign-in-page';
 import MyListPage from '../../../pages/my-list-page/my-list-page';
@@ -41,9 +41,9 @@ function App({ props }: AppProps): JSX.Element {
               </PrivateRoute>
             }
           />
-          <Route 
-            path={AppRoute.Film} 
-            element={<MoviePage />} 
+          <Route
+            path={AppRoute.Film}
+            element={<MoviePage />}
           />
           <Route
             path={AppRoute.AddReview}

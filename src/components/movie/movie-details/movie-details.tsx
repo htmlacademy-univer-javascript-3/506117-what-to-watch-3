@@ -1,7 +1,7 @@
-import { FilmDetails } from "../../../types/film-details";
+import { FilmDetails } from '../../../types/film-details';
 
 type MovieDetailsProps = {
-  film: FilmDetails
+  film: FilmDetails;
 }
 
 function minutesToStringTime(minutes: number) {
@@ -29,9 +29,9 @@ export default function MovieDetails({ film }: MovieDetailsProps): JSX.Element {
                 .slice(0, film.starring.length - 1)
                 .map(
                   (star) => (
-                    <>
+                    <span key={`movie-star-${star}`}>
                       {star}, <br />
-                    </>
+                    </span>
                   )
                 )
             }
