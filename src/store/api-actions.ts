@@ -12,7 +12,7 @@ import { Promo } from '../types/promo';
 import { FilmDetails } from '../types/film-details';
 
 export const clearErrorAction = createAsyncThunk(
-  'game/clearError',
+  'user/clearError',
   () => {
     setTimeout(
       () => store.dispatch(setUserError(null)),

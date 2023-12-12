@@ -1,8 +1,9 @@
 import {store} from '../store';
 import {setUserError} from '../store/action';
 import {clearErrorAction} from '../store/api-actions';
+import { DetailMessageType } from '../types/error-type';
 
-export const processErrorHandle = (message: string): void => {
-  store.dispatch(setUserError(message));
+export const processErrorHandle = (details: DetailMessageType): void => {
+  store.dispatch(setUserError(details));
   store.dispatch(clearErrorAction());
 };

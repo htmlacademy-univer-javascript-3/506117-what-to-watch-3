@@ -1,4 +1,5 @@
 import { AuthorizationStatus } from '../const';
+import { DetailMessageType, ErrorDetails } from './error-type';
 import { Film } from './film';
 import { FilmDetails } from './film-details';
 import { Promo } from './promo';
@@ -18,5 +19,5 @@ export type InitialState = {
     genreFilms: Film[];
     authorizationStatus: AuthorizationStatus;
     isDataLoading: boolean;
-    userError: string | null;
+    userError: DetailMessageType | null;
 };

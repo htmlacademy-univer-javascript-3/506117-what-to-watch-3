@@ -4,6 +4,7 @@ import { AppRoute, AuthorizationStatus } from '../const';
 import { UserData } from '../types/user-data';
 import { Promo } from '../types/promo';
 import { FilmDetails } from '../types/film-details';
+import { DetailMessageType } from '../types/error-type';
 
 export const changeGenre = createAction<{ newGenre: { id: number; title: string } }>('genre/change');
 export const putGenreFilms = createAction('genre/films');
@@ -18,4 +19,4 @@ export const setDataLoadingStatus = createAction<boolean>('data/setDataLoadingSt
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 export const redirectToRoute = createAction<AppRoute>('main/redirectToRoute');
 export const saveUserInfo = createAction<UserData>('user/saveInfo');
-export const setUserError = createAction<string | null>('user/error');
+export const setUserError = createAction<DetailMessageType | null>('user/error');

@@ -2,14 +2,12 @@ import axios, { AxiosError, AxiosInstance, AxiosResponse, AxiosRequestConfig } f
 import { getToken } from './token';
 import { StatusCodes } from 'http-status-codes';
 import { processErrorHandle } from './handle-sign-in-err';
+import { DetailMessageType } from '../types/error-type';
 
 const BACKEND_URL = 'https://13.design.pages.academy/wtw';
 const REQUEST_TIMEOUT = 5000;
 
-type DetailMessageType = {
-  type: string;
-  message: string;
-}
+
 
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
@@ -41,7 +39,7 @@ export const createAPI = (): AxiosInstance => {
     (error: AxiosError<DetailMessageType>) => {
       if (error.response && shouldDisplayError(error.response)) {
         const detailMessage = (error.response.data);
-        processErrorHandle(detailMessage.message);
+        processErrorHandle(detailMessage);
       }
       throw error;
     }
