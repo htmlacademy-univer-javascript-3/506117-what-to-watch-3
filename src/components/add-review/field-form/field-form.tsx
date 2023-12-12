@@ -16,7 +16,7 @@ function GenerateRange(min: number, max: number): number[] {
   return range;
 }
 
-export default function FieldForm() {
+export default function FieldForm() : JSX.Element {
   const [text, setFormData] = useState('');
   const [score, setScore] = useState(0);
 
@@ -26,7 +26,7 @@ export default function FieldForm() {
 
   if (id === undefined) {
     dispatch(redirectToRoute(AppRoute.Main));
-    return;
+    return <p>Some error occured...</p>;
   }
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
