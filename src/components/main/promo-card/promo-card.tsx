@@ -5,10 +5,12 @@ import MyList from '../../common/my-list/my-list';
 import { useAppSelector } from '../../../hooks';
 import { AuthorizationStatus } from '../../../const';
 import { memo } from 'react';
+import { getPromo } from '../../../store/data/common-data/selectors';
+import { getAuthorizationStatus } from '../../../store/data/user-data/selectors';
 
 function PromoCard(): JSX.Element {
-  const promo = useAppSelector((state) => state.promo);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const promo = useAppSelector(getPromo);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   if (promo === null) {
     return <section className="film-card"></section>;

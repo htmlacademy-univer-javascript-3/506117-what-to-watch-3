@@ -1,13 +1,14 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import FieldForm from '../../components/add-review/field-form/field-form';
 import Head from '../../components/common/head/head';
 import Logo from '../../components/common/logo/logo';
-import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
+import { getFilmDetails } from '../../store/data/film-data/selectors';
 
 
 export default function AddReviewPage(): JSX.Element {
-  const film = useAppSelector((state) => state.filmDetails);
+  const film = useAppSelector(getFilmDetails);
+  const { id } = useParams();
 
   if (film === null) {
     return <section></section>;
@@ -27,7 +28,7 @@ export default function AddReviewPage(): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={AppRoute.Film} className="breadcrumbs__link">{film.name}</Link>
+                <Link to={`/films/${id || ''}`} className="breadcrumbs__link">{film.name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>
@@ -45,6 +46,5 @@ export default function AddReviewPage(): JSX.Element {
 
     </section>
   );
-  // done optimizer
 }
 

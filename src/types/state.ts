@@ -1,27 +1,51 @@
 import { AuthorizationStatus } from '../const';
 import { store } from '../store';
-import { DetailMessageType } from './error-type';
+import { ErrorDetails } from './error-type';
 import { Film } from './film';
 import { FilmDetails } from './film-details';
 import { Genre } from './genre';
 import { Promo } from './promo';
 import { Review } from './reviews';
 import { SimilarFilm } from './similar-film';
-import { UserData } from './user-data';
+import { UserDetails } from './user-details';
 
-export type InitialState = {
-    userData: UserData | null;
+export type CommonData = {
     genre: Genre;
     films: Film[];
     promo: Promo | null;
+    genreFilms: Film[];
+    isFilmsDataLoading: boolean;
+    isPromoLoading: boolean;
+    hasError: boolean;
+}
+
+export type FilmData = {
     filmDetails: FilmDetails | null;
     similarFilms: SimilarFilm[];
     reviews: Review[];
-    genreFilms: Film[];
+    isFilmDetailsLoading: boolean;
+    isSimilarFilmsLoading: boolean;
+    isReviewsLoading: boolean;
+    hasError: boolean;
+}
+
+export type UserData = {
+    userDetails: UserDetails;
+    favouriteFilms: Film[];
     authorizationStatus: AuthorizationStatus;
-    isDataLoading: boolean;
-    userError: DetailMessageType | null;
-};
+    isLoadingData: boolean;
+    reviewPosting: boolean;
+    loadingFavouriteFilms: boolean;
+    favouritePosting: boolean;
+    hasError: boolean;
+}
+
+export type ErrorData = {
+    errorType: string;
+    message: string;
+    details: ErrorDetails[];
+}
+
 
 export type State = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

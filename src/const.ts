@@ -22,6 +22,13 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum NameSpace {
+  Data = 'DATA',
+  User = 'USER',
+  Film = 'FILM',
+  Error = 'ERROR'
+}
+
 export const filmCardVideoProps = {
   muted: true,
   width: 280,

@@ -5,8 +5,9 @@ import { postReviewAction } from '../../../store/api-actions';
 import { useParams } from 'react-router-dom';
 import { redirectToRoute } from '../../../store/action';
 import { AppRoute } from '../../../const';
+import { getError } from '../../../store/data/error-data/selectors';
 
-function GenerateRange(min: number, max: number): number[] {
+function generateRange(min: number, max: number): number[] {
   const range: number[] = [];
 
   for (let i = min; i < max + 1; i++) {
@@ -16,13 +17,13 @@ function GenerateRange(min: number, max: number): number[] {
   return range;
 }
 
-export default function FieldForm() : JSX.Element {
+export default function FieldForm(): JSX.Element {
   const [text, setFormData] = useState('');
   const [score, setScore] = useState(0);
 
   const dispatch = useAppDispatch();
   const { id } = useParams();
-  const error = useAppSelector((state) => state.userError);
+  const error = useAppSelector(getError);
 
   if (id === undefined) {
     dispatch(redirectToRoute(AppRoute.Main));
@@ -41,7 +42,7 @@ export default function FieldForm() : JSX.Element {
     }
   };
 
-  const starsRange = GenerateRange(1, 10);
+  const starsRange = generateRange(1, 10);
 
   return (
     <div className="add-review">
@@ -74,7 +75,6 @@ export default function FieldForm() : JSX.Element {
               setFormData(evt.target.value);
             }}
           >
-
           </textarea>
           <div className="add-review__submit">
             <button className="add-review__btn" type="submit">Post</button>

@@ -1,9 +1,9 @@
 import {store} from '../../store';
-import {setUserError} from '../../store/action';
-import {clearErrorAction} from '../../store/api-actions';
-import { DetailMessageType } from '../../types/error-type';
+//import {clearErrorAction} from '../../store/api-actions';
+import { setErrorData } from '../../store/data/error-data/error-data';
+import { ErrorDetails } from '../../types/error-type';
 
-export const processErrorHandle = (details: DetailMessageType): void => {
-  store.dispatch(setUserError(details));
-  store.dispatch(clearErrorAction());
+export const processErrorHandle = (details: ErrorDetails): void => {
+  store.dispatch(setErrorData(details));
+  // store.dispatch(clearErrorAction());
 };

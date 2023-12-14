@@ -1,6 +1,6 @@
-export type UserData = {
-    name: string;
+export type UserDetails = {
     avatarUrl: string;
     email: string;
+    name: string;
     token: string;
 }

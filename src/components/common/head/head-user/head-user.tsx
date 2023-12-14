@@ -3,13 +3,14 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { AppRoute } from '../../../../const';
 import { logoutAction } from '../../../../store/api-actions';
 import { PropsWithChildren } from 'react';
+import { getUserDetails } from '../../../../store/data/user-data/selectors';
 
 type HeadUserProps = {
   userPageHeader: boolean;
 }
 
 function HeadUser({ userPageHeader, children }: PropsWithChildren<HeadUserProps>): JSX.Element {
-  const userData = useAppSelector((state) => state.userData);
+  const userData = useAppSelector(getUserDetails);
   const dispatcher = useAppDispatch();
   const navigate = useNavigate();
   return (

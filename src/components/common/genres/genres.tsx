@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { changeGenre, putGenreFilms } from '../../../store/action';
 import { Film } from '../../../types/film';
+import { getFilms, getGenre } from '../../../store/data/common-data/selectors';
+import { changeGenre, putGenreFilms } from '../../../store/data/common-data/common-data';
 
-function getGenres(films : Film[]) {
+function getGenres(films: Film[]) {
   const filmGenres = films
     .map((f) => f.genre)
     .filter((value, index, array) => array.indexOf(value) === index)
@@ -15,8 +16,8 @@ function getGenres(films : Film[]) {
 
 export default function Genres(): JSX.Element {
   const dispatcher = useAppDispatch();
-  const curGenre = useAppSelector((state) => state.genre);
-  const films = useAppSelector((state) => state.films);
+  const curGenre = useAppSelector(getGenre);
+  const films = useAppSelector(getFilms);
   const [activeGenre, setGenre] = useState(0);
 
   const genres = useMemo(() => getGenres(films), [films]);
@@ -35,7 +36,7 @@ export default function Genres(): JSX.Element {
               key={genre.id}
               className={`catalog__genres-item${activeGenre === genre.id ? ' catalog__genres-item--active' : ''}`}
               onClick={() => {
-                dispatcher(changeGenre({ newGenre: { ...genre } }));
+                dispatcher(changeGenre({ ...genre }));
                 dispatcher(putGenreFilms());
                 setGenre(() => genre.id);
               }}
