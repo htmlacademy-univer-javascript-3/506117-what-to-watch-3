@@ -1,7 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { changeGenre, loadFilmDetails, loadFilms, loadPromo, loadReviews, loadSimilarFilms, putGenreFilms, requireAuthorization, saveUserInfo, setDataLoadingStatus, setUserError } from './action';
-import { InitialState } from '../types/initialState';
+
 import { AuthorizationStatus } from '../const';
+import { InitialState } from '../types/state';
 
 const initialState: InitialState = {
   userData: null,

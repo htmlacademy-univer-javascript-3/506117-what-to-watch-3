@@ -4,6 +4,7 @@ import Logo from '../../common/logo/logo';
 import MyList from '../../common/my-list/my-list';
 import { useAppSelector } from '../../../hooks';
 import { AuthorizationStatus } from '../../../const';
+import { memo } from 'react';
 
 function PromoCard(): JSX.Element {
   const promo = useAppSelector((state) => state.promo);
@@ -51,4 +52,4 @@ function PromoCard(): JSX.Element {
   );
 }
 
-export default PromoCard;
+export default memo(PromoCard);

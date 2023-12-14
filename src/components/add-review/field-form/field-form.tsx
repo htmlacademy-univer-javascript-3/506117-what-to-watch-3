@@ -41,13 +41,15 @@ export default function FieldForm() : JSX.Element {
     }
   };
 
+  const starsRange = GenerateRange(1, 10);
+
   return (
     <div className="add-review">
       <form className="add-review__form" onSubmit={handleSubmit}>
         <div className="rating">
           <div className="rating__stars">
             {
-              GenerateRange(1, 10).reverse().map((el) =>
+              starsRange.reverse().map((el) =>
                 <RateStar el={el} setScore={setScore} key={`score-${el}`} />
               )
             }

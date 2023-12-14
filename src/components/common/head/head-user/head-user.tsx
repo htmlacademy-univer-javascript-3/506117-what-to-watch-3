@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { AppRoute } from '../../../../const';
 import { logoutAction } from '../../../../store/api-actions';
@@ -21,7 +21,9 @@ function HeadUser({ userPageHeader, children }: PropsWithChildren<HeadUserProps>
       <ul className="user-block">
         <li className="user-block__item">
           <div className="user-block__avatar">
-            <img src={userData?.avatarUrl} alt="User avatar" width="63" height="63" />
+            <Link to={AppRoute.MyList}>
+              <img src={userData?.avatarUrl} alt="User avatar" width="63" height="63" />
+            </Link>
           </div>
         </li>
         <li className="user-block__item">
