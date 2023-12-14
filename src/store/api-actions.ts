@@ -18,7 +18,7 @@ export const clearErrorAction = createAsyncThunk<void, { dispatch: AppDispatch }
   'error/clearError',
   ({ dispatch }) => {
     setTimeout(
-      () => dispatch(setErrorData(null)),
+      () => dispatch(setErrorData([])),
       TIMEOUT_SHOW_ERROR,
     );
   },

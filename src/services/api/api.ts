@@ -35,7 +35,7 @@ export const createAPI = (): AxiosInstance => {
 
   api.interceptors.response.use(
     (response) => response,
-    (error: AxiosError<ErrorDetails>) => {
+    (error: AxiosError<ErrorDetails[]>) => {
       if (error.response && shouldDisplayError(error.response)) {
         const detailMessage = (error.response.data);
         processErrorHandle(detailMessage);

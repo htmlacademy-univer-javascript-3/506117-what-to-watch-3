@@ -3,7 +3,7 @@ import {store} from '../../store';
 import { setErrorData } from '../../store/data/error-data/error-data';
 import { ErrorDetails } from '../../types/error-type';
 
-export const processErrorHandle = (details: ErrorDetails): void => {
+export const processErrorHandle = (details: ErrorDetails[]): void => {
   store.dispatch(setErrorData(details));
   // store.dispatch(clearErrorAction());
 };
