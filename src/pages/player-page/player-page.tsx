@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
+import { getFilmDetails } from '../../store/data/film-data/selectors';
 
 function minutesToTimeFormat(minutes: number): string {
   return `${Math.floor(minutes / 60)}:${minutes % 60}:00`;
@@ -8,7 +9,7 @@ function minutesToTimeFormat(minutes: number): string {
 
 
 export default function PlayerPage(): JSX.Element {
-  const film = useAppSelector((state) => state.filmDetails);
+  const film = useAppSelector(getFilmDetails);
   const navigate = useNavigate();
 
   if (film === null) {

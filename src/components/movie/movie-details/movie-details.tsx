@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { FilmDetails } from '../../../types/film-details';
 
 type MovieDetailsProps = {
@@ -14,6 +15,8 @@ function minutesToStringTime(minutes: number) {
 }
 
 export default function MovieDetails({ film }: MovieDetailsProps): JSX.Element {
+  const runTime = useMemo(() => minutesToStringTime(film.runTime), [film.runTime]);
+
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
@@ -45,9 +48,7 @@ export default function MovieDetails({ film }: MovieDetailsProps): JSX.Element {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">
-            {minutesToStringTime(film.runTime)}
-          </span>
+          <span className="film-card__details-value">{runTime}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>

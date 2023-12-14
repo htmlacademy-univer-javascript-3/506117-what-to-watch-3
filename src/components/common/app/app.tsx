@@ -12,10 +12,11 @@ import LoadingScreen from '../loading/loading';
 import { useAppSelector } from '../../../hooks';
 import HistoryRouter from '../../history-route/history-route';
 import browserHistory from '../../../browser-history';
+import { getFilmsLoadingStatus } from '../../../store/data/common-data/selectors';
 
 
 function App(): JSX.Element {
-  const isDataLoading = useAppSelector((state) => state.isDataLoading);
+  const isDataLoading = useAppSelector(getFilmsLoadingStatus);
   if (isDataLoading) {
     return <LoadingScreen />;
   }

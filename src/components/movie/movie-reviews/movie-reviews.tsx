@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { FilmDetails } from '../../../types/film-details';
 import { fetchReviews } from '../../../store/api-actions';
+import { getReviews } from '../../../store/data/film-data/selectors';
 
 type MovieReviewsProps = {
   film: FilmDetails;
@@ -14,7 +15,7 @@ export default function MovieReviews({ film }: MovieReviewsProps): JSX.Element {
     dispatcher(fetchReviews({ id: film.id }));
   }, [dispatcher, film]);
 
-  const reviews = useAppSelector((state) => state.reviews);
+  const reviews = useAppSelector(getReviews);
 
   return (
     <div className="film-card__reviews film-card__row">

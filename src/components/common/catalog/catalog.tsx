@@ -3,13 +3,14 @@ import FilmCard from '../../main/film-card/film-card';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import ShowMore from '../show-more/show-more';
 import { SHOW_NUM } from '../../../const';
-import { putGenreFilms } from '../../../store/action';
+import { putGenreFilms } from '../../../store/data/common-data/common-data';
+import { getGenreFilms } from '../../../store/data/common-data/selectors';
 
 type CatalogProps = PropsWithChildren;
 
 function Catalog(props: CatalogProps): JSX.Element {
   const { children } = props;
-  const films = useAppSelector((state) => state.genreFilms);
+  const films = useAppSelector(getGenreFilms);
   const [limit, setLimit] = useState(SHOW_NUM);
   const dispatcher = useAppDispatch();
 

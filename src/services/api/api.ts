@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestCo
 import { getToken } from './token';
 import { StatusCodes } from 'http-status-codes';
 import { processErrorHandle } from './handle-sign-in-err';
-import { DetailMessageType } from '../../types/error-type';
+import { ErrorDetails } from '../../types/error-type';
 
 const BACKEND_URL = 'https://13.design.pages.academy/wtw';
 const REQUEST_TIMEOUT = 5000;
@@ -35,7 +35,7 @@ export const createAPI = (): AxiosInstance => {
 
   api.interceptors.response.use(
     (response) => response,
-    (error: AxiosError<DetailMessageType>) => {
+    (error: AxiosError<ErrorDetails[]>) => {
       if (error.response && shouldDisplayError(error.response)) {
         const detailMessage = (error.response.data);
         processErrorHandle(detailMessage);

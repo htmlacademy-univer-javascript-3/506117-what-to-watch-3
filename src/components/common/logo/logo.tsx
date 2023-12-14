@@ -11,7 +11,6 @@ export default function Logo({ isLight }: LogoProps): JSX.Element {
       <Link
         to={AppRoute.Main}
         className={`logo__link ${ isLight ? 'logo__link--light' : ''}`}
-        // reloadDocument
       >
         <span className="logo__letter logo__letter--1">W</span>
         <span className="logo__letter logo__letter--2">T</span>

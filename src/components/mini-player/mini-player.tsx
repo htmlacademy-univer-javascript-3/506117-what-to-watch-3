@@ -1,7 +1,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-type DefaultPlayerProps = {
+type MiniPlayerProps = {
   previewVideoLink: string;
   previewImage: string;
   muted: boolean;
@@ -10,7 +10,7 @@ type DefaultPlayerProps = {
   isActive: boolean;
 }
 
-export default function DefaultPlayer(props: DefaultPlayerProps): JSX.Element {
+export default function MiniPlayer(props: MiniPlayerProps): JSX.Element {
   const playerRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setPlaying] = useState(false);
 

@@ -3,10 +3,3 @@ export type ErrorDetails = {
     value: string;
     messages: string[];
 }
-
-export type DetailMessageType = {
-  errorType: string;
-  message: string;
-  details: ErrorDetails[];
-}
-
