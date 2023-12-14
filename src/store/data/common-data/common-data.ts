@@ -27,7 +27,7 @@ export const commonData = createSlice({
         state.genreFilms = state.films.filter((film) => film.genre === state.genre.title);
       }
     },
-    changeGenre: (state, action: {type: string; payload: { id: number, title: string } }) => {
+    changeGenre: (state, action: {type: string; payload: { id: number; title: string } }) => {
       state.genre = action.payload;
     }
   },
