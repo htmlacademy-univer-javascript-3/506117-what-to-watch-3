@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmDetailsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
 import MovieTabs from '../../components/movie/movie-tabs/movie-tabs';
 import { useEffect } from 'react';
-import { AuthorizationStatus } from '../../const';
+import { AuthorizationStatus, SIMILAR_FILMS_NUM } from '../../const';
 import { getFilmDetails, getSimilarFilms } from '../../store/data/film-data/selectors';
 import { getAuthorizationStatus } from '../../store/data/user-data/selectors';
 
@@ -24,11 +24,6 @@ function MoviePage() {
   const film = useAppSelector(getFilmDetails);
   const similarFilms = useAppSelector(getSimilarFilms);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  // const error = useAppSelector((state) => state.userError);
-
-  // if (error?.errorType === 'COMMON_ERROR') {
-  //   navigate(AppRoute.NotFound);
-  // }
 
   if (id === undefined || film === null) {
     return <p></p>;
@@ -64,7 +59,7 @@ function MoviePage() {
                 {
                   authorizationStatus === AuthorizationStatus.Auth &&
                   <>
-                    <MyList />
+                    <MyList filmId={film.id}/>
                     <Link className="btn film-card__button" to={`/films/${film.id}/review`}>Add review</Link>
                   </>
                 }
@@ -78,7 +73,7 @@ function MoviePage() {
             <div className="film-card__poster film-card__poster--big">
               <img src={film.posterImage} alt={film.name} width="218" height="327" />
             </div>
-            <MovieTabs film={film} location={location}/>
+            <MovieTabs film={film} location={location} />
           </div>
         </div>
       </section>
@@ -88,7 +83,7 @@ function MoviePage() {
           <h2 className="catalog__title">More like this</h2>
           <div className="catalog__films-list">
             {
-              similarFilms.slice(0, 4).map((f) => (<FilmCard film={f} key={f.id} />))
+              similarFilms.slice(0, SIMILAR_FILMS_NUM).map((f) => (<FilmCard film={f} key={f.id} />))
             }
           </div>
         </section>
@@ -98,5 +93,5 @@ function MoviePage() {
     </>
   );
 }
-// done tabs
+
 export default MoviePage;

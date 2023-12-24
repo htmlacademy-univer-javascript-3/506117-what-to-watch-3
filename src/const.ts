@@ -37,3 +37,4 @@ export const filmCardVideoProps = {
 
 export const SHOW_NUM = 8;
 export const TIMEOUT_SHOW_ERROR = 5000;
+export const SIMILAR_FILMS_NUM = 4;

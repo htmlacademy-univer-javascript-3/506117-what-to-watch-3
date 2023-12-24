@@ -1,7 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { ErrorData } from '../../../types/state';
 import { NameSpace } from '../../../const';
-import { ErrorDetails } from '../../../types/error-type';
 
 const initialState: ErrorData = {
   message: '',
@@ -13,8 +12,12 @@ export const errorData = createSlice({
   name: NameSpace.Error,
   initialState,
   reducers: {
-    setErrorData: (state, action: {type: string; payload: ErrorDetails[]}) => {
-      state.details = action.payload;
+    setErrorData: (state, action: PayloadAction<{ errorData: ErrorData }>) => {
+      const { errorType, message, details } = action.payload.errorData;
+      state.errorType = errorType;
+      state.message = message;
+      state.details = details;
+
     }
   }
 });

@@ -23,7 +23,9 @@ function PromoCard(): JSX.Element {
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
-      <Head><Logo isLight={false} /></Head>
+      <Head>
+        <Logo isLight={false} />
+      </Head>
 
       <div className="film-card__wrap">
         <div className="film-card__info">
@@ -45,7 +47,7 @@ function PromoCard(): JSX.Element {
                 </svg>
                 <span>Play</span>
               </Link>
-              {authorizationStatus === AuthorizationStatus.Auth && <MyList />}
+              {authorizationStatus === AuthorizationStatus.Auth && <MyList filmId={promo.id} />}
             </div>
           </div>
         </div>

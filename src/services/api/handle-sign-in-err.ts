@@ -1,9 +1,18 @@
-import {store} from '../../store';
-//import {clearErrorAction} from '../../store/api-actions';
+import { TIMEOUT_SHOW_ERROR } from '../../const';
+import { store } from '../../store';
 import { setErrorData } from '../../store/data/error-data/error-data';
-import { ErrorDetails } from '../../types/error-type';
+import { ErrorData } from '../../types/state';
 
-export const processErrorHandle = (details: ErrorDetails[]): void => {
-  store.dispatch(setErrorData(details));
-  // store.dispatch(clearErrorAction());
+export const processErrorHandle = (errorData: ErrorData): void => {
+  store.dispatch(setErrorData({ errorData: errorData }));
+  setTimeout(
+    () => store.dispatch(setErrorData({
+      errorData: {
+        errorType: '',
+        message: '',
+        details: []
+      }
+    })),
+    TIMEOUT_SHOW_ERROR,
+  );
 };
