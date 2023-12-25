@@ -1,11 +1,11 @@
 import { FormEvent, useState } from 'react';
 import RateStar from '../../rate-star/rate-star';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { useAppDispatch } from '../../../hooks';
 import { postReviewAction } from '../../../store/api-actions';
 import { useParams } from 'react-router-dom';
 import { redirectToRoute } from '../../../store/action';
 import { AppRoute } from '../../../const';
-import { getError } from '../../../store/data/error-data/selectors';
+import ErrorBox from '../../error-box/error-box';
 
 function generateRange(min: number, max: number): number[] {
   const range: number[] = [];
@@ -23,7 +23,6 @@ export default function FieldForm(): JSX.Element {
 
   const dispatch = useAppDispatch();
   const { id } = useParams();
-  const error = useAppSelector(getError);
 
   if (id === undefined) {
     dispatch(redirectToRoute(AppRoute.Main));
@@ -57,13 +56,7 @@ export default function FieldForm(): JSX.Element {
           </div>
         </div>
 
-        {
-          error && error.errorType === 'VALIDATION_ERROR' && error.details.map((d) =>
-            d.messages.map((m) =>
-              <p key={m.toString()}>{m}</p>
-            )
-          )
-        }
+        <ErrorBox />
 
         <div className="add-review__text">
           <textarea

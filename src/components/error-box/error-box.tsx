@@ -1,8 +1,8 @@
-import { useAppSelector } from '../../../hooks';
-import { getError } from '../../../store/data/error-data/selectors';
+import { useAppSelector } from '../../hooks';
+import { getErrorData } from '../../store/data/error-data/selectors';
 
-export default function SignInErr(): JSX.Element | null {
-  const error = useAppSelector(getError);
+export default function ErrorBox(): JSX.Element | null {
+  const error = useAppSelector(getErrorData);
   if (error === null) {
     return null;
   }

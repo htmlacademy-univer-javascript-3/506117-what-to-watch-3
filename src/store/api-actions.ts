@@ -2,27 +2,15 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { AxiosInstance } from 'axios';
 import { Film } from '../types/film';
-import { AuthData } from '../types/auth-data';
-import { APIRoute, AppRoute, TIMEOUT_SHOW_ERROR } from '../const';
+import { APIRoute, AppRoute } from '../const';
 import { dropToken, saveToken } from '../services/api/token';
 import { Promo } from '../types/promo';
 import { FilmDetails } from '../types/film-details';
 import { SimilarFilm } from '../types/similar-film';
 import { Review } from '../types/reviews';
-import { ReviewData } from '../types/review-data';
 import { UserDetails } from '../types/user-details';
 import { redirectToRoute } from './action';
-import { setErrorData } from './data/error-data/error-data';
-
-export const clearErrorAction = createAsyncThunk<void, { dispatch: AppDispatch }>(
-  'error/clearError',
-  ({ dispatch }) => {
-    setTimeout(
-      () => dispatch(setErrorData([])),
-      TIMEOUT_SHOW_ERROR,
-    );
-  },
-);
+import { AuthData, ReviewData } from '../types/api-types';
 
 export const fetchFilmsAction = createAsyncThunk<Film[], undefined, {
   state: State;
@@ -47,7 +35,6 @@ export const fetchPromoAction = createAsyncThunk<Promo, undefined, {
 );
 
 export const fetchFilmDetailsAction = createAsyncThunk<FilmDetails, { id: string }, {
-  dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
@@ -104,12 +91,14 @@ export const postReviewAction = createAsyncThunk<void, ReviewData & { id: string
 );
 
 export const postFavouriteAction = createAsyncThunk<void, { id: string; status: number }, {
+  dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'user/add-favourite',
-  async ({ id: id, status: status }, { extra: api }) => {
+  async ({ id: id, status: status }, { extra: api, dispatch }) => {
     await api.post(`/favorite/${id}/${status}`);
+    dispatch(redirectToRoute(AppRoute.MyList));
   },
 );
 
@@ -128,7 +117,6 @@ export const loginAction = createAsyncThunk<UserDetails, AuthData, {
 );
 
 export const logoutAction = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(

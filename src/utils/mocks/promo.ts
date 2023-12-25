@@ -1,4 +1,4 @@
-export const promo = {
+export const mockPromo = {
   id: '8af4e5ed-1b24-4a7a-88ae-5e338837e056',
   name: 'Bohemian Rhapsody',
   posterImage: 'https://13.design.pages.academy/static/film/poster/Bohemian_Rhapsody.jpg',

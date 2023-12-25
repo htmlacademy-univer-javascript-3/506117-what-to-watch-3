@@ -1,21 +1,26 @@
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { postFavouriteAction } from '../../../store/api-actions';
+import { fetchFavouriteFilmsAction, postFavouriteAction } from '../../../store/api-actions';
 import { getFavourites } from '../../../store/data/user-data/selectors';
 
 type MyListProps = {
-  filmId?: string;
+  filmId: string;
 }
 
-export default function MyList({filmId} : MyListProps): JSX.Element {
+export default function MyList({ filmId }: MyListProps): JSX.Element {
   const films = useAppSelector(getFavourites);
-  const isInList = filmId && films.map((f) => f.id).includes(filmId, 0);
+  const isInList = films.map((f) => f.id).includes(filmId);
   const dispatcher = useAppDispatch();
+
+  useEffect(() => {
+    dispatcher(fetchFavouriteFilmsAction());
+  }, [dispatcher]);
 
   const handleClick = () => {
     if (filmId !== undefined) {
       dispatcher(postFavouriteAction({
         id: filmId,
-        status: isInList ? 1 : 0
+        status: isInList ? 0 : 1
       }));
     }
   };
