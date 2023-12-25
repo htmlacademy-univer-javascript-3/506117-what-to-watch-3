@@ -1,4 +1,4 @@
-export const films = [
+export const mockFilms = [
   {
     id: '620d6655-4f32-4392-8a37-26815492c886',
     name: 'Fantastic Beasts: The Crimes of Grindelwald',

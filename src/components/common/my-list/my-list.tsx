@@ -15,7 +15,7 @@ export default function MyList({ filmId }: MyListProps): JSX.Element {
   useEffect(() => {
     dispatcher(fetchFavouriteFilmsAction());
   }, [dispatcher]);
-  
+
   const handleClick = () => {
     if (filmId !== undefined) {
       dispatcher(postFavouriteAction({

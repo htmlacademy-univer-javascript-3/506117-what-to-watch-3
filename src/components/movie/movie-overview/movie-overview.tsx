@@ -1,4 +1,5 @@
-import { computeRatingLevel } from '../../../services/movie-page/movie-overview';
+
+import { computeRatingLevel } from '../../../services/component-services/movie';
 import { FilmDetails } from '../../../types/film-details';
 
 type MovieOverviewProps = {

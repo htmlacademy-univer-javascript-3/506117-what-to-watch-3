@@ -2,7 +2,6 @@ import axios, { AxiosError, AxiosInstance, AxiosResponse, InternalAxiosRequestCo
 import { getToken } from './token';
 import { StatusCodes } from 'http-status-codes';
 import { processErrorHandle } from './handle-sign-in-err';
-import { ErrorDetails } from '../../types/error-type';
 import { ErrorData } from '../../types/state';
 
 const BACKEND_URL = 'https://13.design.pages.academy/wtw';

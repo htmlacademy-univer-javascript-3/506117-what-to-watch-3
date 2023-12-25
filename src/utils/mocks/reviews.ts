@@ -1,4 +1,4 @@
-export const reviews = [
+export const mockReviews = [
   {
     id: 'af88332e-a827-4375-bf36-974fb60315ea',
     comment: 'This movie is perfect in all its categories: credits, sound track, production, casting, writing, photography, editing, acting, and direction. I was amazed with the freedom of the use of the camera.',

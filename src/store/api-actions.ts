@@ -2,16 +2,15 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { AxiosInstance } from 'axios';
 import { Film } from '../types/film';
-import { AuthData } from '../types/auth-data';
 import { APIRoute, AppRoute } from '../const';
 import { dropToken, saveToken } from '../services/api/token';
 import { Promo } from '../types/promo';
 import { FilmDetails } from '../types/film-details';
 import { SimilarFilm } from '../types/similar-film';
 import { Review } from '../types/reviews';
-import { ReviewData } from '../types/review-data';
 import { UserDetails } from '../types/user-details';
 import { redirectToRoute } from './action';
+import { AuthData, ReviewData } from '../types/api-types';
 
 export const fetchFilmsAction = createAsyncThunk<Film[], undefined, {
   state: State;

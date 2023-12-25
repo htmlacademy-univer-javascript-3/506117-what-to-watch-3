@@ -3,7 +3,7 @@ import Footer from '../../components/common/footer/footer';
 import Logo from '../../components/common/logo/logo';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
-import { getError } from '../../store/data/error-data/selectors';
+import { getErrorData } from '../../store/data/error-data/selectors';
 import ErrorBox from '../../components/error-box/error-box';
 
 export default function SignInPage(): JSX.Element {
@@ -22,8 +22,8 @@ export default function SignInPage(): JSX.Element {
     }
   };
 
-  const signInError = useAppSelector(getError);
-  
+  const signInError = useAppSelector(getErrorData);
+
   const hasEmailError = signInError?.details.map((d) => d.property).includes('email');
   const hasPasswordError = signInError?.details.map((d) => d.property).includes('password');
 

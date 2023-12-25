@@ -1,17 +1,9 @@
 import { useMemo } from 'react';
 import { FilmDetails } from '../../../types/film-details';
+import { minutesToStringTime } from '../../../services/component-services/movie';
 
 type MovieDetailsProps = {
   film: FilmDetails;
-}
-
-function minutesToStringTime(minutes: number) {
-  const hours = Math.floor(minutes / 60);
-  const addMinutes = minutes % 60;
-
-  return (
-    `${hours > 0 ? `${hours}h` : ''}${addMinutes > 0 ? ` ${addMinutes}m` : ''}`
-  );
 }
 
 export default function MovieDetails({ film }: MovieDetailsProps): JSX.Element {

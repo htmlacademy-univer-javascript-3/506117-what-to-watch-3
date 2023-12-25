@@ -1,6 +1,5 @@
 import { AuthorizationStatus } from '../const';
 import { store } from '../store';
-import { ErrorDetails } from './error-type';
 import { Film } from './film';
 import { FilmDetails } from './film-details';
 import { Genre } from './genre';
@@ -44,6 +43,12 @@ export type ErrorData = {
     errorType: string;
     message: string;
     details: ErrorDetails[];
+}
+
+export type ErrorDetails = {
+    property: string;
+    value: number;
+    messages: string[];
 }
 
 

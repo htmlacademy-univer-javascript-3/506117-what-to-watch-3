@@ -13,14 +13,26 @@ export default function PlayerPage(): JSX.Element {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    if (videoRef.current != null) {
-      isPlaying ? videoRef.current.play() : videoRef.current.pause();
+    if (videoRef.current !== null) {
+      if (isPlaying) {
+        videoRef.current.play();
+      } else {
+        videoRef.current.pause();
+      }
     }
   }, [isPlaying]);
+
+  useEffect(() => {
+    videoRef.current?.load();
+  }, []);
 
   if (film === null) {
     return <div className="player"></div>;
   }
+
+  const handleFullScreenClick = () => {
+    videoRef.current?.requestFullscreen();
+  };
 
   return (
     <div className="player">
@@ -45,13 +57,19 @@ export default function PlayerPage(): JSX.Element {
         <div className="player__controls-row">
           {
             isPlaying ?
-              <button type="button" className="player__play" onClick={() => { setPlaying(() => false) }}>
+              <button type="button" className="player__play" onClick={() => {
+                setPlaying(() => false);
+              }}
+              >
                 <svg viewBox="0 0 14 21" width="14" height="21">
                   <use xlinkHref="#pause"></use>
                 </svg>
                 <span>Pause</span>
               </button> :
-              <button type="button" className="player__play" onClick={() => { setPlaying(() => true) }}>
+              <button type="button" className="player__play" onClick={() => {
+                setPlaying(() => true);
+              }}
+              >
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s" href="#play-s"></use>
                 </svg>
@@ -60,7 +78,7 @@ export default function PlayerPage(): JSX.Element {
           }
           <div className="player__name">Transpotting</div>
 
-          <button type="button" className="player__full-screen" onClick={() => videoRef.current?.requestFullscreen()}>
+          <button type="button" className="player__full-screen" onClick={handleFullScreenClick}>
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen" href="#full-screen"></use>
             </svg>

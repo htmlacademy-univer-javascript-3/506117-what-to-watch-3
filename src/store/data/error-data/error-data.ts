@@ -17,7 +17,6 @@ export const errorData = createSlice({
       state.errorType = errorType;
       state.message = message;
       state.details = details;
-
     }
   }
 });

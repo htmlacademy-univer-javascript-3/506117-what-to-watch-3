@@ -1,3 +1,20 @@
+export function minutesToStringTime(minutes: number) {
+  if (!Number.isInteger(minutes)) {
+    throw new Error(`Unexpected minutes value: ${minutes}, minutes should be integer`);
+  }
+
+  if (minutes < 0) {
+    throw new Error(`Unexpected minutes value: ${minutes}, minutes should be positive`);
+  }
+
+  const hours = Math.floor(minutes / 60);
+  const addMinutes = minutes % 60;
+
+  return (
+    `${hours > 0 ? `${hours}h` : ''}${addMinutes > 0 ? `${hours > 0 ? ' ' : ''}${addMinutes}m` : ''}`
+  );
+}
+
 export function computeRatingLevel(ratingValue: number): string {
   if (0.0 <= ratingValue && ratingValue <= 2.0) {
     return 'Bad';

@@ -1,8 +1,8 @@
 import { useAppSelector } from '../../hooks';
-import { getError } from '../../store/data/error-data/selectors';
+import { getErrorData } from '../../store/data/error-data/selectors';
 
 export default function ErrorBox(): JSX.Element | null {
-  const error = useAppSelector(getError);
+  const error = useAppSelector(getErrorData);
   if (error === null) {
     return null;
   }
