@@ -1,26 +1,14 @@
 import { describe, it } from 'vitest';
 import { NameSpace } from '../../../const';
-import { mockFilms } from '../../../utils/mocks/films';
-import { mockPromo } from '../../../utils/mocks/promo';
 import { getErrorDataStatus, getFilms, getFilmsLoadingStatus, getGenre, getGenreFilms, getPromo, getPromoLoadingStatus } from './selectors';
+import { makeFakeCommonData } from '../../../utils/mocks';
 
 describe('common-data selectors', () => {
-  const state = {
-    [NameSpace.Data]: {
-      films: mockFilms,
-      genre: {
-        id: 0,
-        title: 'All genres'
-      },
-      genreFilms: mockFilms,
-      promo: mockPromo,
-      isFilmsDataLoading: false,
-      isPromoLoading: false,
-      hasError: false
-    }
-  };
-
   it('should return films from state', () => {
+    const state = {
+      [NameSpace.Data]: makeFakeCommonData()
+    };
+
     const { films } = state[NameSpace.Data];
     const result = getFilms(state);
 
@@ -28,6 +16,10 @@ describe('common-data selectors', () => {
   });
 
   it('should return genre from state', () => {
+    const state = {
+      [NameSpace.Data]: makeFakeCommonData()
+    };
+
     const { genre } = state[NameSpace.Data];
     const result = getGenre(state);
 
@@ -35,6 +27,10 @@ describe('common-data selectors', () => {
   });
 
   it('should return genreFilms from state', () => {
+    const state = {
+      [NameSpace.Data]: makeFakeCommonData()
+    };
+
     const { genreFilms } = state[NameSpace.Data];
     const result = getGenreFilms(state);
 
@@ -42,6 +38,10 @@ describe('common-data selectors', () => {
   });
 
   it('should return promo from state', () => {
+    const state = {
+      [NameSpace.Data]: makeFakeCommonData()
+    };
+
     const { promo } = state[NameSpace.Data];
     const result = getPromo(state);
 
@@ -49,6 +49,10 @@ describe('common-data selectors', () => {
   });
 
   it('should return films data loading status', () => {
+    const state = {
+      [NameSpace.Data]: makeFakeCommonData()
+    };
+
     const { isFilmsDataLoading } = state[NameSpace.Data];
     const result = getFilmsLoadingStatus(state);
 
@@ -56,6 +60,10 @@ describe('common-data selectors', () => {
   });
 
   it('should return promo data loading status', () => {
+    const state = {
+      [NameSpace.Data]: makeFakeCommonData()
+    };
+
     const { isPromoLoading } = state[NameSpace.Data];
     const result = getPromoLoadingStatus(state);
 
@@ -63,6 +71,10 @@ describe('common-data selectors', () => {
   });
 
   it('should return error status from state', () => {
+    const state = {
+      [NameSpace.Data]: makeFakeCommonData()
+    };
+
     const { hasError } = state[NameSpace.Data];
     const result = getErrorDataStatus(state);
     expect(result).toBe(hasError);

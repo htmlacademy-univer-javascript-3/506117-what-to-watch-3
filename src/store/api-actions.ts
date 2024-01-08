@@ -1,16 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { AxiosInstance } from 'axios';
-import { Film } from '../types/film';
 import { APIRoute, AppRoute } from '../const';
 import { dropToken, saveToken } from '../services/api/token';
-import { Promo } from '../types/promo';
-import { FilmDetails } from '../types/film-details';
-import { SimilarFilm } from '../types/similar-film';
-import { Review } from '../types/reviews';
-import { UserDetails } from '../types/user-details';
 import { redirectToRoute } from './action';
 import { AuthData, ReviewData } from '../types/api-types';
+import { Film, FilmDetails, Promo, Review, SimilarFilm, UserDetails } from '../types/data-types';
 
 export const fetchFilmsAction = createAsyncThunk<Film[], undefined, {
   state: State;
@@ -99,6 +94,17 @@ export const postFavouriteAction = createAsyncThunk<void, { id: string; status: 
   async ({ id: id, status: status }, { extra: api, dispatch }) => {
     await api.post(`/favorite/${id}/${status}`);
     dispatch(redirectToRoute(AppRoute.MyList));
+  },
+);
+
+export const checkAuthAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/checkAuth',
+  async (_arg, {extra: api}) => {
+    await api.get(APIRoute.Login);
   },
 );
 

@@ -1,7 +1,5 @@
 import { NameSpace } from '../../../const';
-import { Film } from '../../../types/film';
-import { Genre } from '../../../types/genre';
-import { Promo } from '../../../types/promo';
+import { Film, Genre, Promo } from '../../../types/data-types';
 import { State } from '../../../types/state';
 
 export const getFilms = (state: Pick<State, NameSpace.Data>): Film[] => state[NameSpace.Data].films;

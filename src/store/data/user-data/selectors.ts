@@ -1,7 +1,6 @@
 import { AuthorizationStatus, NameSpace } from '../../../const';
-import { Film } from '../../../types/film';
+import { Film, UserDetails } from '../../../types/data-types';
 import { State } from '../../../types/state';
-import { UserDetails } from '../../../types/user-details';
 
 export const getUserDetails = (state: Pick<State, NameSpace.User>): UserDetails => state[NameSpace.User].userDetails;
 export const getAuthorizationStatus = (state: Pick<State, NameSpace.User>): AuthorizationStatus => state[NameSpace.User].authorizationStatus;

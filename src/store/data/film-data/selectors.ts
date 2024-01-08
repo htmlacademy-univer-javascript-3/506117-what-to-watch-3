@@ -1,7 +1,5 @@
 import { NameSpace } from '../../../const';
-import { FilmDetails } from '../../../types/film-details';
-import { Review } from '../../../types/reviews';
-import { SimilarFilm } from '../../../types/similar-film';
+import { FilmDetails, Review, SimilarFilm } from '../../../types/data-types';
 import { State } from '../../../types/state';
 
 export const getFilmDetails = (state: Pick<State, NameSpace.Film>): FilmDetails | null => state[NameSpace.Film].filmDetails;

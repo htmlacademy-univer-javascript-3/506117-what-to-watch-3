@@ -1,24 +1,14 @@
 import { describe } from 'vitest';
-import { film } from '../../../utils/mocks/film';
-import { mockFilms } from '../../../utils/mocks/films';
-import { mockReviews } from '../../../utils/mocks/reviews';
 import { NameSpace } from '../../../const';
 import { getErrorDataStatus, getFilmDetails, getFilmDetailsLoadingStatus, getReviews, getReviewsLoadingStatus, getSimilarFilms, getSimilarFilmsLoadingStatus } from './selectors';
+import { makeFakeFilmData } from '../../../utils/mocks';
 
 describe('film-data selectors', () => {
-  const state = {
-    [NameSpace.Film]: {
-      filmDetails: film,
-      similarFilms: mockFilms.slice(0, 4),
-      reviews: mockReviews,
-      isFilmDetailsLoading: false,
-      isSimilarFilmsLoading: false,
-      isReviewsLoading: false,
-      hasError: false
-    }
-  };
-
   it('should return filmDetails from state', () => {
+    const state = {
+      [NameSpace.Film]: makeFakeFilmData()
+    };
+
     const { filmDetails } = state[NameSpace.Film];
     const result = getFilmDetails(state);
 
@@ -26,6 +16,10 @@ describe('film-data selectors', () => {
   });
 
   it('should return similarFilms from state', () => {
+    const state = {
+      [NameSpace.Film]: makeFakeFilmData()
+    };
+
     const { similarFilms } = state[NameSpace.Film];
     const result = getSimilarFilms(state);
 
@@ -33,6 +27,10 @@ describe('film-data selectors', () => {
   });
 
   it('should return reviews from state', () => {
+    const state = {
+      [NameSpace.Film]: makeFakeFilmData()
+    };
+
     const { reviews } = state[NameSpace.Film];
     const result = getReviews(state);
 
@@ -40,6 +38,10 @@ describe('film-data selectors', () => {
   });
 
   it('should return error from state', () => {
+    const state = {
+      [NameSpace.Film]: makeFakeFilmData()
+    };
+
     const { hasError } = state[NameSpace.Film];
     const result = getErrorDataStatus(state);
 
@@ -47,6 +49,10 @@ describe('film-data selectors', () => {
   });
 
   it('should reviews loading status from state', () => {
+    const state = {
+      [NameSpace.Film]: makeFakeFilmData()
+    };
+
     const { isReviewsLoading } = state[NameSpace.Film];
     const result = getReviewsLoadingStatus(state);
 
@@ -54,6 +60,10 @@ describe('film-data selectors', () => {
   });
 
   it('should similar films loading status from state', () => {
+    const state = {
+      [NameSpace.Film]: makeFakeFilmData()
+    };
+
     const { isSimilarFilmsLoading } = state[NameSpace.Film];
     const result = getSimilarFilmsLoadingStatus(state);
 
@@ -61,6 +71,10 @@ describe('film-data selectors', () => {
   });
 
   it('should film details loading status from state', () => {
+    const state = {
+      [NameSpace.Film]: makeFakeFilmData()
+    };
+
     const { isFilmDetailsLoading } = state[NameSpace.Film];
     const result = getFilmDetailsLoadingStatus(state);
 

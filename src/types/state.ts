@@ -1,12 +1,7 @@
 import { AuthorizationStatus } from '../const';
 import { store } from '../store';
-import { Film } from './film';
-import { FilmDetails } from './film-details';
-import { Genre } from './genre';
-import { Promo } from './promo';
-import { Review } from './reviews';
-import { SimilarFilm } from './similar-film';
-import { UserDetails } from './user-details';
+import { Film, FilmDetails, Genre, Promo, Review, SimilarFilm, UserDetails } from './data-types';
+
 
 export type CommonData = {
     genre: Genre;

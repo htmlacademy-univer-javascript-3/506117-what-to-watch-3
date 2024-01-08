@@ -56,6 +56,7 @@ export const userData = createSlice({
       })
       .addCase(postReviewAction.rejected, (state) => {
         state.hasError = true;
+        state.reviewPosting = false;
       })
       .addCase(fetchFavouriteFilmsAction.pending, (state) => {
         state.loadingFavouriteFilms = true;
@@ -67,6 +68,7 @@ export const userData = createSlice({
       })
       .addCase(fetchFavouriteFilmsAction.rejected, (state) => {
         state.hasError = true;
+        state.loadingFavouriteFilms = false;
       })
       .addCase(postFavouriteAction.pending, (state) => {
         state.favouritePosting = true;
