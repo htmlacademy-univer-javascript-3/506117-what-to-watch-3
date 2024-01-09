@@ -1,6 +1,6 @@
 import { describe } from 'vitest';
 import { filmData } from './film-data';
-import { fetchFilmDetailsAction, fetchReviews, fetchSimilarFilmsAction } from '../../api-actions';
+import { fetchFilmDetailsAction, fetchReviewsAction, fetchSimilarFilmsAction } from '../../api-actions';
 import { makeEmptyFilmData, makeFakeFilm, makeFakeFilmDetails, makeFakeReview } from '../../../utils/mocks';
 
 describe('film-data slice', () => {
@@ -57,7 +57,7 @@ describe('film-data slice', () => {
     expect(result).toEqual(expectedState);
   });
 
-  it('should set "reviews" to array, "isReviewsLoading" to "false" with "fetchReviews.fulfilled"', () => {
+  it('should set "reviews" to array, "isReviewsLoading" to "false" with "fetchReviewsAction.fulfilled"', () => {
     const expectedState = {
       ...makeEmptyFilmData(), 
       filmDetails: makeFakeFilmDetails(),
@@ -71,7 +71,7 @@ describe('film-data slice', () => {
         filmDetails: expectedState.filmDetails,
         isReviewsLoading: true
       },
-      fetchReviews.fulfilled(expectedState.reviews, '', { id: '' })
+      fetchReviewsAction.fulfilled(expectedState.reviews, '', { id: '' })
     );
 
     expect(result).toEqual(expectedState);
