@@ -12,12 +12,12 @@ import { internet } from 'faker';
 describe('Async actions', () => {
   const axios = api;
   const mockAxiosAdapter = new MockAdapter(axios);
-  const middleware = [thunk.withExtraArgument(axios)];
+  const middlewareElements = [thunk.withExtraArgument(axios)];
   const mockStoreCreator = configureMockStore<
     State,
     Action<string>,
     AppThunkDispatch
-  >(middleware);
+  >(middlewareElements);
   let store: ReturnType<typeof mockStoreCreator>;
 
   beforeEach(() => {
@@ -174,7 +174,7 @@ describe('Async actions', () => {
   describe('postReviewAction', () => {
     it('should dispatch "postReviewAction.pending" and "postReviewAction.fulfilled" when server response 201', async () => {
       const fakeFilm = makeFakeFilm();
-      const fakeReview = makeFakeReview()
+      const fakeReview = makeFakeReview();
       mockAxiosAdapter.onPost(`/comments/${fakeFilm.id}`).reply(201);
 
       await store.dispatch(postReviewAction(
@@ -190,7 +190,7 @@ describe('Async actions', () => {
 
     it('should dispatch "postReviewAction.pending" and "postReviewAction.rejected" when server response 400', async () => {
       const fakeFilm = makeFakeFilm();
-      const fakeReview = makeFakeReview()
+      const fakeReview = makeFakeReview();
       mockAxiosAdapter.onPost(`/comments/${fakeFilm.id}`).reply(400);
 
       await store.dispatch(postReviewAction(
@@ -206,7 +206,7 @@ describe('Async actions', () => {
 
     it('should dispatch "postReviewAction.pending" and "postReviewAction.rejected" when server response 401', async () => {
       const fakeFilm = makeFakeFilm();
-      const fakeReview = makeFakeReview()
+      const fakeReview = makeFakeReview();
       mockAxiosAdapter.onPost(`/comments/${fakeFilm.id}`).reply(401);
 
       await store.dispatch(postReviewAction(
@@ -222,7 +222,7 @@ describe('Async actions', () => {
 
     it('should dispatch "postReviewAction.pending" and "postReviewAction.rejected" when server response 404', async () => {
       const fakeFilm = makeFakeFilm();
-      const fakeReview = makeFakeReview()
+      const fakeReview = makeFakeReview();
       mockAxiosAdapter.onPost(`/comments/${fakeFilm.id}`).reply(404);
 
       await store.dispatch(postReviewAction(
@@ -267,7 +267,7 @@ describe('Async actions', () => {
 
   describe('fetchFavouriteFilmsAction', () => {
     it('should dispatch "fetchFavouriteFilmsAction.pending" and "fetchFavouriteFilmsAction.fulfilled" when server response 200', async () => {
-      mockAxiosAdapter.onGet(`/favorite`).reply(200);
+      mockAxiosAdapter.onGet('/favorite').reply(200);
 
       await store.dispatch(fetchFavouriteFilmsAction());
       const actions = extractActionsTypes(store.getActions());
@@ -279,7 +279,7 @@ describe('Async actions', () => {
     });
 
     it('should dispatch "fetchFavouriteFilmsAction.pending" and "fetchFavouriteFilmsAction.rejected" when server response 401', async () => {
-      mockAxiosAdapter.onGet(`/favorite`).reply(401);
+      mockAxiosAdapter.onGet('/favorite').reply(401);
 
       await store.dispatch(fetchFavouriteFilmsAction());
       const actions = extractActionsTypes(store.getActions());
@@ -308,7 +308,7 @@ describe('Async actions', () => {
     it('should dispatch "fetchSimilarFilmsAction.pending" and "fetchSimilarFilmsAction.rejected" when server response 404', async () => {
       const fakeFilm = makeFakeFilm();
       mockAxiosAdapter.onGet(`/films/${fakeFilm.id}/similar`).reply(404);
-      
+
       await store.dispatch(fetchSimilarFilmsAction({ id: fakeFilm.id }));
       const actions = extractActionsTypes(store.getActions());
 
@@ -336,7 +336,7 @@ describe('Async actions', () => {
     it('should dispatch "fetchFilmDetailsAction.pending" and "fetchFilmDetailsAction.rejected" when server response 404', async () => {
       const fakeFilm = makeFakeFilm();
       mockAxiosAdapter.onGet(`/films/${fakeFilm.id}`).reply(404);
-      
+
       await store.dispatch(fetchFilmDetailsAction({ id: fakeFilm.id }));
       const actions = extractActionsTypes(store.getActions());
 
@@ -349,7 +349,7 @@ describe('Async actions', () => {
 
   describe('fetchPromoAction', () => {
     it('should dispatch "fetchPromoAction.pending" and "fetchPromoAction.fulfilled" when server response 200', async () => {
-      mockAxiosAdapter.onGet(`/promo`).reply(200);
+      mockAxiosAdapter.onGet('/promo').reply(200);
 
       await store.dispatch(fetchPromoAction());
       const actions = extractActionsTypes(store.getActions());
@@ -363,7 +363,7 @@ describe('Async actions', () => {
 
   describe('fetchFilmsAction', () => {
     it('should dispatch "fetchFilmsAction.pending" and "fetchFilmsAction.fulfilled" when server response 200', async () => {
-      mockAxiosAdapter.onGet(`/films`).reply(200);
+      mockAxiosAdapter.onGet('/films').reply(200);
 
       await store.dispatch(fetchFilmsAction());
       const actions = extractActionsTypes(store.getActions());

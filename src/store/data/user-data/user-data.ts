@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { UserData } from '../../../types/state';
 import { AuthorizationStatus, NameSpace } from '../../../const';
-import { fetchFavouriteFilmsAction, loginAction, logoutAction, postFavouriteAction, postReviewAction } from '../../api-actions';
+import { checkAuthAction, fetchFavouriteFilmsAction, loginAction, logoutAction, postFavouriteAction, postReviewAction } from '../../api-actions';
 
 const initialState: UserData = {
   userDetails: {
@@ -35,6 +35,19 @@ export const userData = createSlice({
         state.isLoadingData = false;
       })
       .addCase(loginAction.rejected, (state) => {
+        state.hasError = true;
+        state.isLoadingData = false;
+      })
+      .addCase(checkAuthAction.pending, (state) => {
+        state.isLoadingData = true;
+        state.hasError = false;
+      })
+      .addCase(checkAuthAction.fulfilled, (state, action) => {
+        state.userDetails = action.payload;
+        state.authorizationStatus = AuthorizationStatus.Auth;
+        state.isLoadingData = false;
+      })
+      .addCase(checkAuthAction.rejected, (state) => {
         state.hasError = true;
         state.isLoadingData = false;
       })

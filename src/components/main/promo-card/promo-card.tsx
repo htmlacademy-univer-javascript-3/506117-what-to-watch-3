@@ -4,11 +4,10 @@ import Logo from '../../common/logo/logo';
 import MyList from '../../common/my-list/my-list';
 import { useAppSelector } from '../../../hooks';
 import { AuthorizationStatus } from '../../../const';
-import { memo } from 'react';
 import { getPromo } from '../../../store/data/common-data/selectors';
 import { getAuthorizationStatus } from '../../../store/data/user-data/selectors';
 
-function PromoCard(): JSX.Element {
+export default function PromoCard(): JSX.Element {
   const promo = useAppSelector(getPromo);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
@@ -41,7 +40,7 @@ function PromoCard(): JSX.Element {
             </p>
 
             <div className="film-card__buttons">
-              <Link className="btn btn--play film-card__button" to={`/player/${promo.id}/`}>
+              <Link className="btn btn--play film-card__button" to={`/player/${promo.id}`}>
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s" href="#play-s"></use>
                 </svg>
@@ -55,5 +54,3 @@ function PromoCard(): JSX.Element {
     </section>
   );
 }
-
-export default memo(PromoCard);

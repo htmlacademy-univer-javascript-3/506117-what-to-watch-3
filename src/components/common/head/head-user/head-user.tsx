@@ -9,10 +9,15 @@ type HeadUserProps = {
   userPageHeader: boolean;
 }
 
-function HeadUser({ userPageHeader, children }: PropsWithChildren<HeadUserProps>): JSX.Element {
+export default function HeadUser({ userPageHeader, children }: PropsWithChildren<HeadUserProps>): JSX.Element {
   const userData = useAppSelector(getUserDetails);
   const dispatcher = useAppDispatch();
   const navigate = useNavigate();
+  const handleSignoutButton = () => {
+    dispatcher(logoutAction());
+    navigate(AppRoute.Main);
+  };
+
   return (
     <header className={`page-header ${userPageHeader ? 'user-page__head' : 'film-card__head'}`}>
       {children}
@@ -26,10 +31,7 @@ function HeadUser({ userPageHeader, children }: PropsWithChildren<HeadUserProps>
         </li>
         <li className="user-block__item">
           <button
-            onClick={() => {
-              dispatcher(logoutAction());
-              navigate(AppRoute.Main);
-            }}
+            onClick={handleSignoutButton}
             className="user-block__link"
           >
             Sign out
@@ -39,5 +41,3 @@ function HeadUser({ userPageHeader, children }: PropsWithChildren<HeadUserProps>
     </header>
   );
 }
-
-export default HeadUser;

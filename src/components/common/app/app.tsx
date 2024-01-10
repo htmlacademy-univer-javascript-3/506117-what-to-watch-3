@@ -8,19 +8,11 @@ import PlayerPage from '../../../pages/player-page/player-page';
 import NotFoundPage from '../../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 import { AppRoute } from '../../../const';
-import LoadingScreen from '../loading/loading';
-import { useAppSelector } from '../../../hooks';
 import HistoryRouter from '../../history-route/history-route';
 import browserHistory from '../../../browser-history';
-import { getFilmsLoadingStatus } from '../../../store/data/common-data/selectors';
 
 
 function App(): JSX.Element {
-  const isDataLoading = useAppSelector(getFilmsLoadingStatus);
-  if (isDataLoading) {
-    return <LoadingScreen />;
-  }
-
   return (
     <HistoryRouter history={browserHistory}>
       <Routes>

@@ -1,14 +1,25 @@
-import { useNavigate } from 'react-router-dom';
-import { AppRoute } from '../../const';
-import { useAppSelector } from '../../hooks';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getFilmDetails } from '../../store/data/film-data/selectors';
 import { useEffect, useRef, useState } from 'react';
 import PlayerTime from '../../components/player/player-time/player-time';
 import Toggler from '../../components/player/toggler/toggler';
+import { fetchFilmDetailsAction } from '../../store/api-actions';
+import { redirectToRoute } from '../../store/action';
+import { AppRoute, ErrorType } from '../../const';
+import { getErrorData } from '../../store/data/error-data/selectors';
+import { setErrorData } from '../../store/data/error-data/error-data';
 
 export default function PlayerPage(): JSX.Element {
+  const dispatcher = useAppDispatch();
+  const { id } = useParams();
+  const hasError = useAppSelector(getErrorData);
+
+  useEffect(() => {
+    dispatcher(fetchFilmDetailsAction({ id: id ?? '' }));
+  }, [dispatcher, location]);
+
   const film = useAppSelector(getFilmDetails);
-  const navigate = useNavigate();
   const [isPlaying, setPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -26,13 +37,26 @@ export default function PlayerPage(): JSX.Element {
     videoRef.current?.load();
   }, []);
 
+  if (hasError.errorType === ErrorType.Common) {
+    dispatcher(setErrorData({
+      errorData: {
+        errorType: '',
+        message: '',
+        details: []
+      }
+    }));
+    dispatcher(redirectToRoute(AppRoute.NotFound));
+  }
+
   if (film === null) {
-    return <div className="player"></div>;
+    return <></>;
   }
 
   const handleFullScreenClick = () => {
     videoRef.current?.requestFullscreen();
   };
+
+  const handleExit = () => window.history.back();
 
   return (
     <div className="player">
@@ -41,7 +65,7 @@ export default function PlayerPage(): JSX.Element {
       <button
         type="button"
         className="player__exit"
-        onClick={() => navigate(AppRoute.Main)}
+        onClick={handleExit}
       >
         Exit
       </button>

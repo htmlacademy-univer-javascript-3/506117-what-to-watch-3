@@ -7,7 +7,7 @@ import { getGenreFilms } from '../../../store/data/common-data/selectors';
 
 type CatalogProps = PropsWithChildren;
 
-function Catalog({ children }: CatalogProps): JSX.Element {
+export default function Catalog({ children }: CatalogProps): JSX.Element {
   const films = useAppSelector(getGenreFilms);
   const [limit, setLimit] = useState(SHOW_NUM);
 
@@ -19,9 +19,7 @@ function Catalog({ children }: CatalogProps): JSX.Element {
           films.slice(0, limit).map((film) => (<FilmCard film={film} key={film.id} />))
         }
       </div>
-      {limit < films.length && <ShowMore {...{ limit, setLimit }} /> }
+      {limit < films.length && <ShowMore {...{ limit, setLimit }} />}
     </section>
   );
 }
-
-export default Catalog;

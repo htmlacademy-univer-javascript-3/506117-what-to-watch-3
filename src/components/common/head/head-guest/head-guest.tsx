@@ -4,7 +4,7 @@ import { PropsWithChildren } from 'react';
 
 type HeadGuestProps = PropsWithChildren;
 
-function HeadGuest({ children } : HeadGuestProps) {
+export default function HeadGuest({ children } : HeadGuestProps) {
   const navigate = useNavigate();
 
   return (
@@ -16,5 +16,3 @@ function HeadGuest({ children } : HeadGuestProps) {
     </header>
   );
 }
-
-export default HeadGuest;

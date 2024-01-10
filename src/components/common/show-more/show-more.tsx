@@ -6,12 +6,14 @@ type ShowMoreProps = {
 }
 
 export default function ShowMore({ limit, setLimit }: ShowMoreProps): JSX.Element {
+  const handleButton = () => setLimit(() => SHOW_NUM + limit);
+
   return (
     <div className="catalog__more">
       <button
         className="catalog__button"
         type="button"
-        onClick={() => setLimit(() => SHOW_NUM + limit)}
+        onClick={handleButton}
       >
                 Show more
       </button>

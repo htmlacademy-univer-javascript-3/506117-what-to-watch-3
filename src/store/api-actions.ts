@@ -1,9 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { AxiosInstance } from 'axios';
-import { APIRoute, AppRoute } from '../const';
+import { APIRoute } from '../const';
 import { dropToken, saveToken } from '../services/api/token';
-import { redirectToRoute } from './action';
 import { AuthData, ReviewData } from '../types/api-types';
 import { Film, FilmDetails, Promo, Review, SimilarFilm, UserDetails } from '../types/data-types';
 
@@ -79,9 +78,8 @@ export const postReviewAction = createAsyncThunk<void, ReviewData & { id: string
   extra: AxiosInstance;
 }>(
   'user/review',
-  async ({ comment: comment, rating: rating, id: id }, { dispatch, extra: api }) => {
+  async ({ comment: comment, rating: rating, id: id }, { extra: api }) => {
     await api.post(`/comments/${id}`, { comment, rating });
-    // dispatch(redirectToRoute(`/films/${id}`));
   },
 );
 
@@ -91,9 +89,8 @@ export const postFavouriteAction = createAsyncThunk<void, { id: string; status: 
   extra: AxiosInstance;
 }>(
   'user/add-favourite',
-  async ({ id: id, status: status }, { extra: api, dispatch }) => {
+  async ({ id: id, status: status }, { extra: api }) => {
     await api.post(`/favorite/${id}/${status}`);
-    // dispatch(redirectToRoute(AppRoute.MyList));
   },
 );
 

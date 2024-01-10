@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { FilmDetails } from '../../../types/film-details';
 import { fetchReviewsAction } from '../../../store/api-actions';
 import { getReviews } from '../../../store/data/film-data/selectors';
+import { FilmDetails } from '../../../types/data-types';
 
 type MovieReviewsProps = {
   film: FilmDetails;

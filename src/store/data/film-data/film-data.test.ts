@@ -43,9 +43,9 @@ describe('film-data slice', () => {
 
   it('should set "similarFilms" to array, "isSimilarFilmsLoading" to "false" with "fetchSimilarFilmsAction.fulfilled"', () => {
     const expectedState = {
-      ...makeEmptyFilmData(), 
+      ...makeEmptyFilmData(),
       filmDetails: makeFakeFilmDetails(),
-      similarFilms: Array.from({length: 2}).map(() => makeFakeFilm()), 
+      similarFilms: Array.from({length: 2}).map(() => makeFakeFilm()),
       isSimilarFilmsLoading: false
     };
 
@@ -59,7 +59,7 @@ describe('film-data slice', () => {
 
   it('should set "reviews" to array, "isReviewsLoading" to "false" with "fetchReviewsAction.fulfilled"', () => {
     const expectedState = {
-      ...makeEmptyFilmData(), 
+      ...makeEmptyFilmData(),
       filmDetails: makeFakeFilmDetails(),
       reviews: Array.from({length: 5}).map(() => makeFakeReview()),
       isReviewsLoading: false
@@ -67,7 +67,7 @@ describe('film-data slice', () => {
 
     const result = filmData.reducer(
       {
-        ...makeEmptyFilmData(), 
+        ...makeEmptyFilmData(),
         filmDetails: expectedState.filmDetails,
         isReviewsLoading: true
       },

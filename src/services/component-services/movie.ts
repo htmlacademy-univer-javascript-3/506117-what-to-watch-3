@@ -1,3 +1,5 @@
+import { MAX_RATING, Rating } from "../../const";
+
 export function minutesToStringTime(minutes: number) {
   if (!Number.isInteger(minutes)) {
     throw new Error(`Unexpected minutes value: ${minutes}, minutes should be integer`);
@@ -16,16 +18,18 @@ export function minutesToStringTime(minutes: number) {
 }
 
 export function computeRatingLevel(ratingValue: number): string {
-  if (0.0 <= ratingValue && ratingValue <= 2.0) {
+  if (ratingValue < 0.0 || MAX_RATING < ratingValue )
+    throw new Error(`Unexpected rating value: ${ratingValue}, rating value must be between 0.0 and 10.0`);
+
+  if (ratingValue <= Rating.Bad) {
     return 'Bad';
-  } else if (2.0 <= ratingValue && ratingValue <= 4.0) {
+  } else if (ratingValue <= Rating.Normal) {
     return 'Normal';
-  } else if (4.0 <= ratingValue && ratingValue <= 6.0) {
+  } else if (ratingValue <= Rating.Good) {
     return 'Good';
-  } else if (6.0 <= ratingValue && ratingValue <= 8.0) {
+  } else if (ratingValue <= Rating.VeryGood) {
     return 'Very good';
-  } else if (8.0 <= ratingValue && ratingValue <= 10.0) {
+  } else {
     return 'Awesome';
   }
-  throw new Error(`Unexpected rating value: ${ratingValue}, rating value must be between 0.0 and 10.0`);
 }

@@ -20,7 +20,7 @@ export default function SignInPage(): JSX.Element {
       dispatch(loginAction({
         login: loginRef.current.value,
         password: passwordRef.current.value
-      })).then((response) => 
+      })).then((response) =>
         response.payload && dispatch(redirectToRoute(AppRoute.Main))
       );
     }
@@ -49,6 +49,7 @@ export default function SignInPage(): JSX.Element {
                 placeholder="Email address"
                 name="user-email"
                 id="user-email"
+                required
                 ref={loginRef}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
@@ -60,6 +61,7 @@ export default function SignInPage(): JSX.Element {
                 placeholder="Password"
                 name="user-password"
                 id="user-password"
+                required
                 ref={passwordRef}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
