@@ -14,7 +14,7 @@ export default function Favourites(): JSX.Element {
   const favourites = useAppSelector(getFavourites);
 
   return (
-    <section className="catalog">
+    <section className="catalog" data-testid='favouritesTestId'>
       <div className="catalog__films-list">
         {favourites.map((f) => <FilmCard film={f} key={f.id} />)}
       </div>

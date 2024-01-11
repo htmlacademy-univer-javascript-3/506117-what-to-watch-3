@@ -117,7 +117,7 @@ export const makeEmptyCommonData = () => ({
 
 export const makeFakeUserData = () => ({
   userDetails: makeFakeUserDetails(),
-  authorizationStatus: AuthorizationStatus.Unknown,
+  authorizationStatus: AuthorizationStatus.Auth,
   favouriteFilms: [],
   favouritePosting: false,
   hasError: false,

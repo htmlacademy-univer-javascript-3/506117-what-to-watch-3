@@ -42,7 +42,7 @@ export type ErrorData = {
 
 export type ErrorDetails = {
     property: string;
-    value: number;
+    value: string;
     messages: string[];
 }
 

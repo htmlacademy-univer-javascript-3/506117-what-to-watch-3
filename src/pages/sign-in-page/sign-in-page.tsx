@@ -49,6 +49,7 @@ export default function SignInPage(): JSX.Element {
                 placeholder="Email address"
                 name="user-email"
                 id="user-email"
+                data-testid="emailElement"
                 required
                 ref={loginRef}
               />
@@ -61,6 +62,7 @@ export default function SignInPage(): JSX.Element {
                 placeholder="Password"
                 name="user-password"
                 id="user-password"
+                data-testid="passwordElement"
                 required
                 ref={passwordRef}
               />

@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../../hooks';
 import { postReviewAction } from '../../../store/api-actions';
 import { useParams } from 'react-router-dom';
 import { redirectToRoute } from '../../../store/action';
-import { AppRoute, MAX_RATING } from '../../../const';
+import { MAX_RATING } from '../../../const';
 import ErrorBox from '../../error-box/error-box';
 
 
@@ -15,17 +15,12 @@ export default function FieldForm(): JSX.Element {
   const dispatch = useAppDispatch();
   const { id } = useParams();
 
-  if (id === undefined) {
-    dispatch(redirectToRoute(AppRoute.Main));
-    return <p>Some error occured...</p>;
-  }
-
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     dispatch(postReviewAction({
       comment: text,
       rating: score,
-      id: id
+      id: id ?? ''
     })).then((response) => {
       if (response.meta.requestStatus === 'fulfilled') {
         dispatch(redirectToRoute(`/films/${id}/reviews`));
@@ -39,7 +34,7 @@ export default function FieldForm(): JSX.Element {
     <div className="add-review">
       <form className="add-review__form" onSubmit={handleSubmit}>
         <div className="rating">
-          <div className="rating__stars">
+          <div className="rating__stars" data-testid='ratingStars'>
             {
               starsScore.reverse().map((el) =>
                 <RateStar el={el} setScore={setScore} key={`score-${el}`} />
@@ -56,6 +51,7 @@ export default function FieldForm(): JSX.Element {
             name="review-text"
             id="review-text"
             placeholder="Review text"
+            data-testid="reviewText"
             required
             onChange={(evt) => {
               setFormData(evt.target.value);

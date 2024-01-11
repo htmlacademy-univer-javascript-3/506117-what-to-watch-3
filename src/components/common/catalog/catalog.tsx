@@ -12,7 +12,7 @@ export default function Catalog({ children }: CatalogProps): JSX.Element {
   const [limit, setLimit] = useState(SHOW_NUM);
 
   return (
-    <section className="catalog">
+    <section className="catalog" data-testid='catalogId'>
       {children}
       <div className="catalog__films-list">
         {

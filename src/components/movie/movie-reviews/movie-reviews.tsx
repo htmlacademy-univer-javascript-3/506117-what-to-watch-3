@@ -18,7 +18,7 @@ export default function MovieReviews({ film }: MovieReviewsProps): JSX.Element {
   const reviews = useAppSelector(getReviews);
 
   return (
-    <div className="film-card__reviews film-card__row">
+    <div className="film-card__reviews film-card__row" data-testid='reviewsTestId'>
       <div className="film-card__reviews-col">
         {
           reviews.length === 0 && <p className="review__text">There is no comments yet...</p>

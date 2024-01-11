@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 
 type TogglerTimeProps = {
-    videoRef: React.MutableRefObject<HTMLVideoElement | null>;
+    videoRef?: React.MutableRefObject<HTMLVideoElement | null>;
 }
 
 export default function Toggler({ videoRef }: TogglerTimeProps) {
-  const duration = videoRef.current?.duration || 1;
+  const duration = videoRef?.current?.duration || 1;
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const currentTime = videoRef.current?.currentTime || 0;
+      const currentTime = videoRef?.current?.currentTime || 0;
       const curProgress = (currentTime / duration * 100);
 
       if (progress !== curProgress) {

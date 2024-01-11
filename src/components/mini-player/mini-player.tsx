@@ -45,6 +45,7 @@ export default function MiniPlayer(props: MiniPlayerProps): JSX.Element {
       width={props.width}
       height={props.height}
       poster={props.previewImage}
+      data-testid='miniPlayer'
       ref={playerRef}
     >
       <source src={props.previewVideoLink} />

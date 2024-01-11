@@ -47,7 +47,7 @@ export default function MovieTabs({ film }: MovieTabsProps): JSX.Element {
   const handleTabButton = (tabName : string) => setTabName(() => tabName);
 
   return (
-    <div className="film-card__desc">
+    <div className="film-card__desc" data-testid='tabsTestId'>
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
           {

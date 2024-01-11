@@ -12,6 +12,7 @@ export default function RateStar({el, setScore} : RateStarProps): JSX.Element {
         type="radio"
         name="rating"
         value={el}
+        data-testid={`star-${el}`}
         onChange={() => setScore(() => el)}
       />
       <label className="rating__label" htmlFor={`star-${el}`}>Rating {el}</label>
