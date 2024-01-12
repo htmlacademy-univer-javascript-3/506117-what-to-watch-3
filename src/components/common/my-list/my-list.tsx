@@ -33,7 +33,7 @@ export default function MyList({ filmId }: MyListProps): JSX.Element {
     <button className="btn btn--list film-card__button" type="button" onClick={handleClick}>
       {
         isInList ?
-          <svg viewBox="0 0 19 20" width="19" height="20">
+          <svg viewBox="0 0 19 20" width="19" height="20" data-testid='inListTestId'>
             <use xlinkHref="#in-list"></use>
           </svg> :
           <svg viewBox="0 0 19 20" width="19" height="20">

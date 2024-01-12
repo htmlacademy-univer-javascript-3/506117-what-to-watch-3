@@ -33,7 +33,7 @@ export default function Genres(): JSX.Element {
               className={`catalog__genres-item${activeGenre === genre.id ? ' catalog__genres-item--active' : ''}`}
               onClick={() => handleGenreChoice(genre)}
             >
-              <button className="catalog__genres-link">{genre.title}</button>
+              <button className="catalog__genres-link" data-testid={`genreTestId-${genre.id}`}>{genre.title}</button>
             </li>
           )
           )

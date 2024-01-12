@@ -1,6 +1,6 @@
 import { datatype, lorem, internet, name, date } from 'faker';
 import { Film, FilmDetails, Genre, Promo, Review, SimilarFilm, UserDetails } from '../types/data-types';
-import { CommonData, FilmData, State, UserData } from '../types/state';
+import { CommonData, ErrorData, FilmData, State, UserData } from '../types/state';
 import { AuthorizationStatus } from '../const';
 import { Action, ThunkDispatch } from '@reduxjs/toolkit';
 import { createAPI } from '../services/api/api';
@@ -141,6 +141,12 @@ export const makeEmptyUserData = () => ({
     token: '',
   },
 }) as UserData;
+
+export const makeEmptyErrorData = () => ({
+  message: '',
+  errorType: '',
+  details: []
+}) as ErrorData;
 
 export const createFakeToken = (): Token => datatype.uuid();
 

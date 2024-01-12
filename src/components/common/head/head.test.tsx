@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { withHistory, withStore } from "../../../utils/mock-component";
-import { makeFakeUserData } from "../../../utils/mocks";
+import { makeEmptyUserData, makeFakeUserData } from "../../../utils/mocks";
 import Head from "./head";
 
 describe('Component: Head', () => {
@@ -13,5 +13,16 @@ describe('Component: Head', () => {
         render(preparedComponent);
 
         expect(screen.getByAltText(avatarAltText)).toBeInTheDocument();
+    });
+
+    it('should render head guest on no-auth status', () => {
+        const guestHeadTestId = 'guestHeadTestId';
+        const { withStoreComponent } = withStore(<Head userPageHeader />, {
+            USER: makeEmptyUserData(),
+        });
+        const preparedComponent = withHistory(withStoreComponent);
+        render(preparedComponent);
+
+        expect(screen.getByTestId(guestHeadTestId)).toBeInTheDocument();
     });
 });

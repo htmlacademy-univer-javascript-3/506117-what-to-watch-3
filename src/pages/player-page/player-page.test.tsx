@@ -16,6 +16,8 @@ describe('Component: PlayerPage', () => {
             }
         });
         const preparedComponent = withHistory(withStoreComponent);
+        HTMLMediaElement.prototype.pause = vi.fn();
+        HTMLMediaElement.prototype.load = vi.fn();
         render(preparedComponent);
 
         expect(screen.getByText(fullscreenText)).toBeInTheDocument();

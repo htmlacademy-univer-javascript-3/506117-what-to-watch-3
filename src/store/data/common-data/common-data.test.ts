@@ -42,10 +42,12 @@ describe('common-data slice', () => {
   });
 
   it('should set "genreFilms" to array', () => {
-    const expectedState = { ...makeFakeCommonData(), genreFilms: [] };
-
+    const genre = { id: 0, title: 'All genres' };
+    const fakeCommonData = makeFakeCommonData();
+    const expectedState = { ...fakeCommonData, genreFilms: fakeCommonData.films, genre: genre };
+    
     const result = commonData.reducer(
-      { ...makeEmptyCommonData(), films: expectedState.films, promo: expectedState.promo, genre: expectedState.genre },
+      { ...makeEmptyCommonData(), films: expectedState.films, genre: genre, promo: fakeCommonData.promo },
       putGenreFilms()
     );
 

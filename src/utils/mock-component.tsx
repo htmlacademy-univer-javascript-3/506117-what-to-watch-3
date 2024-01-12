@@ -1,5 +1,5 @@
 import { MemoryHistory, createMemoryHistory } from 'history';
-import HistoryRouter from '../components/history-route/history-route.tsx';
+
 import { MockStore, configureMockStore } from '@jedmao/redux-mock-store';
 import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
@@ -8,6 +8,7 @@ import { api } from '../store/index.ts';
 import { Action } from '@reduxjs/toolkit';
 import { AppThunkDispatch } from './mocks';
 import { Provider } from 'react-redux';
+import HistoryRouter from '../components/history-route/history-router.tsx';
 
 export function withHistory(component: JSX.Element, history?: MemoryHistory) {
   const memoryHistory = history ?? createMemoryHistory();

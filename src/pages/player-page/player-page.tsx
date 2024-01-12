@@ -59,7 +59,7 @@ export default function PlayerPage(): JSX.Element {
   const handleExit = () => window.history.back();
 
   return (
-    <div className="player">
+    <div className="player" data-testid='playerTestId'>
       <video src={film.videoLink} ref={videoRef} className="player__video" poster="img/player-poster.jpg"></video>
 
       <button

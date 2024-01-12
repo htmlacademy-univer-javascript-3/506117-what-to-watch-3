@@ -8,7 +8,7 @@ export default function HeadGuest({ children } : HeadGuestProps) {
   const navigate = useNavigate();
 
   return (
-    <header className="page-header">
+    <header className="page-header" data-testid='guestHeadTestId'>
       {children}
       <div className="user-block">
         <button onClick={() => navigate(AppRoute.SignIn)} className="user-block__link">Sign in</button>

@@ -6,13 +6,14 @@ import { useAppSelector } from '../../../hooks';
 import { AuthorizationStatus } from '../../../const';
 import { getPromo } from '../../../store/data/common-data/selectors';
 import { getAuthorizationStatus } from '../../../store/data/user-data/selectors';
+import ErrorBox from '../../error-box/error-box';
 
 export default function PromoCard(): JSX.Element {
   const promo = useAppSelector(getPromo);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   if (promo === null) {
-    return <section className="film-card"></section>;
+    return <ErrorBox />;
   }
 
   return (

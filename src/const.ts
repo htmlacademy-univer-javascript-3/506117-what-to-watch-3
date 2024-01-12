@@ -52,3 +52,8 @@ export const MAX_RATING = 10;
 export const SHOW_NUM = 8;
 export const TIMEOUT_SHOW_ERROR = 5000;
 export const SIMILAR_FILMS_NUM = 4;
+export const MiniPlayerConfiguration = {
+  muted: true,
+  width: 100,
+  height: 100,
+}; 

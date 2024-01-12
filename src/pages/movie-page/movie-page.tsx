@@ -52,7 +52,7 @@ function MoviePage() {
 
   return (
     <>
-      <section className="film-card film-card--full">
+      <section className="film-card film-card--full" data-testid='filmPageTestId'>
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img src={film.backgroundImage} alt={film.name} />

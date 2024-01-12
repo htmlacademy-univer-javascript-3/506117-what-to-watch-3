@@ -53,7 +53,7 @@ export default function MovieTabs({ film }: MovieTabsProps): JSX.Element {
           {
             Array.from(tabs.entries()).map(([k, t]) => (
               <li className={`film-nav__item${ k === currentTabName ? ' film-nav__item--active' : ''}`} key={t.id}>
-                <button onClick={() => handleTabButton(k)} className="film-nav__link">
+                <button onClick={() => handleTabButton(k)} className="film-nav__link" data-testid={`tabTestId-${k}`}>
                   {t.title}
                 </button>
               </li>

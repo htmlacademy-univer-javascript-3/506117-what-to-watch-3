@@ -4,6 +4,8 @@ import App from './components/common/app/app';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { checkAuthAction } from './store/api-actions';
+import HistoryRouter from './components/history-route/history-router';
+import browserHistory from './browser-history';
 
 store.dispatch(checkAuthAction());
 
@@ -14,7 +16,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <HistoryRouter history={browserHistory}>
+        <App />
+      </HistoryRouter>
     </Provider>
   </React.StrictMode>
 );

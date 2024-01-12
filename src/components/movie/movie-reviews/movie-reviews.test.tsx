@@ -15,4 +15,16 @@ describe('Component: MovieReviews', () => {
 
         expect(screen.getByTestId(reviewsTestId)).toBeInTheDocument();
     });
+
+    it('should render correct without any reviews', () => {
+        const noReviewsText= 'There is no comments yet...';
+        const fakeFilm = makeFakeFilmDetails();
+        const { withStoreComponent } = withStore(<MovieReviews film={fakeFilm} />, {
+            FILM: {...makeFakeFilmData(), reviews: []}
+        });
+        const preparedComponent = withHistory(withStoreComponent);
+        render(preparedComponent);
+
+        expect(screen.getByText(noReviewsText)).toBeInTheDocument();
+    });
 });
