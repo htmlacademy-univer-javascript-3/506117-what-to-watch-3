@@ -4,18 +4,9 @@ import { useAppDispatch } from '../../../hooks';
 import { postReviewAction } from '../../../store/api-actions';
 import { useParams } from 'react-router-dom';
 import { redirectToRoute } from '../../../store/action';
-import { AppRoute } from '../../../const';
+import { MAX_RATING } from '../../../const';
 import ErrorBox from '../../error-box/error-box';
 
-function generateRange(min: number, max: number): number[] {
-  const range: number[] = [];
-
-  for (let i = min; i < max + 1; i++) {
-    range.push(i);
-  }
-
-  return range;
-}
 
 export default function FieldForm(): JSX.Element {
   const [text, setFormData] = useState('');
@@ -24,32 +15,28 @@ export default function FieldForm(): JSX.Element {
   const dispatch = useAppDispatch();
   const { id } = useParams();
 
-  if (id === undefined) {
-    dispatch(redirectToRoute(AppRoute.Main));
-    return <p>Some error occured...</p>;
-  }
-
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-
-    if (text.length > 0) {
-      dispatch(postReviewAction({
-        comment: text,
-        rating: score,
-        id: id
-      }));
-    }
+    dispatch(postReviewAction({
+      comment: text,
+      rating: score,
+      id: id ?? ''
+    })).then((response) => {
+      if (response.meta.requestStatus === 'fulfilled') {
+        dispatch(redirectToRoute(`/films/${id ?? ''}/reviews`));
+      }
+    });
   };
 
-  const starsRange = generateRange(1, 10);
+  const starsScore = Array.from({ length: MAX_RATING }, (_v, k) => k + 1);
 
   return (
     <div className="add-review">
       <form className="add-review__form" onSubmit={handleSubmit}>
         <div className="rating">
-          <div className="rating__stars">
+          <div className="rating__stars" data-testid='ratingStars'>
             {
-              starsRange.reverse().map((el) =>
+              starsScore.reverse().map((el) =>
                 <RateStar el={el} setScore={setScore} key={`score-${el}`} />
               )
             }
@@ -64,6 +51,8 @@ export default function FieldForm(): JSX.Element {
             name="review-text"
             id="review-text"
             placeholder="Review text"
+            data-testid="reviewText"
+            required
             onChange={(evt) => {
               setFormData(evt.target.value);
             }}

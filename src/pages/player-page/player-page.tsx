@@ -1,14 +1,26 @@
-import { useNavigate } from 'react-router-dom';
-import { AppRoute } from '../../const';
-import { useAppSelector } from '../../hooks';
+import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getFilmDetails } from '../../store/data/film-data/selectors';
 import { useEffect, useRef, useState } from 'react';
 import PlayerTime from '../../components/player/player-time/player-time';
 import Toggler from '../../components/player/toggler/toggler';
+import { fetchFilmDetailsAction } from '../../store/api-actions';
+import { redirectToRoute } from '../../store/action';
+import { AppRoute, ErrorType } from '../../const';
+import { getErrorData } from '../../store/data/error-data/selectors';
+import { setErrorData } from '../../store/data/error-data/error-data';
+import ErrorBox from '../../components/error-box/error-box';
 
 export default function PlayerPage(): JSX.Element {
+  const dispatcher = useAppDispatch();
+  const { id } = useParams();
+  const hasError = useAppSelector(getErrorData);
+
+  useEffect(() => {
+    dispatcher(fetchFilmDetailsAction({ id: id ?? '' }));
+  }, [dispatcher, id]);
+
   const film = useAppSelector(getFilmDetails);
-  const navigate = useNavigate();
   const [isPlaying, setPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -26,22 +38,43 @@ export default function PlayerPage(): JSX.Element {
     videoRef.current?.load();
   }, []);
 
+  if (hasError.errorType === ErrorType.Common) {
+    dispatcher(setErrorData({
+      errorData: {
+        errorType: '',
+        message: '',
+        details: []
+      }
+    }));
+    dispatcher(redirectToRoute(AppRoute.NotFound));
+  }
+
   if (film === null) {
-    return <div className="player"></div>;
+    return <ErrorBox />;
   }
 
   const handleFullScreenClick = () => {
     videoRef.current?.requestFullscreen();
   };
 
+  const handleExit = () => window.history.back();
+
   return (
-    <div className="player">
-      <video src={film.videoLink} ref={videoRef} className="player__video" poster="img/player-poster.jpg"></video>
+    <div className="player" data-testid='playerTestId'>
+      <video
+        src={film.videoLink}
+        ref={videoRef}
+        className="player__video"
+        poster="img/player-poster.jpg"
+        data-testid='playerVideoTestId'
+      >
+      </video>
 
       <button
         type="button"
         className="player__exit"
-        onClick={() => navigate(AppRoute.Main)}
+        data-testid='exitTestId'
+        onClick={handleExit}
       >
         Exit
       </button>
@@ -51,13 +84,13 @@ export default function PlayerPage(): JSX.Element {
           <div className="player__time">
             <Toggler videoRef={videoRef} />
           </div>
-          <PlayerTime videoRef={videoRef}/>
+          <PlayerTime videoRef={videoRef} />
         </div>
 
         <div className="player__controls-row">
           {
             isPlaying ?
-              <button type="button" className="player__play" onClick={() => {
+              <button type="button" className="player__play" data-testid='pauseTestId' onClick={() => {
                 setPlaying(() => false);
               }}
               >
@@ -66,7 +99,7 @@ export default function PlayerPage(): JSX.Element {
                 </svg>
                 <span>Pause</span>
               </button> :
-              <button type="button" className="player__play" onClick={() => {
+              <button type="button" className="player__play" data-testid='playTestId' onClick={() => {
                 setPlaying(() => true);
               }}
               >
@@ -76,7 +109,7 @@ export default function PlayerPage(): JSX.Element {
                 <span>Play</span>
               </button>
           }
-          <div className="player__name">Transpotting</div>
+          {videoRef.current === null && <div className="player__name">Transpotting</div>}
 
           <button type="button" className="player__full-screen" onClick={handleFullScreenClick}>
             <svg viewBox="0 0 27 27" width="27" height="27">

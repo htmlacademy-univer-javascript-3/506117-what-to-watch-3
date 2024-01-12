@@ -15,12 +15,12 @@ vi.mock('../../browser-history', () => ({
   }
 }));
 
-describe('Redirect middleware', () => {
+describe('Redirect middlewareElements', () => {
   let store: MockStore;
 
   beforeAll(() => {
-    const middleware = [redirect];
-    const mockStoreCreator = configureMockStore<State, AnyAction>(middleware);
+    const middlewareElements = [redirect];
+    const mockStoreCreator = configureMockStore<State, AnyAction>(middlewareElements);
     store = mockStoreCreator();
   });
 

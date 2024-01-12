@@ -1,5 +1,5 @@
 import Footer from '../../components/common/footer/footer';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import FilmCard from '../../components/main/film-card/film-card';
 import Head from '../../components/common/head/head';
 import MyList from '../../components/common/my-list/my-list';
@@ -7,31 +7,53 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmDetailsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
 import MovieTabs from '../../components/movie/movie-tabs/movie-tabs';
 import { useEffect } from 'react';
-import { AuthorizationStatus, SIMILAR_FILMS_NUM } from '../../const';
-import { getFilmDetails, getSimilarFilms } from '../../store/data/film-data/selectors';
+import { AppRoute, AuthorizationStatus, ErrorType, SIMILAR_FILMS_NUM } from '../../const';
+import { getFilmDetails, getFilmDetailsLoadingStatus, getSimilarFilms } from '../../store/data/film-data/selectors';
 import { getAuthorizationStatus } from '../../store/data/user-data/selectors';
+import { redirectToRoute } from '../../store/action';
+import LoadingScreen from '../../components/common/loading/loading';
+import { getErrorData } from '../../store/data/error-data/selectors';
+import { setErrorData } from '../../store/data/error-data/error-data';
+import ErrorBox from '../../components/error-box/error-box';
 
 function MoviePage() {
-  const { id } = useParams();
   const dispatcher = useAppDispatch();
-  const location = useLocation();
-
-  useEffect(() => {
-    dispatcher(fetchFilmDetailsAction({ id: location.pathname.split('/')[2] }));
-    dispatcher(fetchSimilarFilmsAction({ id: location.pathname.split('/')[2] }));
-  }, [dispatcher, location]);
+  const { id } = useParams();
 
   const film = useAppSelector(getFilmDetails);
   const similarFilms = useAppSelector(getSimilarFilms);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const hasError = useAppSelector(getErrorData);
 
-  if (id === undefined || film === null) {
-    return <p></p>;
+  const loadingStatus = useAppSelector(getFilmDetailsLoadingStatus);
+
+  useEffect(() => {
+    dispatcher(fetchFilmDetailsAction({ id: id ?? '' }));
+    dispatcher(fetchSimilarFilmsAction({ id: id ?? '' }));
+  }, [dispatcher, id]);
+
+  if (loadingStatus) {
+    return <LoadingScreen />;
+  }
+
+  if (hasError.errorType === ErrorType.Common) {
+    dispatcher(setErrorData({
+      errorData: {
+        errorType: '',
+        message: '',
+        details: []
+      }
+    }));
+    dispatcher(redirectToRoute(AppRoute.NotFound));
+  }
+
+  if (film === null) {
+    return <ErrorBox />;
   }
 
   return (
     <>
-      <section className="film-card film-card--full">
+      <section className="film-card film-card--full" data-testid='filmPageTestId'>
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img src={film.backgroundImage} alt={film.name} />
@@ -73,7 +95,7 @@ function MoviePage() {
             <div className="film-card__poster film-card__poster--big">
               <img src={film.posterImage} alt={film.name} width="218" height="327" />
             </div>
-            <MovieTabs film={film} location={location} />
+            <MovieTabs film={film} />
           </div>
         </div>
       </section>

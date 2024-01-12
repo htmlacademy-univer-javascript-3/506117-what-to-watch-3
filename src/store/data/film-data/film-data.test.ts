@@ -1,95 +1,41 @@
 import { describe } from 'vitest';
 import { filmData } from './film-data';
-import { fetchFilmDetailsAction, fetchReviews, fetchSimilarFilmsAction } from '../../api-actions';
-import { film } from '../../../utils/mocks/film';
-import { mockFilms } from '../../../utils/mocks/films';
-import { mockReviews } from '../../../utils/mocks/reviews';
+import { fetchFilmDetailsAction, fetchReviewsAction, fetchSimilarFilmsAction } from '../../api-actions';
+import { makeEmptyFilmData, makeFakeFilm, makeFakeFilmDetails, makeFakeReview } from '../../../utils/mocks';
 
 describe('film-data slice', () => {
   it('should return initial state with empty action', () => {
-    const expectedState = {
-      filmDetails: null,
-      similarFilms: [],
-      reviews: [],
-      isFilmDetailsLoading: false,
-      isSimilarFilmsLoading: false,
-      isReviewsLoading: false,
-      hasError: false
-    };
-
+    const expectedState = makeEmptyFilmData();
     const emptyAction = { type: '' };
     const result = filmData.reducer(expectedState, emptyAction);
     expect(result).toEqual(expectedState);
   });
 
   it('should return default initial state with empty action', () => {
-    const expectedState = {
-      filmDetails: null,
-      similarFilms: [],
-      reviews: [],
-      isFilmDetailsLoading: false,
-      isSimilarFilmsLoading: false,
-      isReviewsLoading: false,
-      hasError: false
-    };
-
+    const expectedState = makeEmptyFilmData();
     const emptyAction = { type: '' };
     const result = filmData.reducer(undefined, emptyAction);
     expect(result).toEqual(expectedState);
   });
 
   it('should set "isFilmDetailsLoading" to "true", "hasError" to "false" with "fetchFilmsAction.pending"', () => {
-    const expectedState = {
-      filmDetails: null,
-      similarFilms: [],
-      reviews: [],
-      isFilmDetailsLoading: true,
-      isSimilarFilmsLoading: false,
-      isReviewsLoading: false,
-      hasError: false
-    };
-
+    const expectedState = {...makeEmptyFilmData(), isFilmDetailsLoading: true};
     const result = filmData.reducer(undefined, fetchFilmDetailsAction.pending);
     expect(result).toEqual(expectedState);
   });
 
   it('should set "isSimilarFilmsLoading" to "true", "hasError" to "false" with "fetchSimilarFilmsAction.pending"', () => {
-    const expectedState = {
-      filmDetails: null,
-      similarFilms: [],
-      reviews: [],
-      isFilmDetailsLoading: false,
-      isSimilarFilmsLoading: true,
-      isReviewsLoading: false,
-      hasError: false
-    };
-
+    const expectedState = { ...makeEmptyFilmData(), isSimilarFilmsLoading: true };
     const result = filmData.reducer(undefined, fetchSimilarFilmsAction.pending);
     expect(result).toEqual(expectedState);
   });
 
   it('should set "filmDetails" to array, "isFilmDetailsLoading" to "false" with "fetchFilmDetailsAction.fulfilled"', () => {
-    const expectedState = {
-      filmDetails: film,
-      similarFilms: [],
-      reviews: [],
-      isFilmDetailsLoading: false,
-      isSimilarFilmsLoading: false,
-      isReviewsLoading: false,
-      hasError: false
-    };
+    const expectedState = {...makeEmptyFilmData(), filmDetails: makeFakeFilmDetails(), isFilmDetailsLoading: false};
 
     const result = filmData.reducer(
-      {
-        filmDetails: null,
-        similarFilms: [],
-        reviews: [],
-        isFilmDetailsLoading: true,
-        isSimilarFilmsLoading: false,
-        isReviewsLoading: false,
-        hasError: false
-      },
-      fetchFilmDetailsAction.fulfilled(film, '', { id: '' })
+      {...makeEmptyFilmData(), isFilmDetailsLoading: true},
+      fetchFilmDetailsAction.fulfilled(expectedState.filmDetails, '', { id: '' })
     );
 
     expect(result).toEqual(expectedState);
@@ -97,68 +43,42 @@ describe('film-data slice', () => {
 
   it('should set "similarFilms" to array, "isSimilarFilmsLoading" to "false" with "fetchSimilarFilmsAction.fulfilled"', () => {
     const expectedState = {
-      filmDetails: film,
-      similarFilms: mockFilms,
-      reviews: [],
-      isFilmDetailsLoading: false,
-      isSimilarFilmsLoading: false,
-      isReviewsLoading: false,
-      hasError: false
+      ...makeEmptyFilmData(),
+      filmDetails: makeFakeFilmDetails(),
+      similarFilms: Array.from({length: 2}).map(() => makeFakeFilm()),
+      isSimilarFilmsLoading: false
     };
 
     const result = filmData.reducer(
-      {
-        filmDetails: film,
-        similarFilms: [],
-        reviews: [],
-        isFilmDetailsLoading: false,
-        isSimilarFilmsLoading: true,
-        isReviewsLoading: false,
-        hasError: false
-      },
-      fetchSimilarFilmsAction.fulfilled(mockFilms, '', { id: '' })
+      {...makeEmptyFilmData(), isSimilarFilmsLoading: true, filmDetails: expectedState.filmDetails},
+      fetchSimilarFilmsAction.fulfilled(expectedState.similarFilms, '', { id: '' })
     );
 
     expect(result).toEqual(expectedState);
   });
 
-  it('should set "reviews" to array, "isReviewsLoading" to "false" with "fetchReviews.fulfilled"', () => {
+  it('should set "reviews" to array, "isReviewsLoading" to "false" with "fetchReviewsAction.fulfilled"', () => {
     const expectedState = {
-      filmDetails: film,
-      similarFilms: [],
-      reviews: mockReviews,
-      isFilmDetailsLoading: false,
-      isSimilarFilmsLoading: false,
-      isReviewsLoading: false,
-      hasError: false
+      ...makeEmptyFilmData(),
+      filmDetails: makeFakeFilmDetails(),
+      reviews: Array.from({length: 5}).map(() => makeFakeReview()),
+      isReviewsLoading: false
     };
 
     const result = filmData.reducer(
       {
-        filmDetails: film,
-        similarFilms: [],
-        reviews: [],
-        isFilmDetailsLoading: false,
-        isSimilarFilmsLoading: false,
-        isReviewsLoading: true,
-        hasError: false
+        ...makeEmptyFilmData(),
+        filmDetails: expectedState.filmDetails,
+        isReviewsLoading: true
       },
-      fetchReviews.fulfilled(mockReviews, '', { id: '' })
+      fetchReviewsAction.fulfilled(expectedState.reviews, '', { id: '' })
     );
 
     expect(result).toEqual(expectedState);
   });
 
   it('should set "isFilmDetailsLoading" to "false", "hasError" to "true" with "fetchFilmDetailsAction.rejected', () => {
-    const expectedState = {
-      filmDetails: null,
-      similarFilms: [],
-      reviews: [],
-      isFilmDetailsLoading: false,
-      isSimilarFilmsLoading: false,
-      isReviewsLoading: false,
-      hasError: true
-    };
+    const expectedState = {...makeEmptyFilmData(), hasError: true};
 
     const result = filmData.reducer(
       undefined,

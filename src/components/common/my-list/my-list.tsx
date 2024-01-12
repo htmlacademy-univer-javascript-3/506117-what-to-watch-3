@@ -1,35 +1,39 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { fetchFavouriteFilmsAction, postFavouriteAction } from '../../../store/api-actions';
-import { getFavourites } from '../../../store/data/user-data/selectors';
+import { getFavouritePostingStatus, getFavourites } from '../../../store/data/user-data/selectors';
 
 type MyListProps = {
   filmId: string;
 }
 
 export default function MyList({ filmId }: MyListProps): JSX.Element {
+  const [clicked, setClicked] = useState(false);
   const films = useAppSelector(getFavourites);
+  const isPostingFavourite = useAppSelector(getFavouritePostingStatus);
   const isInList = films.map((f) => f.id).includes(filmId);
   const dispatcher = useAppDispatch();
 
   useEffect(() => {
     dispatcher(fetchFavouriteFilmsAction());
-  }, [dispatcher]);
+  }, [dispatcher, clicked]);
 
   const handleClick = () => {
-    if (filmId !== undefined) {
+    if (filmId !== undefined && !isPostingFavourite) {
       dispatcher(postFavouriteAction({
         id: filmId,
         status: isInList ? 0 : 1
-      }));
+      })).then(() => {
+        setClicked(() => !clicked);
+      });
     }
   };
 
   return (
-    <button className="btn btn--list film-card__button" type="button" onClick={handleClick}>
+    <button className="btn btn--list film-card__button" type="button" onClick={handleClick} data-testid='myListTestId'>
       {
         isInList ?
-          <svg viewBox="0 0 19 20" width="19" height="20">
+          <svg viewBox="0 0 19 20" width="19" height="20" data-testid='inListTestId'>
             <use xlinkHref="#in-list"></use>
           </svg> :
           <svg viewBox="0 0 19 20" width="19" height="20">

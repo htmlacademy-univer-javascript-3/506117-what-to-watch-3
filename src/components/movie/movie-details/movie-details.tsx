@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { FilmDetails } from '../../../types/film-details';
 import { minutesToStringTime } from '../../../services/component-services/movie';
+import { FilmDetails } from '../../../types/data-types';
 
 type MovieDetailsProps = {
   film: FilmDetails;

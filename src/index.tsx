@@ -3,15 +3,11 @@ import ReactDOM from 'react-dom/client';
 import App from './components/common/app/app';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { fetchFilmsAction, fetchPromoAction } from './store/api-actions';
-import { putGenreFilms } from './store/data/common-data/common-data';
+import { checkAuthAction } from './store/api-actions';
+import HistoryRouter from './components/history-route/history-router';
+import browserHistory from './browser-history';
 
-
-store.dispatch(fetchFilmsAction()).then(
-  () => store.dispatch(putGenreFilms())
-);
-
-store.dispatch(fetchPromoAction());
+store.dispatch(checkAuthAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -20,7 +16,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <HistoryRouter history={browserHistory}>
+        <App />
+      </HistoryRouter>
     </Provider>
   </React.StrictMode>
 );

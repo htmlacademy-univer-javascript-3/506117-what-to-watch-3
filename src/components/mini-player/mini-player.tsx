@@ -1,12 +1,10 @@
 
 import { useEffect, useRef, useState } from 'react';
+import { MiniPlayerConfiguration } from '../../const';
 
 type MiniPlayerProps = {
   previewVideoLink: string;
   previewImage: string;
-  muted: boolean;
-  width: number | string;
-  height: number | string;
   isActive: boolean;
 }
 
@@ -41,10 +39,9 @@ export default function MiniPlayer(props: MiniPlayerProps): JSX.Element {
 
   return (
     <video
-      muted={props.muted}
-      width={props.width}
-      height={props.height}
+      {...MiniPlayerConfiguration}
       poster={props.previewImage}
+      data-testid='miniPlayerTestId'
       ref={playerRef}
     >
       <source src={props.previewVideoLink} />

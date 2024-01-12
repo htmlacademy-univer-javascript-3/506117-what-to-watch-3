@@ -1,14 +1,13 @@
-import { memo, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MiniPlayer from '../../mini-player/mini-player';
-import { filmCardVideoProps } from '../../../const';
-import { Film } from '../../../types/film';
+import { Film } from '../../../types/data-types';
 
 type FilmCardProps = {
   film: Film;
 }
 
-function FilmCard({ film }: FilmCardProps): JSX.Element {
+export default function FilmCard({ film }: FilmCardProps): JSX.Element {
   const [isActive, changeActive] = useState(false);
 
   return (
@@ -20,11 +19,12 @@ function FilmCard({ film }: FilmCardProps): JSX.Element {
       <Link
         className="small-film-card__link"
         to={`/films/${film.id}`}
+        data-testid='filmCardLinkTestId'
       >
         <div className="small-film-card__image">
           {
             isActive ?
-              <MiniPlayer {...{ ...filmCardVideoProps, ...film, isActive }} /> :
+              <MiniPlayer {...{ ...film, isActive }} /> :
               <img src={film.previewImage} alt={film.name} width="280" height="175" />
           }
         </div>
@@ -35,5 +35,3 @@ function FilmCard({ film }: FilmCardProps): JSX.Element {
     </article>
   );
 }
-
-export default memo(FilmCard);

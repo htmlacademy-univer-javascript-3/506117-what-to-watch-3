@@ -1,15 +1,23 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import FieldForm from '../../components/add-review/field-form/field-form';
 import Head from '../../components/common/head/head';
 import Logo from '../../components/common/logo/logo';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getFilmDetails } from '../../store/data/film-data/selectors';
+import { useEffect } from 'react';
+import { fetchFilmDetailsAction } from '../../store/api-actions';
 
 
 export default function AddReviewPage(): JSX.Element {
-  const film = useAppSelector(getFilmDetails);
   const { id } = useParams();
+  const dispatcher = useAppDispatch();
+  const location = useLocation();
 
+  useEffect(() => {
+    dispatcher(fetchFilmDetailsAction({ id: location.pathname.split('/')[2] }));
+  }, [dispatcher, location]);
+
+  const film = useAppSelector(getFilmDetails);
   if (film === null) {
     return <section></section>;
   }
@@ -28,7 +36,7 @@ export default function AddReviewPage(): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={`/films/${id || ''}`} className="breadcrumbs__link">{film.name}</Link>
+                <Link to={`/films/${id || ''}`} className="breadcrumbs__link" data-testid='filmTestId'>{film.name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>

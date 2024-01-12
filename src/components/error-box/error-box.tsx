@@ -1,16 +1,12 @@
 import { useAppSelector } from '../../hooks';
 import { getErrorData } from '../../store/data/error-data/selectors';
 
-export default function ErrorBox(): JSX.Element | null {
+export default function ErrorBox(): JSX.Element {
   const error = useAppSelector(getErrorData);
-  if (error === null) {
-    return null;
-  }
-
   return (
-    <div className="sign-in__message">
+    <div className="sign-in__message" data-testid='errorBoxId'>
       {
-        error.details.map((detail) =>
+        error?.details.map((detail) =>
           detail.messages.map((message) =>
             <p key={`message-${message}`}>{message}</p>
           )

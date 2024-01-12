@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { FilmData } from '../../../types/state';
 import { NameSpace } from '../../../const';
-import { fetchFilmDetailsAction, fetchReviews, fetchSimilarFilmsAction } from '../../api-actions';
+import { fetchFilmDetailsAction, fetchReviewsAction, fetchSimilarFilmsAction } from '../../api-actions';
 
 const initialState: FilmData = {
   filmDetails: null,
@@ -43,15 +43,15 @@ export const filmData = createSlice({
         state.isSimilarFilmsLoading = false;
         state.hasError = true;
       })
-      .addCase(fetchReviews.pending, (state) => {
+      .addCase(fetchReviewsAction.pending, (state) => {
         state.isReviewsLoading = true;
         state.hasError = false;
       })
-      .addCase(fetchReviews.fulfilled, (state, action) => {
+      .addCase(fetchReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
         state.isReviewsLoading = false;
       })
-      .addCase(fetchReviews.rejected, (state) => {
+      .addCase(fetchReviewsAction.rejected, (state) => {
         state.isReviewsLoading = false;
         state.hasError = true;
       });

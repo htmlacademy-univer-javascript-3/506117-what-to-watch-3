@@ -12,7 +12,7 @@ export default function MyListPage(): JSX.Element {
     <div className="user-page">
       <Head userPageHeader>
         <Logo isLight={false}/>
-        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{films.length}</span></h1>
+        <h1 className="page-title user-page__title">My list<span className="user-page__film-count">{films.length}</span></h1>
       </Head>
       <Favourites />
       <Footer />

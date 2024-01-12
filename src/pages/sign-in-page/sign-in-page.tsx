@@ -5,6 +5,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { getErrorData } from '../../store/data/error-data/selectors';
 import ErrorBox from '../../components/error-box/error-box';
+import { redirectToRoute } from '../../store/action';
+import { AppRoute } from '../../const';
 
 export default function SignInPage(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -18,12 +20,13 @@ export default function SignInPage(): JSX.Element {
       dispatch(loginAction({
         login: loginRef.current.value,
         password: passwordRef.current.value
-      }));
+      })).then((response) =>
+        response.payload && dispatch(redirectToRoute(AppRoute.Main))
+      );
     }
   };
 
   const signInError = useAppSelector(getErrorData);
-
   const hasEmailError = signInError?.details.map((d) => d.property).includes('email');
   const hasPasswordError = signInError?.details.map((d) => d.property).includes('password');
 
@@ -46,6 +49,8 @@ export default function SignInPage(): JSX.Element {
                 placeholder="Email address"
                 name="user-email"
                 id="user-email"
+                data-testid="emailElement"
+                required
                 ref={loginRef}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
@@ -57,6 +62,8 @@ export default function SignInPage(): JSX.Element {
                 placeholder="Password"
                 name="user-password"
                 id="user-password"
+                data-testid="passwordElement"
+                required
                 ref={passwordRef}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>

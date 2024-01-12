@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { UserData } from '../../../types/state';
 import { AuthorizationStatus, NameSpace } from '../../../const';
-import { fetchFavouriteFilmsAction, loginAction, logoutAction, postFavouriteAction, postReviewAction } from '../../api-actions';
+import { checkAuthAction, fetchFavouriteFilmsAction, loginAction, logoutAction, postFavouriteAction, postReviewAction } from '../../api-actions';
 
 const initialState: UserData = {
   userDetails: {
@@ -38,6 +38,19 @@ export const userData = createSlice({
         state.hasError = true;
         state.isLoadingData = false;
       })
+      .addCase(checkAuthAction.pending, (state) => {
+        state.isLoadingData = true;
+        state.hasError = false;
+      })
+      .addCase(checkAuthAction.fulfilled, (state, action) => {
+        state.userDetails = action.payload;
+        state.authorizationStatus = AuthorizationStatus.Auth;
+        state.isLoadingData = false;
+      })
+      .addCase(checkAuthAction.rejected, (state) => {
+        state.hasError = true;
+        state.isLoadingData = false;
+      })
       .addCase(logoutAction.pending, (state) => {
         state.hasError = false;
       })
@@ -56,6 +69,7 @@ export const userData = createSlice({
       })
       .addCase(postReviewAction.rejected, (state) => {
         state.hasError = true;
+        state.reviewPosting = false;
       })
       .addCase(fetchFavouriteFilmsAction.pending, (state) => {
         state.loadingFavouriteFilms = true;
@@ -67,6 +81,7 @@ export const userData = createSlice({
       })
       .addCase(fetchFavouriteFilmsAction.rejected, (state) => {
         state.hasError = true;
+        state.loadingFavouriteFilms = false;
       })
       .addCase(postFavouriteAction.pending, (state) => {
         state.favouritePosting = true;
