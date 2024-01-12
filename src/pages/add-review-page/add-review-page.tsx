@@ -36,7 +36,7 @@ export default function AddReviewPage(): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={`/films/${id || ''}`} className="breadcrumbs__link">{film.name}</Link>
+                <Link to={`/films/${id || ''}`} className="breadcrumbs__link" data-testid='filmTestId'>{film.name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>

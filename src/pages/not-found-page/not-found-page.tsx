@@ -10,7 +10,7 @@ export default function NotFoundPage() {
         <span className="four"><span className="screen-reader-text">4</span></span>
       </section>
       <div className="link-container">
-        <Link to={AppRoute.Main}>Go back to main page.</Link>
+        <Link to={AppRoute.Main} data-testid='linkTestId'>Go back to main page.</Link>
       </div>
     </div>
   );

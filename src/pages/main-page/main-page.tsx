@@ -21,19 +21,18 @@ export default function MainPage(): JSX.Element {
   }, [dispatch]);
 
   const isDataLoading = useAppSelector(getFilmsLoadingStatus);
-  if (isDataLoading) {
-    return <LoadingScreen />;
-  }
 
   return (
-    <>
-      <PromoCard />
-      <div className="page-content" data-testid='mainPageTestId'>
-        <Catalog >
-          <Genres />
-        </Catalog>
-        <Footer />
-      </div>
-    </>
+    isDataLoading ?
+      <LoadingScreen /> :
+      <>
+        <PromoCard />
+        <div className="page-content" data-testid='mainPageTestId'>
+          <Catalog >
+            <Genres />
+          </Catalog>
+          <Footer />
+        </div>
+      </>
   );
 }

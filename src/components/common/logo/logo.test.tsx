@@ -7,53 +7,53 @@ import { AppRoute } from '../../../const';
 import userEvent from '@testing-library/user-event';
 
 describe('Component: Logo', () => {
-    let mockHistory: MemoryHistory;
+  let mockHistory: MemoryHistory;
 
-    beforeAll(() => {
-        mockHistory = createMemoryHistory();
-    });
+  beforeAll(() => {
+    mockHistory = createMemoryHistory();
+  });
 
-    beforeEach(() => {
-        mockHistory.push(AppRoute.Film);
-    });
-    
-    it('should render correct', () => {
-        render(withHistory(<Logo isLight={false} />));
+  beforeEach(() => {
+    mockHistory.push(AppRoute.Film);
+  });
 
-        const [letterW1, letterW2] = screen.getAllByText('W');
-        const letterT = screen.getByText('T');
+  it('should render correct', () => {
+    render(withHistory(<Logo isLight={false} />));
 
-        expect(letterW1).toBeInTheDocument();
-        expect(letterT).toBeInTheDocument();
-        expect(letterW2).toBeInTheDocument();
-    });
+    const [letterW1, letterW2] = screen.getAllByText('W');
+    const letterT = screen.getByText('T');
 
-    it('should render correct light theme', () => {
-        render(withHistory(<Logo isLight />));
-        const lightLogo = screen.getByTestId('logo-light');
-        expect(lightLogo).toBeInTheDocument();
-    });
+    expect(letterW1).toBeInTheDocument();
+    expect(letterT).toBeInTheDocument();
+    expect(letterW2).toBeInTheDocument();
+  });
 
-    it('should trigger redirect to "MainPage" on click', async () => {
-        const mainPageText = 'main page';
+  it('should render correct light theme', () => {
+    render(withHistory(<Logo isLight />));
+    const lightLogo = screen.getByTestId('logo-light');
+    expect(lightLogo).toBeInTheDocument();
+  });
 
-        const { withStoreComponent } = withStore(
-            withHistory(
-                <Routes>
-                    <Route path={AppRoute.Main} element={<span>{mainPageText}</span>} />
-                    <Route path={AppRoute.Film} element={<Logo isLight />}/>
-                </Routes>,
-                mockHistory
-            ),
-            {}
-        );
+  it('should trigger redirect to "MainPage" on click', async () => {
+    const mainPageText = 'main page';
 
-        render(withStoreComponent);
+    const { withStoreComponent } = withStore(
+      withHistory(
+        <Routes>
+          <Route path={AppRoute.Main} element={<span>{mainPageText}</span>} />
+          <Route path={AppRoute.Film} element={<Logo isLight />}/>
+        </Routes>,
+        mockHistory
+      ),
+      {}
+    );
 
-        await userEvent.click(
-            screen.getByTestId('logo-light')
-        );
+    render(withStoreComponent);
 
-        expect(screen.getByText(mainPageText)).toBeInTheDocument();
-    });
+    await userEvent.click(
+      screen.getByTestId('logo-light')
+    );
+
+    expect(screen.getByText(mainPageText)).toBeInTheDocument();
+  });
 });

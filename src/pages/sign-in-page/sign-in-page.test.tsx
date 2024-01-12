@@ -45,17 +45,17 @@ describe('Component: SignInPage', () => {
   });
 
   it('should render "ErrorBox" on incorrect login or password', () => {
-    const expectedErrorText = "email must be an email";
+    const expectedErrorText = 'email must be an email';
     const { withStoreComponent } = withStore(<SignInPage />, {
-        ERROR: {
-            message: 'Validation error: \'/wtw/login\'',
-            errorType: 'VALIDATION_ERROR',
-            details: [{
-                property: "email",
-                value: "incorrectEmail@incorrect",
-                messages: ["email must be an email"]
-            }]
-        }
+      ERROR: {
+        message: 'Validation error: \'/wtw/login\'',
+        errorType: 'VALIDATION_ERROR',
+        details: [{
+          property: 'email',
+          value: 'incorrectEmail@incorrect',
+          messages: ['email must be an email']
+        }]
+      }
     });
     const preparedComponent = withHistory(withStoreComponent);
 
@@ -69,8 +69,8 @@ describe('Component: SignInPage', () => {
     const preparedComponent = withHistory(withStoreComponent);
 
     render(preparedComponent);
-    
+
     const expectedComponent = screen.getByTestId('logo-light');
     expect(expectedComponent).toBeInTheDocument();
-});
+  });
 });

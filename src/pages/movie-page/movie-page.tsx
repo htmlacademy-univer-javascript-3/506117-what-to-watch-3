@@ -14,6 +14,7 @@ import { redirectToRoute } from '../../store/action';
 import LoadingScreen from '../../components/common/loading/loading';
 import { getErrorData } from '../../store/data/error-data/selectors';
 import { setErrorData } from '../../store/data/error-data/error-data';
+import ErrorBox from '../../components/error-box/error-box';
 
 function MoviePage() {
   const dispatcher = useAppDispatch();
@@ -32,8 +33,8 @@ function MoviePage() {
   }, [dispatcher, id]);
 
   if (loadingStatus) {
-    return <LoadingScreen />
-  } 
+    return <LoadingScreen />;
+  }
 
   if (hasError.errorType === ErrorType.Common) {
     dispatcher(setErrorData({
@@ -42,12 +43,12 @@ function MoviePage() {
         message: '',
         details: []
       }
-    }))
+    }));
     dispatcher(redirectToRoute(AppRoute.NotFound));
   }
-  
+
   if (film === null) {
-    return <></>;
+    return <ErrorBox />;
   }
 
   return (

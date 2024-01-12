@@ -5,31 +5,33 @@ import { internet } from 'faker';
 
 
 describe('Component: MiniPlayer', () => {
-    it('should render correct', () => {
-        const miniPlayerTestId = 'miniPlayerTestId'; 
-        const fakePlayerProps = {
-            previewVideoLink: internet.url(),
-            previewImage: internet.url(),
-            isActive: true,
-        };
-        HTMLMediaElement.prototype.load = vi.fn();
-        render(withHistory(<MiniPlayer {...fakePlayerProps} />));
+  beforeAll(() => {
+    HTMLMediaElement.prototype.play = vi.fn();
+    HTMLMediaElement.prototype.load = vi.fn();
+  });
 
-        expect(screen.getByTestId(miniPlayerTestId)).toBeInTheDocument();
-    });
+  it('should render correct', () => {
+    const miniPlayerTestId = 'miniPlayerTestId';
+    const fakePlayerProps = {
+      previewVideoLink: internet.url(),
+      previewImage: internet.url(),
+      isActive: true,
+    };
+    render(withHistory(<MiniPlayer {...fakePlayerProps} />));
 
-    it('should play video when data loaded', async () => {
-        const fakePlayerProps = {
-            previewVideoLink: internet.url(),
-            previewImage: internet.url(),
-            isActive: true,
-        };
-        HTMLMediaElement.prototype.play = vi.fn();
-        HTMLMediaElement.prototype.load = vi.fn();
-    
-        render(<MiniPlayer {...fakePlayerProps}/>);
-        fireEvent(screen.getByTestId('miniPlayerTestId'), new Event('loadeddata'));
-    
-        expect(screen.getByTestId('miniPlayerTestId')).not.toBeDisabled();
-      });
+    expect(screen.getByTestId(miniPlayerTestId)).toBeInTheDocument();
+  });
+
+  it('should play video when data loaded', () => {
+    const fakePlayerProps = {
+      previewVideoLink: internet.url(),
+      previewImage: internet.url(),
+      isActive: true,
+    };
+
+    render(<MiniPlayer {...fakePlayerProps} />);
+    fireEvent(screen.getByTestId('miniPlayerTestId'), new Event('loadeddata'));
+
+    expect(screen.getByTestId('miniPlayerTestId')).not.toBeDisabled();
+  });
 });

@@ -42,18 +42,12 @@ export enum Rating {
   Awesome = 10.0
 }
 
-export const filmCardVideoProps = {
-  muted: true,
-  width: 280,
-  height: 175
-};
-
 export const MAX_RATING = 10;
 export const SHOW_NUM = 8;
 export const TIMEOUT_SHOW_ERROR = 5000;
 export const SIMILAR_FILMS_NUM = 4;
 export const MiniPlayerConfiguration = {
   muted: true,
-  width: 100,
-  height: 100,
-}; 
+  width: 280,
+  height: 175,
+};

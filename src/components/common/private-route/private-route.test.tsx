@@ -21,22 +21,22 @@ describe('Component: PrivateRoute', () => {
     const expectedText = 'public route';
     const notExpectedText = 'private route';
     const { withStoreComponent } = withStore(
-        withHistory(
-            <Routes>
-                <Route path={AppRoute.SignIn} element={<span>{expectedText}</span>} />
-                <Route path={AppRoute.AddReview} element={
-                <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-                    <span>{notExpectedText}</span>
-                </PrivateRoute>
-                }
-                />
-            </Routes>,
-            mockHistory
-        ),
-        {
-            DATA: makeFakeCommonData(),
-            USER: makeFakeUserData()
-        }
+      withHistory(
+        <Routes>
+          <Route path={AppRoute.SignIn} element={<span>{expectedText}</span>} />
+          <Route path={AppRoute.AddReview} element={
+            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+              <span>{notExpectedText}</span>
+            </PrivateRoute>
+          }
+          />
+        </Routes>,
+        mockHistory
+      ),
+      {
+        DATA: makeFakeCommonData(),
+        USER: makeFakeUserData()
+      }
     );
 
     render(withStoreComponent);
@@ -49,22 +49,22 @@ describe('Component: PrivateRoute', () => {
     const notExpectedText = 'public route';
     const expectedText = 'private route';
     const { withStoreComponent } = withStore(
-        withHistory(
-            <Routes>
-                <Route path={AppRoute.SignIn} element={<span>{notExpectedText}</span>} />
-                <Route path={AppRoute.AddReview} element={
-                <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                    <span>{expectedText}</span>
-                </PrivateRoute>
-                }
-                />
-            </Routes>,
-            mockHistory
-        ),
-        {
-            DATA: makeFakeCommonData(),
-            USER: makeFakeUserData()
-        }
+      withHistory(
+        <Routes>
+          <Route path={AppRoute.SignIn} element={<span>{notExpectedText}</span>} />
+          <Route path={AppRoute.AddReview} element={
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <span>{expectedText}</span>
+            </PrivateRoute>
+          }
+          />
+        </Routes>,
+        mockHistory
+      ),
+      {
+        DATA: makeFakeCommonData(),
+        USER: makeFakeUserData()
+      }
     );
 
     render(withStoreComponent);

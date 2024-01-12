@@ -15,7 +15,7 @@ export function withHistory(component: JSX.Element, history?: MemoryHistory) {
 
   return (
     <HistoryRouter history={memoryHistory}>
-        {component}
+      {component}
     </HistoryRouter>
   );
 }

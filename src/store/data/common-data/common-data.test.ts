@@ -45,7 +45,7 @@ describe('common-data slice', () => {
     const genre = { id: 0, title: 'All genres' };
     const fakeCommonData = makeFakeCommonData();
     const expectedState = { ...fakeCommonData, genreFilms: fakeCommonData.films, genre: genre };
-    
+
     const result = commonData.reducer(
       { ...makeEmptyCommonData(), films: expectedState.films, genre: genre, promo: fakeCommonData.promo },
       putGenreFilms()

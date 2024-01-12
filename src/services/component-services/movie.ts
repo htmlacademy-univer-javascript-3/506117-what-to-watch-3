@@ -1,4 +1,4 @@
-import { MAX_RATING, Rating } from "../../const";
+import { MAX_RATING, Rating } from '../../const';
 
 export function minutesToStringTime(minutes: number) {
   if (!Number.isInteger(minutes)) {
@@ -18,8 +18,9 @@ export function minutesToStringTime(minutes: number) {
 }
 
 export function computeRatingLevel(ratingValue: number): string {
-  if (ratingValue < 0.0 || MAX_RATING < ratingValue )
+  if (ratingValue < 0.0 || MAX_RATING < ratingValue) {
     throw new Error(`Unexpected rating value: ${ratingValue}, rating value must be between 0.0 and 10.0`);
+  }
 
   if (ratingValue <= Rating.Bad) {
     return 'Bad';

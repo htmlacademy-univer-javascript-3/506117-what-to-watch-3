@@ -1,83 +1,83 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from '@testing-library/react';
 
-import { withHistory, withStore } from "../../../utils/mock-component";
-import { makeFakeCommonData, makeFakeFilm } from "../../../utils/mocks";
-import Catalog from "./catalog";
+import { withHistory, withStore } from '../../../utils/mock-component';
+import { makeFakeCommonData, makeFakeFilm } from '../../../utils/mocks';
+import Catalog from './catalog';
 
 describe('Component: Catalog', () => {
-    it('should render correct', () => {
-        const catalogTestId = 'catalogId';
+  it('should render correct', () => {
+    const catalogTestId = 'catalogId';
 
-        const { withStoreComponent } = withStore(<Catalog />, {
-            DATA: makeFakeCommonData()
-        });
-        const preparedComponent = withHistory(withStoreComponent);
-
-        render(preparedComponent);
-
-        expect(screen.getByTestId(catalogTestId)).toBeInTheDocument();
+    const { withStoreComponent } = withStore(<Catalog />, {
+      DATA: makeFakeCommonData()
     });
+    const preparedComponent = withHistory(withStoreComponent);
 
-    it('should render "ShowMore" component on more than 8 films', () => {
-        const showmoreTestId = 'showmoreTestId';
-        const fakeFilms = Array.from({ length: 10 }).map(() => makeFakeFilm());
+    render(preparedComponent);
 
-        const { withStoreComponent } = withStore(<Catalog />, {
-            DATA: {
-                ...makeFakeCommonData(),
-                genreFilms: fakeFilms,
-                genre: {
-                    id: 0,
-                    title: 'All genres'
-                }
-            }
-        });
-        const preparedComponent = withHistory(withStoreComponent);
+    expect(screen.getByTestId(catalogTestId)).toBeInTheDocument();
+  });
 
-        render(preparedComponent);
+  it('should render "ShowMore" component on more than 8 films', () => {
+    const showmoreTestId = 'showmoreTestId';
+    const fakeFilms = Array.from({ length: 10 }).map(() => makeFakeFilm());
 
-        expect(screen.getByTestId(showmoreTestId)).toBeInTheDocument();
+    const { withStoreComponent } = withStore(<Catalog />, {
+      DATA: {
+        ...makeFakeCommonData(),
+        genreFilms: fakeFilms,
+        genre: {
+          id: 0,
+          title: 'All genres'
+        }
+      }
     });
+    const preparedComponent = withHistory(withStoreComponent);
 
-    it('should render children components', () => {
-        const childText = 'child text';
-        const childWithText = <span>{childText}</span>
-        const fakeFilms = Array.from({ length: 10 }).map(() => makeFakeFilm());
+    render(preparedComponent);
 
-        const { withStoreComponent } = withStore(<Catalog>{childWithText}</Catalog>, {
-            DATA: {
-                ...makeFakeCommonData(),
-                genreFilms: fakeFilms,
-                genre: {
-                    id: 0,
-                    title: 'All genres'
-                }
-            }
-        });
-        const preparedComponent = withHistory(withStoreComponent);
+    expect(screen.getByTestId(showmoreTestId)).toBeInTheDocument();
+  });
 
-        render(preparedComponent);
+  it('should render children components', () => {
+    const childText = 'child text';
+    const childWithText = <span>{childText}</span>;
+    const fakeFilms = Array.from({ length: 10 }).map(() => makeFakeFilm());
 
-        expect(screen.getByText(childText)).toBeInTheDocument();
+    const { withStoreComponent } = withStore(<Catalog>{childWithText}</Catalog>, {
+      DATA: {
+        ...makeFakeCommonData(),
+        genreFilms: fakeFilms,
+        genre: {
+          id: 0,
+          title: 'All genres'
+        }
+      }
     });
+    const preparedComponent = withHistory(withStoreComponent);
 
-    it('should render "FilmCard" components', () => {
-        const fakeFilms = [makeFakeFilm()];
+    render(preparedComponent);
 
-        const { withStoreComponent } = withStore(<Catalog />, {
-            DATA: {
-                ...makeFakeCommonData(),
-                genreFilms: fakeFilms,
-                genre: {
-                    id: 0,
-                    title: 'All genres'
-                }
-            }
-        });
-        const preparedComponent = withHistory(withStoreComponent);
+    expect(screen.getByText(childText)).toBeInTheDocument();
+  });
 
-        render(preparedComponent);
+  it('should render "FilmCard" components', () => {
+    const fakeFilms = [makeFakeFilm()];
 
-        expect(screen.getByText(fakeFilms[0].name)).toBeInTheDocument();
+    const { withStoreComponent } = withStore(<Catalog />, {
+      DATA: {
+        ...makeFakeCommonData(),
+        genreFilms: fakeFilms,
+        genre: {
+          id: 0,
+          title: 'All genres'
+        }
+      }
     });
+    const preparedComponent = withHistory(withStoreComponent);
+
+    render(preparedComponent);
+
+    expect(screen.getByText(fakeFilms[0].name)).toBeInTheDocument();
+  });
 });

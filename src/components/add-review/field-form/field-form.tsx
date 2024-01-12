@@ -23,7 +23,7 @@ export default function FieldForm(): JSX.Element {
       id: id ?? ''
     })).then((response) => {
       if (response.meta.requestStatus === 'fulfilled') {
-        dispatch(redirectToRoute(`/films/${id}/reviews`));
+        dispatch(redirectToRoute(`/films/${id ?? ''}/reviews`));
       }
     });
   };

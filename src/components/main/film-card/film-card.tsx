@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import MiniPlayer from '../../mini-player/mini-player';
-import { filmCardVideoProps } from '../../../const';
 import { Film } from '../../../types/data-types';
 
 type FilmCardProps = {
@@ -25,7 +24,7 @@ export default function FilmCard({ film }: FilmCardProps): JSX.Element {
         <div className="small-film-card__image">
           {
             isActive ?
-              <MiniPlayer {...{ ...filmCardVideoProps, ...film, isActive }} /> :
+              <MiniPlayer {...{ ...film, isActive }} /> :
               <img src={film.previewImage} alt={film.name} width="280" height="175" />
           }
         </div>

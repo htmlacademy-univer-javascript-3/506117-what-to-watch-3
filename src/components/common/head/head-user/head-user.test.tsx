@@ -1,80 +1,80 @@
-import { render, screen } from "@testing-library/react";
-import { withHistory, withStore } from "../../../../utils/mock-component";
-import { extractActionsTypes, makeFakeUserData } from "../../../../utils/mocks";
-import HeadUser from "./head-user";
-import userEvent from "@testing-library/user-event";
-import { logoutAction } from "../../../../store/api-actions";
-import { APIRoute, AppRoute } from "../../../../const";
-import { MemoryHistory, createMemoryHistory } from "history";
-import { Route, Routes } from "react-router-dom";
+import { render, screen } from '@testing-library/react';
+import { withHistory, withStore } from '../../../../utils/mock-component';
+import { extractActionsTypes, makeFakeUserData } from '../../../../utils/mocks';
+import HeadUser from './head-user';
+import userEvent from '@testing-library/user-event';
+import { logoutAction } from '../../../../store/api-actions';
+import { APIRoute, AppRoute } from '../../../../const';
+import { MemoryHistory, createMemoryHistory } from 'history';
+import { Route, Routes } from 'react-router-dom';
 
 describe('Component: HeadUser', () => {
-    let mockHistory: MemoryHistory;
+  let mockHistory: MemoryHistory;
 
-    beforeAll(() => {
-        mockHistory = createMemoryHistory();
+  beforeAll(() => {
+    mockHistory = createMemoryHistory();
+  });
+
+  beforeEach(() => {
+    mockHistory.push(AppRoute.Main);
+  });
+
+  it('should render correct', () => {
+    const signoutText = 'Sign out';
+    const avatarAltText = 'User avatar';
+    const { withStoreComponent } = withStore(<HeadUser userPageHeader />, {
+      USER: makeFakeUserData()
     });
+    const preparedComponent = withHistory(withStoreComponent);
+    render(preparedComponent);
 
-    beforeEach(() => {
-        mockHistory.push(AppRoute.Main);
+    expect(screen.getByText(signoutText)).toBeInTheDocument();
+    expect(screen.getByAltText(avatarAltText)).toBeInTheDocument();
+  });
+
+  it('should sign out correct', async () => {
+    const { withStoreComponent, mockStore, mockAxiosAdapter } = withStore(<HeadUser userPageHeader />, {
+      USER: makeFakeUserData()
     });
-    
-    it('should render correct', () => {
-        const signoutText = 'Sign out'
-        const avatarAltText = 'User avatar';
-        const { withStoreComponent } = withStore(<HeadUser userPageHeader />, {
-            USER: makeFakeUserData()
-        });
-        const preparedComponent = withHistory(withStoreComponent);
-        render(preparedComponent);
+    const preparedComponent = withHistory(withStoreComponent);
+    render(preparedComponent);
 
-        expect(screen.getByText(signoutText)).toBeInTheDocument();
-        expect(screen.getByAltText(avatarAltText)).toBeInTheDocument();
-    });
+    mockAxiosAdapter.onDelete(APIRoute.Logout).reply(204, []);
 
-    it('should sign out correct', async () => {
-        const { withStoreComponent, mockStore, mockAxiosAdapter } = withStore(<HeadUser userPageHeader />, {
-            USER: makeFakeUserData()
-        });
-        const preparedComponent = withHistory(withStoreComponent);
-        render(preparedComponent);
+    await userEvent.click(
+      screen.getByRole('button')
+    );
 
-        mockAxiosAdapter.onDelete(APIRoute.Logout).reply(204, []);
+    const actions = extractActionsTypes(mockStore.getActions());
 
-        await userEvent.click(
-            screen.getByRole('button')
-        );
+    expect(actions).toEqual([
+      logoutAction.pending.type,
+      logoutAction.fulfilled.type
+    ]);
+  });
 
-        const actions = extractActionsTypes(mockStore.getActions());
+  it('should trigger redirect to "MyListPage" on avatar click', async () => {
+    const mylistText = 'my list';
 
-        expect(actions).toEqual([
-            logoutAction.pending.type, 
-            logoutAction.fulfilled.type
-        ]);
-    });
+    const { withStoreComponent } = withStore(
+      withHistory(
+        <Routes>
+          <Route path={AppRoute.MyList} element={<span>{mylistText}</span>} />
+          <Route path={AppRoute.Main} element={<HeadUser userPageHeader />}/>
+        </Routes>,
+        mockHistory
+      ),
+      {
+        USER: makeFakeUserData()
+      }
+    );
 
-    it('should trigger redirect to "MyListPage" on avatar click', async () => {
-        const mylistText = 'my list';
+    render(withStoreComponent);
 
-        const { withStoreComponent } = withStore(
-            withHistory(
-                <Routes>
-                    <Route path={AppRoute.MyList} element={<span>{mylistText}</span>} />
-                    <Route path={AppRoute.Main} element={<HeadUser userPageHeader />}/>
-                </Routes>,
-                mockHistory
-            ),
-            {
-                USER: makeFakeUserData()
-            }
-        );
+    await userEvent.click(
+      screen.getByAltText('User avatar')
+    );
 
-        render(withStoreComponent);
-
-        await userEvent.click(
-            screen.getByAltText('User avatar')
-        );
-
-        expect(screen.getByText(mylistText)).toBeInTheDocument();
-    });
+    expect(screen.getByText(mylistText)).toBeInTheDocument();
+  });
 });

@@ -16,10 +16,10 @@ describe('Application Routing', () => {
     const withHistoryComponent = withHistory(<App />, mockHistory);
     const fakePromo = makeFakePromo();
     const { withStoreComponent } = withStore(withHistoryComponent, {
-        DATA: {...makeFakeCommonData(), promo: fakePromo},
-        FILM: makeFakeFilmData(),
-        USER: makeFakeUserData(),
-        ERROR: makeEmptyErrorData()
+      DATA: {...makeFakeCommonData(), promo: fakePromo},
+      FILM: makeFakeFilmData(),
+      USER: makeFakeUserData(),
+      ERROR: makeEmptyErrorData()
     });
     mockHistory.push(AppRoute.Main);
 
@@ -33,10 +33,10 @@ describe('Application Routing', () => {
   it('should render "SignInPage" when user navigate to "/login"', () => {
     const withHistoryComponent = withHistory(<App />, mockHistory);
     const { withStoreComponent } = withStore(withHistoryComponent, {
-        DATA: makeFakeCommonData(),
-        FILM: makeFakeFilmData(),
-        USER: makeEmptyUserData(),
-        ERROR: makeEmptyErrorData()
+      DATA: makeFakeCommonData(),
+      FILM: makeFakeFilmData(),
+      USER: makeEmptyUserData(),
+      ERROR: makeEmptyErrorData()
     });
     mockHistory.push(AppRoute.SignIn);
 
@@ -68,7 +68,7 @@ describe('Application Routing', () => {
       USER: makeFakeUserData(),
       ERROR: makeEmptyErrorData()
     });
-    mockHistory.push(`/films/${filmData.filmDetails?.id}/reviews`);
+    mockHistory.push(`/films/${filmData.filmDetails?.id ?? ''}/reviews`);
 
     render(withStoreComponent);
 
@@ -80,10 +80,10 @@ describe('Application Routing', () => {
     const withHistoryComponent = withHistory(<App />, mockHistory);
     const filmData = makeFakeFilmData();
     const { withStoreComponent } = withStore(withHistoryComponent, {
-        FILM: filmData,
-        USER: makeFakeUserData()
+      FILM: filmData,
+      USER: makeFakeUserData()
     });
-    mockHistory.push(`/films/${filmData.filmDetails?.id}/review`);
+    mockHistory.push(`/films/${filmData.filmDetails?.id ?? ''}/review`);
 
     render(withStoreComponent);
 
@@ -95,11 +95,11 @@ describe('Application Routing', () => {
     const withHistoryComponent = withHistory(<App />, mockHistory);
     const filmData = makeFakeFilmData();
     const { withStoreComponent } = withStore(withHistoryComponent, {
-        FILM: filmData,
-        USER: makeFakeUserData(),
-        ERROR: makeEmptyErrorData()
+      FILM: filmData,
+      USER: makeFakeUserData(),
+      ERROR: makeEmptyErrorData()
     });
-    mockHistory.push(`/player/${filmData.filmDetails?.id}`);
+    mockHistory.push(`/player/${filmData.filmDetails?.id ?? ''}`);
 
     HTMLMediaElement.prototype.pause = vi.fn();
     HTMLMediaElement.prototype.load = vi.fn();
@@ -112,7 +112,7 @@ describe('Application Routing', () => {
   it('should render "NotFoundPage" when user navigate to non-existent route', () => {
     const withHistoryComponent = withHistory(<App />, mockHistory);
     const { withStoreComponent } = withStore(withHistoryComponent, {
-        USER: makeEmptyUserData()
+      USER: makeEmptyUserData()
     });
     const unknownRoute = '/unknown-route';
     mockHistory.push(unknownRoute);
