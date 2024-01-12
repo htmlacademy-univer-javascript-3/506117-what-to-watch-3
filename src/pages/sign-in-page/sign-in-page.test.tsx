@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { withHistory, withStore } from '../../utils/mock-component';
 import SignInPage from './sign-in-page';
+import { makeEmptyUserData } from '../../utils/mocks';
 
 
 describe('Component: SignInPage', () => {
@@ -9,7 +10,7 @@ describe('Component: SignInPage', () => {
     const singinText = 'Sign in';
     const emailAddressText = 'Email address';
     const passwordText = 'Password';
-    const { withStoreComponent } = withStore(<SignInPage />, {});
+    const { withStoreComponent } = withStore(<SignInPage />, { USER: makeEmptyUserData() });
     const preparedComponent = withHistory(withStoreComponent);
 
     render(preparedComponent);
@@ -27,7 +28,7 @@ describe('Component: SignInPage', () => {
     const passwordElementTestId = 'passwordElement';
     const expectedEmailValue = 'keks@gmail.com';
     const expectedPasswordValue = '123456abc';
-    const { withStoreComponent } = withStore(<SignInPage />, {});
+    const { withStoreComponent } = withStore(<SignInPage />, { USER: makeEmptyUserData() });
     const preparedComponent = withHistory(withStoreComponent);
 
     render(preparedComponent);
@@ -55,7 +56,8 @@ describe('Component: SignInPage', () => {
           value: 'incorrectEmail@incorrect',
           messages: ['email must be an email']
         }]
-      }
+      },
+      USER: makeEmptyUserData()
     });
     const preparedComponent = withHistory(withStoreComponent);
 
@@ -65,7 +67,7 @@ describe('Component: SignInPage', () => {
   });
 
   it('should render child component "Logo"', () => {
-    const { withStoreComponent } = withStore(<SignInPage />, {});
+    const { withStoreComponent } = withStore(<SignInPage />, { USER: makeEmptyUserData() });
     const preparedComponent = withHistory(withStoreComponent);
 
     render(preparedComponent);

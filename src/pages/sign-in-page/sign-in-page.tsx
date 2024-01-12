@@ -6,12 +6,19 @@ import { loginAction } from '../../store/api-actions';
 import { getErrorData } from '../../store/data/error-data/selectors';
 import ErrorBox from '../../components/error-box/error-box';
 import { redirectToRoute } from '../../store/action';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { getAuthorizationStatus } from '../../store/data/user-data/selectors';
 
 export default function SignInPage(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
+
+  const authStatus = useAppSelector(getAuthorizationStatus);
+
+  if (authStatus === AuthorizationStatus.Auth) {
+    dispatch(redirectToRoute(AppRoute.Main));
+  }
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();

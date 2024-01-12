@@ -1,11 +1,12 @@
 import { FormEvent, useState } from 'react';
 import RateStar from '../../rate-star/rate-star';
-import { useAppDispatch } from '../../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { postReviewAction } from '../../../store/api-actions';
 import { useParams } from 'react-router-dom';
 import { redirectToRoute } from '../../../store/action';
-import { MAX_RATING } from '../../../const';
+import { MAX_RATING, MAX_TEXT_LENGTH, MIN_TEXT_LENGTH } from '../../../const';
 import ErrorBox from '../../error-box/error-box';
+import { getReviewPostingStatus } from '../../../store/data/user-data/selectors';
 
 
 export default function FieldForm(): JSX.Element {
@@ -28,6 +29,7 @@ export default function FieldForm(): JSX.Element {
     });
   };
 
+  const isPosting = useAppSelector(getReviewPostingStatus);
   const starsScore = Array.from({ length: MAX_RATING }, (_v, k) => k + 1);
 
   return (
@@ -52,6 +54,9 @@ export default function FieldForm(): JSX.Element {
             id="review-text"
             placeholder="Review text"
             data-testid="reviewText"
+            disabled={isPosting}
+            minLength={MIN_TEXT_LENGTH}
+            maxLength={MAX_TEXT_LENGTH}
             required
             onChange={(evt) => {
               setFormData(evt.target.value);
@@ -59,7 +64,7 @@ export default function FieldForm(): JSX.Element {
           >
           </textarea>
           <div className="add-review__submit">
-            <button className="add-review__btn" type="submit">Post</button>
+            <button className="add-review__btn" type="submit" disabled={isPosting}>Post</button>
           </div>
         </div>
       </form>
