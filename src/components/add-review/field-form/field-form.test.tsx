@@ -11,7 +11,7 @@ describe('Component: FieldForm', () => {
     const reviewTextId = 'reviewText';
     const ratingStarsId = 'ratingStars';
 
-    const { withStoreComponent } = withStore(<FieldForm />, {});
+    const { withStoreComponent } = withStore(<FieldForm />, { USER: makeFakeUserData() });
     const preparedComponent = withHistory(withStoreComponent);
 
     render(preparedComponent);
@@ -25,7 +25,7 @@ describe('Component: FieldForm', () => {
     const reviewTextId = 'reviewText';
     const expectedReviewText = 'This movie is perfect in all its categories: credits, sound track, production, casting, writing, photography, editing, acting, and direction. I was amazed with the freedom of the use of the camera.';
 
-    const { withStoreComponent } = withStore(<FieldForm />, {});
+    const { withStoreComponent } = withStore(<FieldForm />, { USER: makeFakeUserData() });
     const preparedComponent = withHistory(withStoreComponent);
 
     render(preparedComponent);
