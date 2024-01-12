@@ -28,7 +28,7 @@ export default function FieldForm(): JSX.Element {
     });
   };
 
-  const starsScore = Array.from({ length: MAX_RATING }, (v, k) => k + 1);
+  const starsScore = Array.from({ length: MAX_RATING }, (_v, k) => k + 1);
 
   return (
     <div className="add-review">

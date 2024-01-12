@@ -10,7 +10,7 @@ describe('error-data selectors', () => {
       details: [
         {
           property: 'password',
-          value: 1,
+          value: '1',
           messages: [
             'Password no have letter or number!',
             'password must be longer than or equal to 2 characters'
